@@ -6,8 +6,6 @@ exports = module.exports = function (User, mailer) {
 
             user = req.user;
 
-            console.log(profile);
-
             user.instagram.id = profile.id;
             user.instagram.username = profile.username;
             user.instagram.token = token;
