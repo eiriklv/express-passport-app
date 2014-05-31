@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+        <!-- header -->
+        <h1><span class="fa fa-sign-in"></span> Login</h1>
+
+        <!-- LOGIN FORM -->
+        <form action="/auth/local/login" method="post">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+
+            <button type="submit" class="btn btn-success btn-lg">Login</button>
+        </form>
+
+        <hr>
+
+        <p>Need an account? <a href="/auth/local/signup">Signup</a></p>
+        <p>Or go <a href="/">home</a>.</p>
+
+    </div>
+</div>

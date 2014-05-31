@@ -1,0 +1,9 @@
+<div class="container top15">
+    <!-- show any messages that come back with authentication -->
+    {{#each messages}}
+        <div class="flashmessage alert alert-success fade in text-center">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            {{this}}
+        </div>
+    {{/each}}
+</div>

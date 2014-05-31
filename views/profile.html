@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    {{> common-title }}
+
+    <!-- stylesheets -->
+    {{> common-essential-stylesheets }}
+
+    <!-- custom body style -->
+    <style>
+        body { padding-top:40px; padding-bottom:40px; word-wrap:break-word; }
+    </style>
+
+</head>
+<body>
+
+    <!-- header -->
+    {{> common-header }}
+
+    <!-- session flash messages -->
+    {{> common-flash-messages }}
+
+    <!-- button panel -->
+    {{> profile-buttonpanel }}
+
+    <!-- profile content -->
+    {{> profile-content }}
+
+    <!-- essential scripts -->
+    {{> common-essential-scripts }}
+
+    <!-- action modal -->
+    {{> modals-action }}
+
+    <!-- profile js app -->
+    <script src="/javascript/profile.js"></script>
+
+</body>
+</html>
