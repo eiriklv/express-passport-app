@@ -6,6 +6,9 @@
 # NODE_ENV                    Environment ('development', 'staging', 'production')
 # CLIENT_API_URL              Path to the client REST api (root - as resources should be relative)
 # MONGO_URL                   MongoDB url
+# REDIS_URL                   Redis database url
+# REDIS_DB                    Redis database number
+# REDIS_SESSION_PREFIX        Prefix for redis session entries
 # APPSECRET                   Application session secret
 # FACEBOOK_CLIENT_ID          Facebook application client id
 # FACEBOOK_CLIENT_SECRET      Facebook application client secret
