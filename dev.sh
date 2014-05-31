@@ -9,7 +9,7 @@
 # APPSECRET                   Application session secret
 # FACEBOOK_CLIENT_ID          Facebook application client id
 # FACEBOOK_CLIENT_SECRET      Facebook application client secret
-# FACEBOOK_CALLBACK_URL       Facebook application callback url (http://yourdomain.com/auth/facebookcallback)
+# FACEBOOK_CALLBACK_URL       Facebook application callback url (http://yourdomain.com/auth/facebook/callback)
 # GOOGLE_CLIENT_ID            Google application client id
 # GOOGLE_CLIENT_SECRET        Google application client secret
 # GOOGLE_CALLBACK_URL         Google application callback url (http://yourdomain.com/auth/google/callback)
