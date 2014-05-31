@@ -1,4 +1,4 @@
-var debug = require('debug')('authentication:mailer');
+var debug = require('debug')('express-passport-app:mailer');
 
 exports = module.exports = function (config) {
     var templates = require('./templates')(config.get('service.name'));
@@ -24,7 +24,7 @@ exports = module.exports = function (config) {
     }
     else {
         return function (user, provider, action, token) {
-            debug(templates[provider][action](user.fullname, verificationRoute, token));
+            debug(templates[provider][action].message(user.fullname, verificationRoute, token));
         };
     }
 };
