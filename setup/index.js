@@ -7,7 +7,6 @@ var debug = require('debug')('express-passport-app:setup');
 // express dependencies
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
 var favicon = require('serve-favicon');
 var methodOverride = require('method-override');
 var errorHandler = require('errorhandler');
