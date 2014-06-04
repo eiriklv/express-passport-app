@@ -60,5 +60,5 @@
         "develop": "sh dev.sh"
     },
     "author": "Eirik Vullum <evullum@gmail.com> (http://www.evconsult.no/)",
-    "license": "ISC"
+    "license": "MIT"
 }
