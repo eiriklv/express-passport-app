@@ -7,7 +7,7 @@ exports = module.exports = function (profile) {
             }
             else {
                 req.flash('verificationMessage', 'Your e-mail is now verified!');
-                res.redirect('/home');
+                res.redirect('/');
             }
         });
     };

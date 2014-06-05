@@ -3,7 +3,7 @@ exports = module.exports = function () {
         var user = req.user;
         user.facebook = undefined;
         req.flash('deleteMessage', 'Your Facebook account was un-linked.');
-        var referer = req.headers.referer || '/home';
+        var referer = req.headers.referer || '/';
 
         user.save(function (err) {
             res.redirect(referer);
