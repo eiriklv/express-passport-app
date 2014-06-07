@@ -7,7 +7,7 @@
     "version": "0.3.0",
     "description": "An Express 4.x boilerplate with Passport authentication",
     "dependencies": {
-        "express": "~4.3.1",
+        "express": "~4.4.1",
         "morgan": "~1.1.1",
         "body-parser": "~1.2.2",
         "cookie-parser": "~1.1.0",
