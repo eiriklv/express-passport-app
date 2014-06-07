@@ -1,7 +1,7 @@
 var bcrypt   = require('bcrypt');
 
-exports = module.exports = function (mongoose, validators) {
-    var userSchema = mongoose.Schema({
+exports = module.exports = function (collection, mongoose, validators) {
+    var schema = mongoose.Schema({
         email: {
             type: String, // this is the verified email used to contact the user (must be verified for local signup)
             validate: [validators.email, 'email is not valid'],
@@ -57,5 +57,5 @@ exports = module.exports = function (mongoose, validators) {
         return bcrypt.compareSync(password, this.password); // this is syncronous (future: async)
     };
 
-    return mongoose.model('User', userSchema);
+    return mongoose.model(collection, schema);
 };

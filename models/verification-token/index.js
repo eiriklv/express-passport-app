@@ -1,7 +1,7 @@
 var crypto = require('crypto');
 
-exports = module.exports = function (mongoose, validators) {
-    var verificationTokenSchema = mongoose.Schema({
+exports = module.exports = function (collection, mongoose, validators) {
+    var schema = mongoose.Schema({
         token: {
             type: String, // sha1 hash of the mongodb user id
             required: true
@@ -19,5 +19,5 @@ exports = module.exports = function (mongoose, validators) {
         return shasum.digest('hex');
     };
 
-    return mongoose.model('VerificationToken', verificationTokenSchema);
+    return mongoose.model(collection, schema);
 };
