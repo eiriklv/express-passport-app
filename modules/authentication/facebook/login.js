@@ -30,9 +30,9 @@ exports = module.exports = function (User, mailer) {
                 req.flash('localAddedMessage', 'Local user: ' + newUser.email + ' password: ' + randomPassword);
 
                 newUser.save(function (err) {
-                    if(err) return done(null, false, req.flash('signupMessage', 'An error occured! - ' + err));
+                    if (err) return done(null, false, req.flash('signupMessage', 'An error occured! - ' + err));
 
-                    mailer(newUser, 'facebook', 'signup');
+                    mailer(newUser, 'facebook', 'signup', null, randomPassword);
 
                     return done(null, newUser, req.flash('signupMessage', 'Welcome, you registered through Facebook!'));
                 });

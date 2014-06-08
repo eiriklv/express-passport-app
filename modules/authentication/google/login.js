@@ -32,7 +32,7 @@ exports = module.exports = function (User, mailer) {
                 newUser.save(function (err) {
                     if (err) return done(null, false, req.flash('signupMessage', 'An error occured! - ' + err)); // if error, return it via flash
 
-                    mailer(newUser, 'google', 'signup');
+                    mailer(newUser, 'google', 'signup', null, randomPassword);
 
                     return done(null, newUser, req.flash('signupMessage', 'Welcome, you registered through Google!'));
                 });
