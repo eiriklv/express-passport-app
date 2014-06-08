@@ -27,8 +27,6 @@ exports = module.exports = function (User, mailer) {
                 var randomPassword = Math.random().toString(36).slice(-15);
                 newUser.password = newUser.generateHash(randomPassword);
 
-                req.flash('localAddedMessage', 'Local user: ' + newUser.email + ' password: ' + randomPassword);
-
                 newUser.save(function (err) {
                     if (err) return done(null, false, req.flash('signupMessage', 'An error occured! - ' + err)); // if error, return it via flash
 
