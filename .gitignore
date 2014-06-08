@@ -29,3 +29,6 @@ build/Release
 node_modules
 client/public/javascript/*
 client/public/stylesheets/*
+
+# development script
+dev.sh
