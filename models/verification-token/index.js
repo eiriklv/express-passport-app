@@ -13,7 +13,7 @@ exports = module.exports = function (collection, mongoose, validators) {
         }
     });
 
-    verificationTokenSchema.methods.generateToken = function (uid) {
+    schema.methods.generateToken = function (uid) {
         var shasum = crypto.createHash('sha1');
         shasum.update(uid.toString());
         return shasum.digest('hex');

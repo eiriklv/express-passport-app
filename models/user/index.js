@@ -49,11 +49,11 @@ exports = module.exports = function (collection, mongoose, validators) {
         }
     });
 
-    userSchema.methods.generateHash = function(password) {
+    schema.methods.generateHash = function(password) {
         return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null); // this is syncronous (future: async)
     };
 
-    userSchema.methods.validPassword = function(password) {
+    schema.methods.validPassword = function(password) {
         return bcrypt.compareSync(password, this.password); // this is syncronous (future: async)
     };
 
