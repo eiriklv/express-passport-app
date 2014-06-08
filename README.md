@@ -51,7 +51,7 @@ Express 4.x application with Passport authentication
 * `INSTAGRAM_CLIENT_SECRET` - Instagram application client secret
 * `INSTAGRAM_CALLBACK_URL` - Instagram application callback url (http://yourdomain.com/auth/instagram/callback)
 * `MANDRILL_API_KEY` - Mandrill API key
-* `MANDRILL_SENDER` - Mandrill email sender address (John Doe <john@doe.com>)
+* `MANDRILL_SENDER` - Mandrill email sender address (John Doe &lt;john@doe.com&gt;)
 * `EMAIL_VERIFICATION_ROUTE` - Email verification route (http://yourdomain.com/auth/local/verify)
 
 #### Run the application:
