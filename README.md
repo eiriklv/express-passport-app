@@ -20,7 +20,7 @@ Express 4.x application with Passport authentication
 #### Install dependecies (some might need to use `sudo` for various reasons): ###
 * `npm install -g gulp`
 * `npm install`
-* set your config in `dev.sh`
+* set your enviroment variables (see below)
 
 #### Create an application on both Facebook, Google+ and Instagram and point the callbacks to (respectively)
 * `http://localhost:3000/auth/facebook/callback`
