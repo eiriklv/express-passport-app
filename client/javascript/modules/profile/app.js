@@ -1,73 +1,14 @@
 exports = module.exports = function (templates, api) {
 
-    function bindToClickEvents (list, modal) {
-        // bind to click event on .btn elements under #source-list
-        $(list).on('click', '.btn', function (event) {
-            event.preventDefault();
-
-            var element = $(event.target);
-            var action = element.attr('data-action');
-            console.log('action: ' + action);
-
-            handleButtonClick(action, element);
-        });
-
-        // bind to button events for modal
-        $(modal).on('click', '.btn', function (event) {
+    function bindToEvent (options) {
+        var parent = $(options.element);
+        parent.on(options.eventType, options.elementType, function (event) {
             event.preventDefault();
 
             var element = $(event.target);
             var action = element.attr('data-action');
 
-            handleAction(action, element);
-        });
-    }
-
-    // perform a request for the action (add, remove, edit, template)
-    function handleAction (action, element) {
-        var modalElement = $('#action-modal');
-
-        console.log('action: ' + action);
-
-        element.empty().append(templates.common.loader());
-
-        if (action == 'update') {
-            var body = $('#update-form').serializeObject();
-
-            api.profile.update(body, function (err, user) {
-                if (err) {
-                    alertify.error(err);
-                    element.empty().append('Update Profile');
-                    return;
-                }
-
-                modalElement.modal('hide');
-                alertify.success('Profile updated!');
-                console.log(user);
-            });
-        }
-    }
-
-    // handle the initial button clicks
-    function handleButtonClick (action, element) {
-        if (action == 'update') {
-            renderModal(action, templates.profile.modal.edit);
-        }
-    }
-
-    function renderModal (action, template, options) {
-        var modalElement = $('#action-modal');
-
-        // use template to add data to modal
-        api.profile.get(function (err, user) {
-            if (err) return console.log(err);
-
-            var dataRendered = template({
-                user: user
-            });
-
-            modalElement.empty().append(dataRendered);
-            modalElement.modal();
+            if(options.handlers[action]) options.handlers[action](element, parent, options.templates);
         });
     }
 
@@ -85,7 +26,51 @@ exports = module.exports = function (templates, api) {
         });
     }
 
+    // bind event handlers to the button panel
+    bindToEvent({
+        element: '#button-panel',
+        eventType: 'click',
+        elementType: '.btn',
+        templates: templates,
+        handlers: {
+            update: function (target, parent, templates) {
+                api.profile.get(function (err, user) {
+                    if (err) return console.log(err);
+
+                    var renderedData = templates.profile.modal.edit({ user: user });
+                    $('#action-modal').empty().append(renderedData).modal();
+                });
+            }
+        }
+    });
+
+    // bind event handlers to the action modal / update form
+    bindToEvent({
+        element: '#action-modal',
+        eventType: 'click',
+        elementType: '.btn',
+        templates: templates,
+        handlers: {
+            update: function (target, parent, templates) {
+                target.empty().append(templates.common.loader());
+
+                var body = $('form', parent).serializeObject();
+
+                api.profile.update(body, function (err, user) {
+                    if (err) {
+                        alertify.error(err);
+                        target.empty().append('Update Profile');
+                        return;
+                    }
+
+                    parent.modal('hide');
+                    alertify.success('Profile updated!');
+                    console.log(user);
+                });
+            }
+        }
+    });
+
     // init the app
     loadProfileData('#main');
-    bindToClickEvents('#button-panel', '#action-modal');
 };
