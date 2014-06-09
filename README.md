@@ -7,17 +7,23 @@ Express 4.x application with Passport authentication
 * passport
 * gulp
 * browserify
+ * hbsfy
+ * envify
 * handlebars
 * socket.io
 * stylus + nib
 * convict
+
+#### Dependencies:
+* mongodb
+* redis
 
 #### Social logins supported:
 * Facebook
 * Google+
 * Instagram (only by linking - as Instagram might not supply a valid email for registration)
 
-#### Install dependecies (some might need to use `sudo` for various reasons): ###
+#### Install dependencies (some might need to use `sudo` for various reasons): ###
 * `npm install -g gulp`
 * `npm install`
 
