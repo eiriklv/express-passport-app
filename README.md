@@ -15,7 +15,7 @@ Express 4.x application with Passport authentication
 * stylus + nib
 * bootstrap
 * fontawesome
-* vanilla js + jquery (TODO: react or mithril.js)
+* vanilla js + jquery
 
 #### Dependencies:
 * mongodb
@@ -65,3 +65,7 @@ Express 4.x application with Passport authentication
 #### Run the application:
 * `gulp`
 * navigate your browser to `http://localhost:3000` (or whatever port you chose for `PORT`)
+
+#### TODO
+* replace jquery with react or mithril.js
+* build simple client side example with the selected framework
