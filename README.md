@@ -6,13 +6,16 @@ Express 4.x application with Passport authentication
 * express
 * passport
 * gulp
+* socket.io
+* convict
 * browserify
  * hbsfy
  * envify
 * handlebars
-* socket.io
 * stylus + nib
-* convict
+* bootstrap
+* fontawesome
+* vanilla js + jquery (TODO: react or mithril.js)
 
 #### Dependencies:
 * mongodb
