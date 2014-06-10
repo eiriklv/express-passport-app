@@ -41,7 +41,7 @@ Express 4.x application with Passport authentication
 * Create an application on [mandrill](http://mandrill.com/)
 
 #### Set environment variables
-* `PORT` - Port exposed by this component.
+* **`PORT` - Port exposed by this component.**
  * example: `3000`
 * `SERVICE_NAME` - The name of your fantastic service/platform!
  * example: `Express Passport Application`
