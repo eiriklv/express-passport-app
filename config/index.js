@@ -82,7 +82,7 @@ var config = module.exports = convict({
             },
             db: {
                 doc: 'Redis database number (0-15)',
-                default: 1,
+                default: 0,
                 env: 'REDIS_DB'
             }
         }
