@@ -42,27 +42,49 @@ Express 4.x application with Passport authentication
 
 #### Set environment variables
 * `PORT` - Port exposed by this component.
+ * example: `3000`
 * `SERVICE_NAME` - The name of your fantastic service/platform!
-* `DEBUG` - Debugging (* for all)
+ * example: `Express Passport Application`
+* `DEBUG` - Debug output (* for all)
+ * example: `*`
 * `NODE_ENV` - Environment ('development', 'staging', 'production')
+ * example: `development`
 * `CLIENT_API_URL` - Path to the client REST api (root - as resources should be relative)
+ * example: `/api`
 * `MONGO_URL` - MongoDB url (including authentication)
+ * example: `mongodb://user:pass@localhost:27017/mydatabase`
 * `REDIS_URL` - Redis url (including authentication)
+ * example: `redis://user:pass@localhost:6379`
 * `REDIS_DB` - Redis database number
+ * example: `1`
 * `REDIS_SESSION_PREFIX` - Prefix for redis session entries
+ * example: `sess:`
 * `APPSECRET` - Application session secret
+ * example: `sOmeCrAzYhAsH894372`
 * `FACEBOOK_CLIENT_ID` - Facebook application client id
+ * example: `abcdefghijklmnopqrstuvxyz1234567890`
 * `FACEBOOK_CLIENT_SECRET` - Facebook application client secret
-* `FACEBOOK_CALLBACK_URL` - Facebook application callback url (http://yourdomain.com/auth/facebook/callback)
+ * example: `abcdefghijklmnopqrstuvxyz1234567890`
+* `FACEBOOK_CALLBACK_URL` - Facebook application callback url
+ * example: `http://yourdomain.com/auth/facebook/callback`
 * `GOOGLE_CLIENT_ID` - Google application client id
+ * example: `abcdefghijklmnopqrstuvxyz1234567890`
 * `GOOGLE_CLIENT_SECRET` - Google application client secret
-* `GOOGLE_CALLBACK_URL` - Google application callback url (http://yourdomain.com/auth/google/callback)
+ * example: `abcdefghijklmnopqrstuvxyz1234567890`
+* `GOOGLE_CALLBACK_URL` - Google application callback url
+ * example: `http://yourdomain.com/auth/google/callback`
 * `INSTAGRAM_CLIENT_ID` - Instagram application client id
+ * example: `abcdefghijklmnopqrstuvxyz1234567890`
 * `INSTAGRAM_CLIENT_SECRET` - Instagram application client secret
-* `INSTAGRAM_CALLBACK_URL` - Instagram application callback url (http://yourdomain.com/auth/instagram/callback)
+ * example: `abcdefghijklmnopqrstuvxyz1234567890`
+* `INSTAGRAM_CALLBACK_URL` - Instagram application callback url
+ * example: `http://yourdomain.com/auth/instagram/callback`
 * `MANDRILL_API_KEY` - Mandrill API key
-* `MANDRILL_SENDER` - Mandrill email sender address (John Doe &lt;john@doe.com&gt;)
-* `EMAIL_VERIFICATION_ROUTE` - Email verification route (http://yourdomain.com/auth/local/verify)
+ * example: `abcdefghijklmnopqrstuvxyz1234567890`
+* `MANDRILL_SENDER` - Mandrill email sender address
+ * example: `John Doe <john@doe.com>`
+* `EMAIL_VERIFICATION_ROUTE` - Email verification route 
+ * example: `http://yourdomain.com/auth/local/verify`
 
 #### Run the application:
 * `gulp`
