@@ -39,7 +39,7 @@ setup.configureExpress({
 // http and socket.io server(s)
 var server = http.createServer(app);
 var io = socketio.listen(server);
-var sessionSockets = new SessionSockets(io, sessionStore, cookieParser());
+var sessionSockets = new SessionSockets(io, sessionStore, cookieParser(), config.get('session.key'));
 
 // app dependencies (app specific)
 var ipc = common.ipc(0);

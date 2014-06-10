@@ -31,6 +31,13 @@ var config = module.exports = convict({
             env: 'SERVICE_NAME'
         }
     },
+    session: {
+        key: {
+            doc: 'Session key.',
+            default: 'connect.sid',
+            env: 'SESSION_KEY'
+        }
+    },
     server: {
         port: {
             doc: 'The server port to bind.',

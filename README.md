@@ -61,6 +61,8 @@ Express 4.x application with Passport authentication
  * example: `sess:`
 * `APPSECRET` - Application session secret
  * example: `sOmeCrAzYhAsH894372`
+ * `SESSION_KEY` - Application session secret (optional)
+ * example: `express.sid` (default to `connect.sid`)
 * `FACEBOOK_CLIENT_ID` - Facebook application client id
  * example: `abcdefghijklmnopqrstuvxyz1234567890`
 * `FACEBOOK_CLIENT_SECRET` - Facebook application client secret
@@ -83,7 +85,7 @@ Express 4.x application with Passport authentication
  * example: `abcdefghijklmnopqrstuvxyz1234567890`
 * `MANDRILL_SENDER` - Mandrill email sender address
  * example: `John Doe <john@doe.com>`
-* `EMAIL_VERIFICATION_ROUTE` - Email verification route 
+* `EMAIL_VERIFICATION_ROUTE` - Email verification route
  * example: `http://yourdomain.com/auth/local/verify`
 
 #### Run the application:

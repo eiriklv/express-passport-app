@@ -28,7 +28,7 @@ module.exports.configureExpress = function (options, app, config) {
     app.use(options.cookieParser()); // cookie parser
     app.use(bodyParser()); // pull information from html in POST
     app.use(methodOverride()); // simulate DELETE and PUT from '_method' in form
-    app.use(options.session({ secret: config.get('server.secret'), store: options.store })); // sessions
+    app.use(options.session({ secret: config.get('server.secret'), store: options.store, key: config.get('session.key') })); // sessions
     app.use(options.passport.initialize()); // init passport
     app.use(options.passport.session()); // persistent login sessions
     app.use(flash()); // session flash messages (express-flash)
