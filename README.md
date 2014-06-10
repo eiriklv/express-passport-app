@@ -42,7 +42,7 @@ Express 4.x application with Passport authentication
 
 #### Set environment variables
 * **`PORT` - Port exposed by this component**
- * example: `3000`
+ * *example: `3000`*
 * **`SERVICE_NAME` - The name of your fantastic service/platform!**
  * example: `Express Passport Application`
 * **`DEBUG` - Debug output (* for all)**
