@@ -49,7 +49,7 @@ Express 4.x application with Passport authentication
  * example: `*`
 * `NODE_ENV` - Environment ('development', 'staging', 'production')
  * example: `development`
-* `CLIENT_API_URL` - Path to the client REST api (relative)
+* `CLIENT_API_PATH` - Path to the client REST api (relative)
  * example: `/api`
 * `MONGO_URL` - MongoDB url (including authentication)
  * example: `mongodb://user:pass@localhost:27017/mydatabase`

@@ -47,10 +47,10 @@ var config = module.exports = convict({
             env: 'APPSECRET'
         },
         api: {
-            url: {
-                doc: 'The client api url (relative)',
+            path: {
+                doc: 'The client api url path (relative)',
                 default: '/api',
-                env: 'CLIENT_API_URL'
+                env: 'CLIENT_API_PATH'
             }
         }
     },
