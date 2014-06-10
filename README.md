@@ -93,5 +93,7 @@ Express 4.x application with Passport authentication
 * navigate your browser to `http://localhost:3000` (or whatever port you chose for `PORT`)
 
 #### TODO
+* add unit test framework
+* continuous integration with travis ci
 * replace jquery with [react](http://facebook.github.io/react/) or [mithril](http://lhorie.github.io/mithril/)
 * build simple client side example with the selected framework
