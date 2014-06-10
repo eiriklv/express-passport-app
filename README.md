@@ -2,29 +2,31 @@ Express 4.x application with Passport authentication
 ====================================================
 
 #### Built with:
-* node.js
-* express
-* passport
-* gulp
-* socket.io
-* convict
-* browserify
- * hbsfy
- * envify
-* handlebars
-* stylus + nib
-* bootstrap
-* fontawesome
-* vanilla js + jquery
+* [node.js](http://www.nodejs.org/)
+* [express](http://www.expressjs.com/)
+* [passport](http://www.passportjs.org/)
+* [gulp](http://www.gulpjs.com/)
+* [socket.io](http://www.socket.io/)
+* [convict](http://github.com/mozilla/node-convict/)
+* [browserify](http://www.browserify.org/)
+ * [hbsfy](http://github.com/epeli/node-hbsfy/)
+ * [envify](http://github.com/hughsk/envify/)
+* [handlebars](http://handlebarsjs.com/)
+* [stylus](http://learnboost.github.io/stylus/)
+ * [nib](http://visionmedia.github.io/nib/)
+* [bootstrap](http://getbootstrap.com/)
+* [fontawesome](http://fortawesome.github.io/Font-Awesome/)
+* [jquery](http://www.jquery.com/)
 
 #### Dependencies:
-* mongodb
-* redis
+* [mongodb](http://www.mongodb.org/)
+* [redis](http://redis.io/)
 
 #### Social logins supported:
-* Facebook
-* Google+
-* Instagram (only by linking - as Instagram might not supply a valid email for registration)
+* [facebook](http://developers.facebook.com/)
+* [google+](http://developers.google.com/+/)
+* [instagram](http://instagram.com/developer/)
+ * (only by linking - as Instagram might not supply a valid email for registration)
 
 #### Install dependencies (some might need to use `sudo` for various reasons): ###
 * `npm install -g gulp`
@@ -36,7 +38,7 @@ Express 4.x application with Passport authentication
 * `http://localhost:3000/auth/instagram/callback`
 
 #### Email verification via Mandrill
-* Create an application on Mandrill
+* Create an application on [mandrill](http://mandrill.com/)
 
 #### Set environment variables
 * `PORT` - Port exposed by this component.
@@ -67,5 +69,5 @@ Express 4.x application with Passport authentication
 * navigate your browser to `http://localhost:3000` (or whatever port you chose for `PORT`)
 
 #### TODO
-* replace jquery with react or mithril.js
+* replace jquery with [react](http://facebook.github.io/react/) or [mithril](http://lhorie.github.io/mithril/)
 * build simple client side example with the selected framework
