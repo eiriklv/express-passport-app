@@ -45,7 +45,7 @@ Express 4.x application with Passport authentication
  * example: `3000`
 * `SERVICE_NAME` - The name of your fantastic service/platform!
  * example: `Express Passport Application`
-* `DEBUG` - Debug output (* for all)
+* `DEBUG` - Debug output (* for all) (optional)
  * example: `*`
 * `NODE_ENV` - Environment ('development', 'staging', 'production')
  * example: `development`
@@ -55,9 +55,9 @@ Express 4.x application with Passport authentication
  * example: `mongodb://user:pass@localhost:27017/mydatabase`
 * `REDIS_URL` - Redis url (including authentication)
  * example: `redis://user:pass@localhost:6379`
-* `REDIS_DB` - Redis database number
+* `REDIS_DB` - Redis database number (optional)
  * example: `1`
-* `REDIS_SESSION_PREFIX` - Prefix for redis session entries
+* `REDIS_SESSION_PREFIX` - Prefix for redis session entries (optional)
  * example: `sess:`
 * `APPSECRET` - Application session secret
  * example: `sOmeCrAzYhAsH894372`
