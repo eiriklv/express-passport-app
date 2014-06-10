@@ -45,6 +45,13 @@ var config = module.exports = convict({
             },
             default: 'somesillysecret',
             env: 'APPSECRET'
+        },
+        api: {
+            url: {
+                doc: 'The client api url (relative)',
+                default: '/api',
+                env: 'CLIENT_API_URL'
+            }
         }
     },
     database: {

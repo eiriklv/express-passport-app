@@ -53,7 +53,7 @@ var authentication = require('./modules/authentication')(models, mailer);
 // app specific modules
 require('./modules/sockets')(io, sessionSockets, ipc);
 require('./modules/passport')(passport, config, authentication, models);
-require('./routes')(app, express, middleware, handlers);
+require('./routes')(app, express, middleware, handlers, config);
 
 // run application
 setup.run(server, config);
