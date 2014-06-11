@@ -23,16 +23,16 @@ module.exports.configureExpress = function (options, app, config) {
     app.set('json spaces', 2);
 
     // express common config
-    app.use(options.express.static(options.dir + '/client/public')); // set the static files location /public/img will be /img for users
-    app.use(morgan('dev')); // log every request to the console
-    app.use(options.cookieParser()); // cookie parser
-    app.use(bodyParser()); // pull information from html in POST
-    app.use(methodOverride()); // simulate DELETE and PUT from '_method' in form
-    app.use(options.session({ secret: config.get('server.secret'), store: options.store, key: config.get('session.key') })); // sessions
-    app.use(options.passport.initialize()); // init passport
-    app.use(options.passport.session()); // persistent login sessions
-    app.use(flash()); // session flash messages (express-flash)
-    app.use(favicon(options.dir + '/client/public/favicon.ico')); // favicon
+    app.use(options.express.static(options.dir + '/client/public'));
+    app.use(morgan('dev'));
+    app.use(options.cookieParser());
+    app.use(bodyParser());
+    app.use(methodOverride());
+    app.use(options.session({ secret: config.get('server.secret'), store: options.store, key: config.get('session.key') }));
+    app.use(options.passport.initialize());
+    app.use(options.passport.session());
+    app.use(flash());
+    app.use(favicon(options.dir + '/client/public/favicon.ico'));
 
     // express dev config
     if ('development' == config.get('env')) {
@@ -51,7 +51,7 @@ module.exports.registerPartials = function (path, handlebars) {
             if(extension != 'html') return;
             var source = fs.readFileSync(partials + folder + '/' + file, "utf8");
             var partial = folder+'-'+file.split('.')[0];
-            handlebars.registerPartial(partial, source); // register partial
+            handlebars.registerPartial(partial, source);
         });
     });
 };

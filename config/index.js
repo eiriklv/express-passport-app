@@ -178,6 +178,8 @@ var config = module.exports = convict({
     }
 });
 
-debug(util.inspect(process.env, { colors: true })); // print the environment for debugging
+// print the environment for debugging
+debug(util.inspect(process.env, { colors: true }));
 
-config.validate(); // perform the config validation
+// perform the config validation
+config.validate();
