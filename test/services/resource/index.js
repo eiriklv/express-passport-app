@@ -6,7 +6,7 @@ exports = module.exports = function (resource, models) {
     describe('Resource', function(){
         describe('#create()', function () {
 
-            it('should do something (you want it to!)', function (done) {
+            it('should work correctly', function (done) {
                 done();
             });
 
@@ -14,7 +14,7 @@ exports = module.exports = function (resource, models) {
 
         describe('#edit()', function () {
 
-            it('should do something (you want it to!)', function (done) {
+            it('should work correctly', function (done) {
                 done();
             });
 
@@ -22,7 +22,7 @@ exports = module.exports = function (resource, models) {
 
         describe('#get()', function () {
 
-            it('should do something (you want it to!)', function (done) {
+            it('should work correctly', function (done) {
                 done();
             });
 
@@ -30,7 +30,7 @@ exports = module.exports = function (resource, models) {
 
         describe('#remove()', function () {
 
-            it('should do something (you want it to!)', function (done) {
+            it('should work correctly', function (done) {
                 done();
             });
 

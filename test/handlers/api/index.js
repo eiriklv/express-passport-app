@@ -1,31 +1,41 @@
 exports = module.exports = function () {
     // mock of profile service (should be sinon stub?)
-    var profile = function profile (err) {
-        this.update = function (req, callback) {
-            callback(err);
+    var profileMock = function profile (err, user) {
+        return {
+            update: function (req, callback) {
+                callback(err, user);
+            }
         };
     };
 
     // mock of resource service (should be sinon stub?)
-    var resource = function resource (err) {
-        this.create = function (body, callback) {
-            callback(err, body);
-        };
-        this.edit = function (body, callback) {
-            callback(err, body);
-        };
-        this.get = function (body, callback) {
-            callback(err, body);
-        };
-        this.remove = function (body, callback) {
-            callback(err, body);
+    var resourceMock = function resource (err) {
+        return {
+            create: function (body, callback) {
+                callback(err, body);
+            },
+            edit: function (body, callback) {
+                callback(err, body);
+            },
+            get: function (body, callback) {
+                callback(err, body);
+            },
+            remove: function (body, callback) {
+                callback(err, body);
+            }
         };
     };
 
     // tests subjects
     var services = {};
-    services.profile = require('../../../handlers/api/profile')(profile);
-    services.resource = require('../../../handlers/api/resource')(resource);
+    services.profile = {
+        success: require('../../../handlers/api/profile')(profileMock(null, { fullname: 'John Doe' })),
+        error: require('../../../handlers/api/profile')(profileMock('error'))
+    };
+    services.resource = {
+        success: require('../../../handlers/api/resource')(resourceMock()),
+        error: require('../../../handlers/api/resource')(resourceMock('error'))
+    };
 
     // tests
     describe('Handlers', function(){
