@@ -1,6 +1,6 @@
-exports = module.exports = function (services) {
+exports = module.exports = function (profile) {
     return {
-        get: require('./get')(services.profile),
-        update: require('./update')(services.profile)
+        get: require('./get')(profile),
+        update: require('./update')(profile)
     };
 };
