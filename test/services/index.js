@@ -1,7 +1,11 @@
-// mocks/stubs
+// dependencies
 var mongoose = require('mongoose');
 var mockgoose = require('mockgoose');
+
+// mock mongoose
 mockgoose(mongoose);
+
+// fake connect to db
 mongoose.connect('mongodb://localhost/fakedb');
 
 // test subjects dependencies
@@ -12,5 +16,8 @@ var models = require('../../models')(mongoose, helpers.validators);
 var profile = require('../../services/profile')(models, helpers);
 var resource = require('../../services/resource')(models, helpers);
 
-require('./profile')(profile, models);
-require('./resource')(resource, models);
+// tests
+describe('Services', function(){
+    require('./profile')(profile, models);
+    require('./resource')(resource, models);
+});
