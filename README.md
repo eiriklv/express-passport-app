@@ -18,6 +18,11 @@ Express 4.x application with Passport authentication
 * [fontawesome](http://fortawesome.github.io/Font-Awesome/)
 * [jquery](http://www.jquery.com/)
 
+#### Testing
+* [mocha](http://visionmedia.github.io/mocha/)
+* [chai](http://chaijs.com/)
+* [sinon](http://sinonjs.org/)
+
 #### Dependencies:
 * [mongodb](http://www.mongodb.org/)
 * [redis](http://redis.io/)
@@ -93,7 +98,7 @@ Express 4.x application with Passport authentication
 * navigate your browser to `http://localhost:3000` (or whatever port you chose for `PORT`)
 
 #### TODO
-* add unit test framework
+* ~~add unit test framework~~ add complete test suite
 * continuous integration with travis ci
 * replace jquery with [react](http://facebook.github.io/react/) or [mithril](http://lhorie.github.io/mithril/)
 * build simple client side example with the selected framework
