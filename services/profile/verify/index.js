@@ -1,9 +1,9 @@
-var debug = require('debug')('express-passport-app:service:profile:verify');
 var async = require('async');
 
 exports = module.exports = function (models, helpers) {
     return function (req, callback) {
-        if (!req.query.token) return callback('Verification token missing! Try again with a valid token (see e-mail)');
+        if (!req.query) return callback('no request query');
+        if (!req.query.token) return callback('verification token missing! try again with a valid token (see e-mail)');
 
         var uid, user;
 
@@ -11,7 +11,8 @@ exports = module.exports = function (models, helpers) {
         async.series({
             checkToken: function (callback) {
                 models.VerificationToken.findOne({ token: req.query.token }, function (err, tokenEntry) {
-                    if (err || !tokenEntry) return callback(err);
+                    if (err) return callback(err);
+                    if (!tokenEntry) return callback('invalid token');
 
                     uid = tokenEntry.uid;
 
@@ -21,10 +22,11 @@ exports = module.exports = function (models, helpers) {
                 });
             },
             verifyUser: function (callback) {
-                if (!uid) return callback('Invalid verification token!');
+                if (!uid) return callback('invalid verification token!');
 
                 models.User.findById(uid, function (err, userEntry) {
                     if (err) return callback(err);
+                    if (!userEntry) return callback('no user entry for supplied token');
 
                     user = userEntry;
                     userEntry.verified = true;
@@ -36,7 +38,7 @@ exports = module.exports = function (models, helpers) {
 
             },
             logInUser: function (callback) {
-                if (!uid) return callback('Invalid verification token! No login performed');
+                if (!uid) return callback('invalid verification token! no login performed');
 
                 req.logIn(user, function (err) {
                     callback(err);
