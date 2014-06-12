@@ -93,6 +93,9 @@ Express 4.x application with Passport authentication
 * `EMAIL_VERIFICATION_ROUTE` - Email verification route
  * example: `http://yourdomain.com/auth/local/verify`
 
+#### Run tests:
+* `npm test`
+
 #### Run the application:
 * `gulp`
 * navigate your browser to `http://localhost:3000` (or whatever port you chose for `PORT`)
