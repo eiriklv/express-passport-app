@@ -5,6 +5,7 @@ exports = module.exports = function (collection, mongoose, validators) {
         email: {
             type: String, // this is the verified email used to contact the user (must be verified for local signup)
             validate: [validators.email, 'email is not valid'],
+            required: true,
             index: true
         },
         password: {

@@ -3,6 +3,8 @@ var async = require('async');
 
 exports = module.exports = function (models, helpers) {
     return function (req, callback) {
+        if (!req.body) return callback('no request body');
+
         var user = req.user;
 
         async.series({
@@ -11,23 +13,25 @@ exports = module.exports = function (models, helpers) {
                 callback();
             },
             updatePassword: function (callback) {
+                if (!req.body.old_password) return callback();
                 if (req.body.old_password.length === 0) return callback();
 
                 var oldPass = req.body.old_password;
                 var newPass = req.body.new_password;
                 var confirmPass = req.body.new_password_confirm;
                 var passCheck = user.validPassword(oldPass);
-                var passValid = newPass.length>5 && newPass === confirmPass;
+                var newPassLength = newPass ? newPass.length : 0;
+                var passValid = newPassLength > 5 && newPass === confirmPass;
 
                 if (passCheck && passValid) {
-                    user.local.password = user.generateHash(newPass);
+                    user.password = user.generateHash(newPass);
                     callback();
                 }
                 else if (!passCheck) {
-                    callback('Password not valid.');
+                    callback('password not valid');
                 }
                 else {
-                    callback('Passwords did not match, or was shorter than 6 characters! Try again.');
+                    callback('passwords did not match, or was shorter than 6 characters! try again');
                 }
             },
             saveProfile: function (callback) {
