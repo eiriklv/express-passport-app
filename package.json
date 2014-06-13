@@ -64,7 +64,7 @@
         ]
     },
     "scripts": {
-        "test": "node_modules/.bin/mocha recursive -R mocha-lcov-reporter > ./node_modules/coveralls/bin/coveralls.js",
+        "test": "node_modules/.bin/mocha recursive -R spec",
         "develop": "sh dev.sh"
     },
     "author": "Eirik Vullum <eirik@evconsult.no> (http://www.evconsult.no/)",
