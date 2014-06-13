@@ -1,0 +1,7 @@
+language: javascript
+before_install:
+  - npm install -g mocha
+  - npm install -g gulp
+  - npm install
+  - npm update
+script: npm test
