@@ -1,6 +1,8 @@
 Express 4.x application with Passport authentication
 ====================================================
 
+[![Build Status](https://travis-ci.org/eiriklv/express-passport-app.svg?branch=master)](https://travis-ci.org/eiriklv/express-passport-app)
+
 #### Built with:
 * [node.js](http://www.nodejs.org/)
 * [express](http://www.expressjs.com/)
