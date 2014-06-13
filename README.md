@@ -94,6 +94,7 @@ Express 4.x application with Passport authentication
  * example: `http://yourdomain.com/auth/local/verify`
 
 #### Run tests:
+* npm install -g mocha
 * `npm test`
 
 #### Run the application:
