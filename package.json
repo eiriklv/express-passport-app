@@ -53,7 +53,9 @@
         "chai": "~1.9.1",
         "sinon": "~1.10.2",
         "sinon-chai": "~2.5.0",
-        "mockgoose": "~1.10.0"
+        "mockgoose": "~1.10.0",
+        "coveralls": "~2.10.0",
+        "mocha-lcov-reporter": "0.0.1"
     },
     "browserify": {
         "transform": [
@@ -62,7 +64,7 @@
         ]
     },
     "scripts": {
-        "test": "mocha recursive -R spec",
+        "test": "node_modules/.bin/mocha recursive -R mocha-lcov-reporter > ./node_modules/coveralls/bin/coveralls.js",
         "develop": "sh dev.sh"
     },
     "author": "Eirik Vullum <eirik@evconsult.no> (http://www.evconsult.no/)",
