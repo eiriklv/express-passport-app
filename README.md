@@ -34,6 +34,7 @@ Express 4.x application with Passport authentication
  * (only by linking - as Instagram might not supply a valid email for registration)
 
 #### Install dependencies (some might need to use `sudo` for various reasons): ###
+* `npm install -g mocha`
 * `npm install -g gulp`
 * `npm install`
 
@@ -94,7 +95,6 @@ Express 4.x application with Passport authentication
  * example: `http://yourdomain.com/auth/local/verify`
 
 #### Run tests:
-* npm install -g mocha
 * `npm test`
 
 #### Run the application:
