@@ -5,6 +5,8 @@ Express 4.x application with Passport authentication
 [![Coverage Status](https://coveralls.io/repos/eiriklv/express-passport-app/badge.png)](https://coveralls.io/r/eiriklv/express-passport-app)
 [![Dependency Status](https://david-dm.org/eiriklv/express-passport-app.svg)]()
 
+![express passport application](http://s29.postimg.org/6zbwl1fnb/preview.png "Express Passport Application")
+
 #### Built with:
 * [node.js](http://www.nodejs.org/)
 * [express](http://www.expressjs.com/)
