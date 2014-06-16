@@ -108,6 +108,7 @@ Express 4.x application with Passport authentication
 * navigate your browser to `http://localhost:3000` (or whatever port you chose for `PORT`)
 
 #### TODO
+* upgrade to socket.io 1.x
 * ~~continuous integration with [travis](http://www.travis-ci.org/)~~
 * add test coverage with [coveralls.io](http://www.coveralls.io/)
 * ~~add unit test framework~~
