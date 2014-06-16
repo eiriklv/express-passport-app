@@ -34,4 +34,4 @@ client/public/stylesheets/*
 .vagrant
 
 # development script
-dev.sh
+*.sh
