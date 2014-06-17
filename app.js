@@ -12,8 +12,7 @@ var SessionSockets = require('session.socket.io-express4');
 var app = express();
 
 // config and setup helpers
-var common = require('./common');
-var helpers = common.helpers();
+var helpers = require('./helpers')();
 var config = require('./config');
 var setup = require('./setup');
 
@@ -42,7 +41,7 @@ var io = socketio.listen(server);
 var sessionSockets = new SessionSockets(io, sessionStore, cookieParser(), config.get('session.key'));
 
 // app dependencies (app specific)
-var ipc = common.ipc(0);
+var ipc = require('./modules/ipc')(0);
 var mailer = require('./modules/mailer')(config);
 var models = require('./models')(mongoose, helpers.validators);
 var services = require('./services')(models, helpers);

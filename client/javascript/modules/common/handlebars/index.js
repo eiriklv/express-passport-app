@@ -1,5 +1,5 @@
 var handlebars = require('hbsfy/runtime');
-var helpers = require('../../../../../common').helpers();
+var helpers = require('../../../../../helpers')();
 
 exports = module.exports = function () {
     return {
