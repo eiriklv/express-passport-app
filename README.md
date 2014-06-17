@@ -7,7 +7,7 @@ Express 4.x application with Passport authentication
 
 ![express passport application](http://s29.postimg.org/6zbwl1fnb/preview.png "Express Passport Application")
 
-#### Built with:
+#### Built with
 * [node.js](http://www.nodejs.org/)
 * [express](http://www.expressjs.com/)
 * [passport](http://www.passportjs.org/)
@@ -29,17 +29,17 @@ Express 4.x application with Passport authentication
 * [chai](http://chaijs.com/)
 * [sinon](http://sinonjs.org/)
 
-#### Dependencies:
+#### Dependencies
 * [mongodb](http://www.mongodb.org/)
 * [redis](http://redis.io/)
 
-#### Social logins supported:
+#### Social logins supported
 * [facebook](http://developers.facebook.com/)
 * [google+](http://developers.google.com/+/)
 * [instagram](http://instagram.com/developer/)
  * (only by linking - as Instagram might not supply a valid email for registration)
 
-#### Install dependencies (some might need to use `sudo` for various reasons): ###
+#### Install dependencies (some might need to use `sudo` for various reasons)
 * `brew install redis`
 * `brew install mongodb`
 * `npm install -g mocha`
@@ -102,10 +102,10 @@ Express 4.x application with Passport authentication
 * `EMAIL_VERIFICATION_ROUTE` - Email verification route
  * example: `http://yourdomain.com/auth/local/verify`
 
-#### Run tests:
+#### Run tests
 * `npm test`
 
-#### Run the application:
+#### Run the application
 * `gulp`
 * navigate your browser to `http://localhost:3000` (or whatever port you chose for `PORT`)
 
