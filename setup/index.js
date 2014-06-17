@@ -86,8 +86,8 @@ module.exports.sessions = function (SessionStore, config) {
 };
 
 // connect to backend store (db)
-module.exports.db = function (db, url)  {
-    db.connect(url);
+module.exports.db = function (db, config)  {
+    db.connect(config.get('database.mongo.url'));
 };
 
 // run application

@@ -20,7 +20,7 @@ var setup = require('./setup');
 var sessionStore = setup.sessions(RedisStore, config);
 
 // setup application
-setup.db(mongoose, config.get('database.mongo.url'));
+setup.db(mongoose, config);
 setup.registerPartials('./views/partials/', hbs);
 setup.registerHelpers(helpers.handlebars, hbs);
 
