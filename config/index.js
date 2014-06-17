@@ -52,7 +52,9 @@ var config = module.exports = convict({
             },
             default: 'somesillysecret',
             env: 'APPSECRET'
-        },
+        }
+    },
+    client: {
         api: {
             path: {
                 doc: 'The client api url path (relative)',
@@ -60,7 +62,7 @@ var config = module.exports = convict({
                 env: 'CLIENT_API_PATH'
             }
         }
-    },
+    }
     database: {
         mongo: {
             url: {
