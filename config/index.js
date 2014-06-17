@@ -62,7 +62,7 @@ var config = module.exports = convict({
                 env: 'CLIENT_API_PATH'
             }
         }
-    }
+    },
     database: {
         mongo: {
             url: {
