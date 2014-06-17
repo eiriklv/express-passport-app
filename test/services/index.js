@@ -9,7 +9,7 @@ mockgoose(mongoose);
 mongoose.connect('mongodb://localhost/fakedb');
 
 // test subjects dependencies
-var helpers = require('../../common').helpers();
+var helpers = require('../../helpers')();
 var models = require('../../models')(mongoose, helpers.validators);
 
 // test subjects
