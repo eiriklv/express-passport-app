@@ -54,7 +54,7 @@ Express 4.x application with Passport authentication
 #### Email verification via Mandrill:
 * Create an application on [mandrill](http://mandrill.com/)
 
-#### Set environment variables:
+#### Environment variables:
 * `PORT` - Port exposed by this component.
  * example: `3000`
 * `SERVICE_NAME` - The name of your fantastic service/platform!
@@ -106,7 +106,9 @@ Express 4.x application with Passport authentication
 * `npm test`
 
 #### Run the application:
+* set environment variables
 * `gulp`
+* alternatively create a shellscript for the above (for development)
 * navigate your browser to `http://localhost:PORT`
 
 #### TODO
