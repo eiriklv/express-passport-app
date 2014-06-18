@@ -76,7 +76,7 @@ Express 4.x application with Passport authentication
 * `APPSECRET` - Application session secret
  * example: `sOmeCrAzYhAsH894372`
 * `SESSION_KEY` - Application session secret (optional)
- * example: `express.sid` (default to `connect.sid`)
+ * example: `express.sid` (defaults to `connect.sid`)
 * `FACEBOOK_CLIENT_ID` - Facebook application client id
  * example: `abcdefghijklmnopqrstuvxyz1234567890`
 * `FACEBOOK_CLIENT_SECRET` - Facebook application client secret
