@@ -114,6 +114,7 @@ Express 4.x application with Passport authentication
 * ~~continuous integration with [travis](http://www.travis-ci.org/)~~
 * add test coverage with [coveralls.io](http://www.coveralls.io/)
 * ~~add unit test framework~~
+* look into using [jest](http://facebook.github.io/jest/) for testing
 * add complete test suite
 * replace jquery with [react](http://facebook.github.io/react/) or [mithril](http://lhorie.github.io/mithril/)
 * build simple client side example with the selected framework
