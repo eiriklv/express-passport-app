@@ -69,8 +69,8 @@ Express 4.x application with Passport authentication
  * example: `mongodb://user:pass@localhost:27017/mydatabase`
 * `REDIS_URL` - Redis url (including authentication)
  * example: `redis://user:pass@localhost:6379`
-* `REDIS_DB` - Redis database number (optional)
- * example: `0` - make sure you are using `0` if you are using a cloud solution with a single db
+* `REDIS_DB` - Redis database number (0-15)
+ * example: `1` - defaults to `0`
 * `REDIS_SESSION_PREFIX` - Prefix for redis session entries (optional)
  * example: `sess:`
 * `APPSECRET` - Application session secret
