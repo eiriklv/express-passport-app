@@ -107,7 +107,7 @@ Express 4.x application with Passport authentication
 
 #### Run the application:
 * `gulp`
-* navigate your browser to `http://localhost:3000` (or whatever port you chose for `PORT`)
+* navigate your browser to `http://localhost:PORT`
 
 #### TODO
 * upgrade to socket.io 1.x
