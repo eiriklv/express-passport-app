@@ -7,7 +7,7 @@ Express 4.x application with Passport authentication
 
 ![express passport application](http://s29.postimg.org/6zbwl1fnb/preview.png "Express Passport Application")
 
-#### Built with
+#### Built with:
 * [node.js](http://www.nodejs.org/)
 * [express](http://www.expressjs.com/)
 * [passport](http://www.passportjs.org/)
@@ -24,37 +24,37 @@ Express 4.x application with Passport authentication
 * [fontawesome](http://fortawesome.github.io/Font-Awesome/)
 * [jquery](http://www.jquery.com/)
 
-#### Testing
+#### Testing:
 * [mocha](http://visionmedia.github.io/mocha/)
 * [chai](http://chaijs.com/)
 * [sinon](http://sinonjs.org/)
 
-#### Dependencies
+#### Dependencies:
 * [mongodb](http://www.mongodb.org/)
 * [redis](http://redis.io/)
 
-#### Social logins supported
+#### Social logins supported:
 * [facebook](http://developers.facebook.com/)
 * [google+](http://developers.google.com/+/)
 * [instagram](http://instagram.com/developer/)
  * (only by linking - as Instagram might not supply a valid email for registration)
 
-#### Install dependencies (some might need to use `sudo` for various reasons)
+#### Install dependencies (some might need to use `sudo` for various reasons):
 * `brew/apt-get install redis`
 * `brew/apt-get install mongodb`
 * `npm install -g mocha`
 * `npm install -g gulp`
 * `npm install`
 
-#### Create an application on both Facebook, Google+ and Instagram and point the callbacks to (respectively)
+#### Create an application on both Facebook, Google+ and Instagram and point the callbacks to (respectively):
 * `http://localhost:3000/auth/facebook/callback`
 * `http://localhost:3000/auth/google/callback`
 * `http://localhost:3000/auth/instagram/callback`
 
-#### Email verification via Mandrill
+#### Email verification via Mandrill:
 * Create an application on [mandrill](http://mandrill.com/)
 
-#### Set environment variables
+#### Set environment variables:
 * `PORT` - Port exposed by this component.
  * example: `3000`
 * `SERVICE_NAME` - The name of your fantastic service/platform!
@@ -102,10 +102,10 @@ Express 4.x application with Passport authentication
 * `EMAIL_VERIFICATION_ROUTE` - Email verification route
  * example: `http://yourdomain.com/auth/local/verify`
 
-#### Run tests
+#### Run tests:
 * `npm test`
 
-#### Run the application
+#### Run the application:
 * `gulp`
 * navigate your browser to `http://localhost:3000` (or whatever port you chose for `PORT`)
 
