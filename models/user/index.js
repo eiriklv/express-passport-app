@@ -1,4 +1,4 @@
-var bcrypt   = require('bcrypt-nodejs');
+var bcrypt   = require('bcryptjs');
 
 exports = module.exports = function (collection, mongoose, validators) {
     var schema = mongoose.Schema({
