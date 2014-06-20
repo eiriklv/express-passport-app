@@ -1,5 +1,5 @@
 exports = module.exports = function () {
-	return function (req, res) {
+    return function (req, res) {
         res.render('home', {
             title: 'Home',
             icon: 'fa-magic',

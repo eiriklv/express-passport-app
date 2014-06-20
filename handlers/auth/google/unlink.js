@@ -1,5 +1,5 @@
 exports = module.exports = function () {
-	return function (req, res, next) {
+    return function (req, res, next) {
         var user = req.user;
         user.google = undefined;
         req.flash('deleteMessage', 'Your Google account was un-linked.');

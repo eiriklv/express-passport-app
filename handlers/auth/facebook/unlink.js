@@ -1,5 +1,5 @@
 exports = module.exports = function () {
-	return function (req, res, next) {
+    return function (req, res, next) {
         var user = req.user;
         user.facebook = undefined;
         req.flash('deleteMessage', 'Your Facebook account was un-linked.');

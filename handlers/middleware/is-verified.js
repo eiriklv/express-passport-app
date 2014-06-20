@@ -1,5 +1,5 @@
 exports = module.exports = function () {
-	return function (req, res, next) {
+    return function (req, res, next) {
          // if user is authenticated in the session but has no verified email, redirect to email verification
         if (req.isAuthenticated() && !req.user.verified) {
             req.flash('notVerified'); // avoid duplicate message (bug/edge-case)
