@@ -111,6 +111,37 @@ Express 4.x application with Passport authentication
 * alternatively create a shellscript for the above (for development)
 * navigate your browser to `http://localhost:PORT`
 
+#### Example shellscript
+```sh
+#!/bin/sh
+
+export PORT=3000 \
+export SERVICE_NAME="Express Passport Application" \
+export DEBUG="*" \
+export NODE_ENV="development" \
+export CLIENT_API_PATH="/api" \
+export MONGO_URL="mongodb://localhost/express-passport-app" \
+export REDIS_URL="redis://localhost:6379" \
+export REDIS_DB=0 \
+export REDIS_SESSION_PREFIX="sess:" \
+export APPSECRET="somecrazyhash" \
+export SESSION_KEY="express.sid" \
+export FACEBOOK_CLIENT_ID="000000000000000" \
+export FACEBOOK_CLIENT_SECRET="000000000000000000000000000000000000000000000" \
+export FACEBOOK_CALLBACK_URL="http://localhost:3000/auth/facebook/callback" \
+export GOOGLE_CLIENT_ID="000000000000000000000000000000.apps.googleusercontent.com" \
+export GOOGLE_CLIENT_SECRET="000000000000000000000000000000" \
+export GOOGLE_CALLBACK_URL="http://localhost:3000/auth/google/callback" \
+export INSTAGRAM_CLIENT_ID="000000000000000000000000000000" \
+export INSTAGRAM_CLIENT_SECRET="000000000000000000000000000000" \
+export INSTAGRAM_CALLBACK_URL="http://localhost:3000/auth/instagram/callback" \
+export MANDRILL_API_KEY="000000000000000000000000000000" \
+export MANDRILL_SENDER="Express Passport Application <noreply@expresspassportapp.com>" \
+export EMAIL_VERIFICATION_ROUTE="http://localhost:3000/auth/local/verify" \
+
+gulp
+```
+
 #### TODO
 * upgrade to socket.io 1.x
 * ~~continuous integration with [travis](http://www.travis-ci.org/)~~
