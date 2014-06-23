@@ -111,10 +111,9 @@ Express 4.x application with Passport authentication
 * alternatively create a shellscript for the above (for development)
 * navigate your browser to `http://localhost:PORT`
 
-#### Example shellscript
+#### Development shellscript example:
 ```sh
 #!/bin/sh
-
 export PORT=3000 \
 export SERVICE_NAME="Express Passport Application" \
 export DEBUG="*" \
