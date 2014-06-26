@@ -61,7 +61,7 @@ module.exports.registerPartials = function (path, handlebars) {
 module.exports.registerHelpers = function (helpers, handlebars) {
     for (var helper in helpers) {
         if (helpers.hasOwnProperty(helper)) {
-            handlebars.registerHelper(helper, helpers.helper);
+            handlebars.registerHelper(helper, helpers[helper]);
         }
     }
     return;
