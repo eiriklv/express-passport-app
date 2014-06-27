@@ -41,6 +41,7 @@ Express 4.x application with Passport authentication
  * (only by linking - as Instagram might not supply a valid email for registration)
 
 #### Install dependencies (some might need to use `sudo` for various reasons):
+* `brew/apt-get install nodejs`
 * `brew/apt-get install redis`
 * `brew/apt-get install mongodb`
 * `npm install -g mocha`
