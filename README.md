@@ -30,6 +30,7 @@ Express 4.x application with Passport authentication
 * [sinon](http://sinonjs.org/)
 
 #### Dependencies:
+* [nodejs](http://www.nodejs.org)
 * [mongodb](http://www.mongodb.org/)
 * [redis](http://redis.io/)
 
