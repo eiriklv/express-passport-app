@@ -4,14 +4,14 @@
     "engines": {
         "node": "0.10.x"
     },
-    "version": "0.4.1",
+    "version": "0.4.2",
     "description": "Express 4.x boilerplate with Passport authentication",
     "dependencies": {
-        "express": "~4.4.3",
+        "express": "~4.5.0",
         "morgan": "~1.1.1",
         "body-parser": "~1.4.3",
         "cookie-parser": "~1.3.1",
-        "express-session": "~1.5.0",
+        "express-session": "~1.6.3",
         "serve-favicon": "~2.0.1",
         "errorhandler": "~1.1.0",
         "method-override": "~2.0.2",
@@ -32,18 +32,18 @@
         "passport-instagram": "~0.1.2",
         "express-flash": "~0.0.2",
         "bcryptjs": "~1.0.1",
-        "stylus": "~0.46.3",
+        "stylus": "~0.47.1",
         "convict": "~0.4.2",
         "validator": "~3.16.0",
         "superagent": "^0.18.0",
         "mandrill-send": "~0.1.0"
     },
     "devDependencies": {
-        "browserify": "~4.1.10",
+        "browserify": "~4.2.0",
         "vinyl-source-stream": "~0.1.1",
         "gulp": "~3.8.0",
         "gulp-stylus": "~1.0.2",
-        "gulp-notify": "~1.3.1",
+        "gulp-notify": "~1.4.0",
         "gulp-nodemon": "~1.0.4",
         "gulp-mocha": "~0.4.1",
         "nib": "~1.0.2",
@@ -54,7 +54,7 @@
         "sinon": "~1.10.2",
         "sinon-chai": "~2.5.0",
         "mockgoose": "~1.10.0",
-        "coveralls": "~2.10.0",
+        "coveralls": "~2.11.0",
         "mocha-lcov-reporter": "0.0.1"
     },
     "browserify": {
