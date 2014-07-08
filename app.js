@@ -53,5 +53,8 @@ require('./modules/sockets')(io, sessionSockets, ipc);
 require('./modules/passport')(passport, config, authentication, models);
 require('./routes')(app, express, handlers, config);
 
+// express error handling
+setup.handleExpressError(app);
+
 // run application
 setup.run(server, config);
