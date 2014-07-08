@@ -26,8 +26,8 @@ module.exports.configureExpress = function (options, app, config) {
     app.use(options.express.static(options.dir + '/client/public'));
     app.use(morgan('dev'));
     app.use(options.cookieParser());
-    app.use(bodyParser.urlencoded())
-    app.use(bodyParser.json())
+    app.use(bodyParser.urlencoded());
+    app.use(bodyParser.json());
     app.use(methodOverride());
     app.use(options.session({ secret: config.get('server.secret'), store: options.store, key: config.get('session.key') }));
     app.use(options.passport.initialize());
