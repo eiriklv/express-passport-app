@@ -158,5 +158,5 @@ gulp
 * ~~add unit test framework~~
 * look into using [jest](http://facebook.github.io/jest/) for testing
 * add complete test suite
-* replace jquery with [react](http://facebook.github.io/react/) or [mithril](http://lhorie.github.io/mithril/)
-* build simple client side example with the selected framework
+* ~~replace jquery with [react](http://facebook.github.io/react/) or [mithril](http://lhorie.github.io/mithril/)
+* ~~build simple client side example with the selected framework
