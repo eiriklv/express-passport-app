@@ -6,6 +6,8 @@ Express 4.x application with Passport authentication
 [![Dependency Status](https://david-dm.org/eiriklv/express-passport-app.svg)](https://david-dm.org/eiriklv/express-passport-app)
 [![devDependency Status](https://david-dm.org/eiriklv/express-passport-app/dev-status.svg)](https://david-dm.org/eiriklv/express-passport-app#info=devDependencies)
 
+##### Edit: This branch introduces a demo application with react
+
 #### Introduction:
 This project will give you a complete scaffolding/boilerplate of the [node](http://www.nodejs.org/)/[express](http://www.expressjs.com/) stack along with social logins through [passport]() and email verification through [mandrill](http://www.mandrill.com). It uses [mongodb](http://www.mongodb.org/) for database models and [redis](http://www.redis.io/) for session storage. Fork at will! :)
 
@@ -21,6 +23,8 @@ This project will give you a complete scaffolding/boilerplate of the [node](http
 * [browserify](http://www.browserify.org/)
  * [hbsfy](http://github.com/epeli/node-hbsfy/)
  * [envify](http://github.com/hughsk/envify/)
+ * [reactify](https://github.com/andreypopp/reactify)
+* [react](http://facebook.github.io/react/)
 * [handlebars](http://handlebarsjs.com/)
 * [stylus](http://learnboost.github.io/stylus/)
  * [nib](http://visionmedia.github.io/nib/)

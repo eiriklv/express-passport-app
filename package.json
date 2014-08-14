@@ -36,7 +36,14 @@
         "convict": "~0.4.x",
         "validator": "~3.16.x",
         "superagent": "^0.18.x",
-        "mandrill-send": "~0.1.x"
+        "mandrill-send": "~0.1.x",
+        "react": "~0.10.0",
+        "react-async": "~0.9.1",
+        "react-router-component": "~0.18.2",
+        "node-jsx": "0.11.0",
+        "react-bootstrap": "^0.11.1",
+        "fibers": "~1.0.1",
+        "marked": "~0.3.2"
     },
     "devDependencies": {
         "browserify": "~4.2.x",
@@ -48,7 +55,9 @@
         "gulp-mocha": "~0.5.x",
         "nib": "~1.0.x",
         "hbsfy": "~1.3.x",
-        "envify": "~2.0.x",
+        "envify": "~1.2.1",
+        "reactify": "0.14.x",
+        "jest-cli": "^0.1.18",
         "mocha": "~1.21.x",
         "chai": "~1.9.x",
         "sinon": "~1.10.x",
@@ -60,7 +69,8 @@
     "browserify": {
         "transform": [
             "hbsfy",
-            "envify"
+            "envify",
+            "reactify"
         ]
     },
     "scripts": {
