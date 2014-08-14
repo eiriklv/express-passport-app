@@ -1,5 +1,5 @@
-exports = module.exports = function (Resource) {
-    return function (query, callback) {
-        callback(null, query);
+exports = module.exports = function (Resource, helpers) {
+    return function (body, callback) {
+        callback(null, body);
     };
 };

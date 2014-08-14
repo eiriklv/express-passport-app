@@ -45,7 +45,7 @@ var ipc = require('./modules/ipc')(0);
 var mailer = require('./modules/mailer')(config);
 var models = require('./models')(mongoose, helpers.validators);
 var services = require('./services')(models, helpers);
-var handlers = require('./handlers')(passport, services);
+var handlers = require('./handlers')(passport, services, helpers);
 var authentication = require('./modules/authentication')(models, mailer);
 
 // app specific modules

@@ -7,7 +7,7 @@ var extenders = require('./modules/common/extenders')(); // extend jquery to add
 var config = require('./config');
 
 // modules
-var api = require('./modules/common/api')(config);
+var api = require('./modules/api')(config);
 var templates = require('./templates')();
 var messages = require('./modules/common/messages')();
 

@@ -1,7 +1,7 @@
-exports = module.exports = function (services) {
+exports = module.exports = function (services, helpers) {
     return {
         landing: require('./landing')(),
-        home: require('./home')(),
+        home: require('./home')(services, helpers),
         profile: require('./profile')(services),
         common: require('./common')(services)
     };
