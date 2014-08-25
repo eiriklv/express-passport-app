@@ -12,7 +12,7 @@ var React = require('react');
 var ReactAsync = require('react-async');
 var superagent = require('superagent');
 var io = require('socket.io-client');
-var sockets = require('./modules/home/sockets')
+var sockets = require('./modules/home/sockets');
 
 // custom components
 var TodoApp = require('./modules/components/todo-app');
@@ -43,7 +43,7 @@ var App = React.createClass({
         return (
             <html>
                 <Head title={this.state.title} description={this.state.description} />
-                <body id="reactapp">
+                <body id="home">
                     <Header user={this.state.user} />
                     <div className="container">
                         <div className="jumbotron text-center">
