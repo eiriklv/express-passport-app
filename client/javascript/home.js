@@ -12,7 +12,7 @@ var React = require('react');
 var ReactAsync = require('react-async');
 var superagent = require('superagent');
 var io = require('socket.io-client');
-var sockets = require('./modules/home/sockets');
+var sockets = require('./modules/sockets/home');
 
 // custom components
 var TodoApp = require('./modules/components/todo-app');

@@ -1,19 +1,85 @@
-// dependencies
-var io = require('socket.io-client');
-var handlebars = require('./modules/common/handlebars')(); // register handlebars helpers and partials
-var extenders = require('./modules/common/extenders')(); // extend jquery to add some methods
+/**
+ * @jsx React.DOM
+ */
+'use strict';
 
 // config
 var config = require('./config');
-
-// modules
 var api = require('./modules/api')(config);
-var templates = require('./templates')();
-var messages = require('./modules/common/messages')();
 
-// application
-var app = require('./modules/profile/app')(templates, api); // this could be the main app
+// dependencies
+var React = require('react');
+var ReactAsync = require('react-async');
+var superagent = require('superagent');
+var io = require('socket.io-client');
+var sockets = require('./modules/sockets/home');
 
-// debug
-console.log('profile app started');
-console.log(config);
+// custom components
+var Counter = require('./modules/components/counter');
+var Head = require('./modules/components/head');
+var Header = require('./modules/components/header');
+var AccountData = require('./modules/components/account-data');
+var FlashMessages = require('./modules/components/flash-messages');
+var ProfileSettings = require('./modules/components/profile-settings');
+var Jumbotron = require('react-bootstrap').Jumbotron;
+
+// client scripts
+var ClientScripts = require('./modules/components/client-scripts');
+
+var App = React.createClass({
+
+    mixins: [ReactAsync.Mixin],
+
+    getInitialStateAsync: function (callback) {
+        callback(null, this.props); // set the input props as state (equal to 'return this.props' in getInitialState, but async)
+    },
+
+    componentDidMount: function () {
+        // intialize socket.io
+        sockets(io);
+    },
+
+    render: function() {
+        return (
+            <html>
+
+                <Head title={this.state.title} description={this.state.description} />
+
+                <body id="profile">
+
+                    <Header user={this.state.user} />
+
+                    <FlashMessages messages={this.state.messages} />
+
+                    <Jumbotron className='text-center'>
+                        <h1>Profile page</h1>
+                    </Jumbotron>
+
+                    <ProfileSettings api={api} />
+
+                    <div className="MainPage container">
+
+                        <AccountData user={this.state.user} />
+
+                    </div>
+
+                    <ClientScripts />
+
+                </body>
+
+            </html>
+        );
+    }
+});
+
+module.exports = App;
+
+if (typeof window !== 'undefined') {
+    if (config.environment == 'development') {
+        window.React = require('react');
+    }
+
+    window.onload = function () {
+        React.renderComponent(App(), document);
+    }
+}

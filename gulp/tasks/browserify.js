@@ -35,13 +35,7 @@ gulp.task('browserify', function () {
         {
             input: ['./client/javascript/profile.js'],
             output: 'profile.js',
-            extensions: ['.handlebars'],
             destination: './client/public/javascript/'
         },
-        {
-            input: ['./client/javascript/profile-new.js'],
-            output: 'profile-new.js',
-            destination: './client/public/javascript/'
-        }
     ]);
 });
