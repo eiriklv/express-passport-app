@@ -14,6 +14,11 @@ var superagent = require('superagent');
 var io = require('socket.io-client');
 var sockets = require('./modules/sockets/home');
 
+// common components
+var Head = require('./modules/components/common/head');
+var Header = require('./modules/components/common/header');
+var ClientScripts = require('./modules/components/common/client-scripts');
+
 // custom components
 var TodoApp = require('./modules/components/todo-app');
 var CommentBox = require('./modules/components/comment-box');
@@ -22,12 +27,7 @@ var Counter = require('./modules/components/counter');
 var LikeButton = require('./modules/components/like-button');
 var Ticker = require('./modules/components/ticker');
 var Time = require('./modules/components/time');
-var Head = require('./modules/components/head');
-var Header = require('./modules/components/header');
 var FilterableProductTable = require('./modules/components/filterable-product-table');
-
-// client scripts
-var ClientScripts = require('./modules/components/client-scripts');
 
 var App = React.createClass({
 

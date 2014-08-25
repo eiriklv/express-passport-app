@@ -14,16 +14,16 @@ var superagent = require('superagent');
 var io = require('socket.io-client');
 var sockets = require('./modules/sockets/home');
 
+// common components
+var Head = require('./modules/components/common/head');
+var Header = require('./modules/components/common/header');
+var ClientScripts = require('./modules/components/common/client-scripts');
+
 // custom components
 var Counter = require('./modules/components/counter');
-var Head = require('./modules/components/head');
-var Header = require('./modules/components/header');
 var AccountData = require('./modules/components/account-data');
 var FlashMessages = require('./modules/components/flash-messages');
 var ProfileSettings = require('./modules/components/profile-settings');
-
-// client scripts
-var ClientScripts = require('./modules/components/client-scripts');
 
 var App = React.createClass({
 
