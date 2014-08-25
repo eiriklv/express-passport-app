@@ -26,6 +26,9 @@ var Head = require('./modules/components/head');
 var Header = require('./modules/components/header');
 var FilterableProductTable = require('./modules/components/filterable-product-table');
 
+// client scripts
+var ClientScripts = require('./modules/components/client-scripts');
+
 var App = React.createClass({
 
     mixins: [ReactAsync.Mixin],
@@ -42,9 +45,13 @@ var App = React.createClass({
     render: function() {
         return (
             <html>
+
                 <Head title={this.state.title} description={this.state.description} />
+
                 <body id="home">
+
                     <Header user={this.state.user} />
+
                     <div className="container">
                         <div className="jumbotron text-center">
                             <h1>React Demo Components</h1>
@@ -54,8 +61,11 @@ var App = React.createClass({
                     <div className="MainPage container">
 
                         <Counter initialCount={10} />
+
                         <Time startTime={this.state.startTime} />
+
                         <LikeButton liked={false} />
+
                         <Ticker offset={0} interval={1000} />
 
                         <TodoApp
@@ -64,18 +74,21 @@ var App = React.createClass({
                             skin='warning'
                             placeholder='What do you need to do?'
                         />
+
                         <TodoApp
                             type='focus'
                             title='FOCUS AREAS'
                             skin='success'
                             placeholder='What do you need to focus on?'
                         />
+
                         <TodoApp
                             type='goal'
                             title='GOALS'
                             skin='info'
                             placeholder='What are your goals?'
                         />
+
                         <TodoApp
                             type='motivation'
                             title='MOTIVATIONS'
@@ -90,8 +103,13 @@ var App = React.createClass({
                             title='Filterable Product Table'
                             products={this.state.products}
                         />
+
                     </div>
+
+                    <ClientScripts />
+
                 </body>
+
             </html>
         );
     }
