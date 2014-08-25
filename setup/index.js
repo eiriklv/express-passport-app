@@ -26,10 +26,18 @@ module.exports.configureExpress = function (options, app, config) {
     app.use(options.express.static(options.dir + '/client/public'));
     app.use(morgan('dev'));
     app.use(options.cookieParser());
-    app.use(bodyParser.urlencoded());
+    app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
     app.use(methodOverride());
-    app.use(options.session({ secret: config.get('server.secret'), store: options.store, key: config.get('session.key') }));
+
+    app.use(options.session({
+        secret: config.get('server.secret'),
+        store: options.store,
+        key: config.get('session.key'),
+        resave: true,
+        saveUninitialized: true
+    }));
+
     app.use(options.passport.initialize());
     app.use(options.passport.session());
     app.use(flash());
