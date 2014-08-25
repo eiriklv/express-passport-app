@@ -17,7 +17,7 @@ exports = module.exports = function (services, helpers) {
                 {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
             ],
             startTime: new Date()
-        }
+        };
 
         helpers.react.renderMarkupToString({
             component: App,
