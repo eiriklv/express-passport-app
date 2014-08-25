@@ -21,7 +21,6 @@ var Header = require('./modules/components/header');
 var AccountData = require('./modules/components/account-data');
 var FlashMessages = require('./modules/components/flash-messages');
 var ProfileSettings = require('./modules/components/profile-settings');
-var Jumbotron = require('react-bootstrap').Jumbotron;
 
 // client scripts
 var ClientScripts = require('./modules/components/client-scripts');
@@ -51,9 +50,11 @@ var App = React.createClass({
 
                     <FlashMessages messages={this.state.messages} />
 
-                    <Jumbotron className='text-center'>
-                        <h1>Profile page</h1>
-                    </Jumbotron>
+                    <div className="container">
+                        <div className="jumbotron text-center">
+                            <h1>Profile page</h1>
+                        </div>
+                    </div>
 
                     <ProfileSettings api={api} />
 
