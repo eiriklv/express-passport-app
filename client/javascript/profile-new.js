@@ -20,6 +20,7 @@ var Head = require('./modules/components/head');
 var Header = require('./modules/components/header');
 var AccountData = require('./modules/components/account-data');
 var FlashMessages = require('./modules/components/flash-messages');
+var ProfileSettings = require('./modules/components/profile-settings');
 
 // client scripts
 var ClientScripts = require('./modules/components/client-scripts');
@@ -55,9 +56,9 @@ var App = React.createClass({
                         </div>
                     </div>
 
-                    <div className="MainPage container">
+                    <ProfileSettings />
 
-                        <Counter initialCount={10} />
+                    <div className="MainPage container">
 
                         <AccountData user={this.state.user} />
 
