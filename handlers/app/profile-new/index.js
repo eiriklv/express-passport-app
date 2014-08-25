@@ -6,7 +6,8 @@ exports = module.exports = function (services, helpers) {
         var context = {
             title: 'Profile page',
             description: 'React profile page',
-            user: req.user,
+            user: req.user.toObject(),
+            messages: req.flash()
         };
 
         helpers.react.renderMarkupToString({

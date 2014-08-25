@@ -18,6 +18,11 @@ var sockets = require('./modules/home/sockets');
 var Counter = require('./modules/components/counter');
 var Head = require('./modules/components/head');
 var Header = require('./modules/components/header');
+var AccountData = require('./modules/components/account-data');
+var FlashMessages = require('./modules/components/flash-messages');
+
+// client scripts
+var ClientScripts = require('./modules/components/client-scripts');
 
 var App = React.createClass({
 
@@ -35,9 +40,15 @@ var App = React.createClass({
     render: function() {
         return (
             <html>
+
                 <Head title={this.state.title} description={this.state.description} />
+
                 <body id="profile">
+
                     <Header user={this.state.user} />
+
+                    <FlashMessages messages={this.state.messages} />
+
                     <div className="container">
                         <div className="jumbotron text-center">
                             <h1>Profile page</h1>
@@ -48,8 +59,14 @@ var App = React.createClass({
 
                         <Counter initialCount={10} />
 
+                        <AccountData user={this.state.user} />
+
                     </div>
+
+                    <ClientScripts />
+
                 </body>
+
             </html>
         );
     }
