@@ -16,8 +16,16 @@ module.exports = React.createClass({
         console.log('updating header');
     },
 
+    componentDidMount: function() {
+        this.setActiveNavigationLink();
+    },
+
     shouldComponentUpdate: function() {
         return false;
+    },
+
+    setActiveNavigationLink: function () {
+        document.getElementById('nav-' + document.body.id).className = 'active';
     },
 
     render: function() {
@@ -38,8 +46,8 @@ module.exports = React.createClass({
                     <div className='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
 
                         <ul className='nav navbar-nav'>
-                            <li className='active'><a href='/'>Home</a></li>
-                            <li><a href='/profile'>Profile</a></li>
+                            <li id='nav-home'><a href='/'>Home</a></li>
+                            <li id='nav-profile'><a href='/profile'>Profile</a></li>
 
                             <li className='dropdown'>
                                 <a href='#' className='dropdown-toggle' data-toggle='dropdown'>Logged in: {this.state.fullname} <span className='caret'></span></a>
