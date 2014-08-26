@@ -24,7 +24,7 @@ module.exports = React.createClass({
         return false;
     },
 
-    render: function () {
+    render: function() {
         return (
             <form role='form' className='commentForm' onSubmit={this.handleSubmit}>
                 <div className='form-group'>

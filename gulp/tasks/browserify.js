@@ -3,7 +3,7 @@ var gulp = require('gulp');
 var handleErrors = require('../util/handle-errors');
 var source = require('vinyl-source-stream');
 
-function createSingleBundle (options) {
+function createSingleBundle(options) {
     browserify({
         entries: options.input,
         extensions: options.extensions
@@ -14,7 +14,7 @@ function createSingleBundle (options) {
         .pipe(gulp.dest(options.destination));
 }
 
-function createBundles (bundles) {
+function createBundles(bundles) {
     bundles.forEach(function (bundle) {
         createSingleBundle({
             input: bundle.input,
@@ -25,7 +25,7 @@ function createBundles (bundles) {
     });
 }
 
-gulp.task('browserify', function () {
+gulp.task('browserify', function() {
     createBundles([
         {
             input: ['./client/javascript/home.js'],

@@ -1,4 +1,4 @@
-exports = module.exports = function (Resource, helpers) {
+exports = module.exports = function(Resource, helpers) {
     return {
         get: require('./get')(Resource, helpers),
         remove: require('./remove')(Resource, helpers),

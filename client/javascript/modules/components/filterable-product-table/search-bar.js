@@ -7,7 +7,7 @@ var React = require('react');
 module.exports = React.createClass({
     displayName: 'SearchBar',
 
-    handleChange: function () {
+    handleChange: function() {
         // this calls a user generated function (onUserInput) passed as a prop from the parent (FilterableProductTable)
         this.props.onUserInput(
             this.refs.filterTextInput.getDOMNode().value,

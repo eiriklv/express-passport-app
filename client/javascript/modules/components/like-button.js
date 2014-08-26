@@ -14,7 +14,7 @@ module.exports = React.createClass({
         };
     },
 
-    handleClick: function (event) {
+    handleClick: function(event) {
         // if the action has been called, but no response har been returned yet, abort the click
         if (this.state.disabled) return;
 
@@ -26,7 +26,7 @@ module.exports = React.createClass({
         this.setState({disabled: true});
 
         // perform the action and update the state when response is recieved
-        setTimeout(function () {
+        setTimeout(function() {
             alertify.success('You ' + status + ' this!');
             this.setState({
                 liked: !this.state.liked,
@@ -35,7 +35,7 @@ module.exports = React.createClass({
         }.bind(this), 2000);
     },
 
-    render: function () {
+    render: function() {
         var text = this.state.liked ? 'like' : 'unlike';
         return (
             <div className='well' onClick={this.handleClick}>

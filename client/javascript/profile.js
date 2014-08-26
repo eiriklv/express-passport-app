@@ -29,11 +29,11 @@ var App = React.createClass({
 
     mixins: [ReactAsync.Mixin],
 
-    getInitialStateAsync: function (callback) {
+    getInitialStateAsync: function(callback) {
         callback(null, this.props); // set the input props as state (equal to 'return this.props' in getInitialState, but async)
     },
 
-    componentDidMount: function () {
+    componentDidMount: function() {
         // intialize socket.io
         sockets(io);
     },
@@ -80,7 +80,7 @@ if (typeof window !== 'undefined') {
         window.React = require('react');
     }
 
-    window.onload = function () {
+    window.onload = function() {
         React.renderComponent(App(), document);
     }
 }

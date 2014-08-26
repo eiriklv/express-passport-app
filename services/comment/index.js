@@ -1,4 +1,4 @@
-exports = module.exports = function (Comment, helpers) {
+exports = module.exports = function(Comment, helpers) {
     return {
         get: require('./get')(Comment, helpers),
         remove: require('./remove')(Comment, helpers),

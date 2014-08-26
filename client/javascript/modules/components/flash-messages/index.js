@@ -6,8 +6,6 @@ var React = require('react');
 
 var FlashMessage = require('./flash-message');
 
-var count = 0;
-
 module.exports = React.createClass({
     displayName: 'FlashMessages',
 

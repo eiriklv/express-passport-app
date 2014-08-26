@@ -11,7 +11,7 @@ var ProfileLink = require('./profile-link');
 module.exports = React.createClass({
     displayName: 'Avatar',
 
-    render: function () {
+    render: function() {
         return (
             <div className='well'>
                 <ProfilePicture username={this.props.username} />

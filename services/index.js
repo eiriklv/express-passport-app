@@ -1,4 +1,4 @@
-exports = module.exports = function (models, helpers) {
+exports = module.exports = function(models, helpers) {
     return {
         profile: require('./profile')(models, helpers),
         resource: require('./resource')(models.Resource, helpers),

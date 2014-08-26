@@ -16,7 +16,7 @@ var Input = require('react-bootstrap').Input;
 module.exports = React.createClass({
     mixins: [OverlayMixin, ReactAsync.Mixin],
 
-    getInitialStateAsync: function (callback) {
+    getInitialStateAsync: function(callback) {
         callback(null, {
             submittable: true,
             submitText: 'Submit',
@@ -25,8 +25,8 @@ module.exports = React.createClass({
         });
     },
 
-    componentDidMount: function () {
-        this.props.api.profile.get(function (err, user) {
+    componentDidMount: function() {
+        this.props.api.profile.get(function(err, user) {
             this.setState({
                 inputs: {
                     id: user._id,
@@ -37,21 +37,21 @@ module.exports = React.createClass({
         }.bind(this));
     },
 
-    handleToggle: function () {
+    handleToggle: function() {
         this.setState({
             isModalOpen: !this.state.isModalOpen,
             inputs: this.state.inputs
         });
     },
 
-    handleChange: function (field) {
-        return function (event) {
+    handleChange: function(field) {
+        return function(event) {
             this.state.inputs[event.target.id] = event.target.value;
             this.setState(this.state);
         }.bind(this);
     },
 
-    handleSubmit: function (event) {
+    handleSubmit: function(event) {
         event.preventDefault();
 
         if (this.state.submittable) {
@@ -63,7 +63,7 @@ module.exports = React.createClass({
             console.log('submitting');
             console.log(this.state.inputs);
 
-            setTimeout(function () {
+            setTimeout(function() {
                 this.setState({
                     submittable: true,
                     submitText: 'Submit'
@@ -72,7 +72,7 @@ module.exports = React.createClass({
         }
     },
 
-    render: function () {
+    render: function() {
         return (
             <div className='container'>
                 <div className='well text-center'>
@@ -84,7 +84,7 @@ module.exports = React.createClass({
 
     // This is called by the `OverlayMixin` when this component
     // is mounted or updated and the return value is appended to the body.
-    renderOverlay: function () {
+    renderOverlay: function() {
         if (!this.state.isModalOpen) {
             return <span/>;
         }

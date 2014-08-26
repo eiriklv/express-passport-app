@@ -1,4 +1,4 @@
-exports = module.exports = function (collection, mongoose) {
+exports = module.exports = function(collection, mongoose) {
     var schema = mongoose.Schema({
         author: {
             type: String,

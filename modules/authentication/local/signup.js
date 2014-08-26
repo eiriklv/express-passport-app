@@ -1,9 +1,11 @@
 var async = require('async');
 var util = require('util');
 
-exports = module.exports = function (User, VerificationToken, mailer){
-    return function (req, email, password, done) {
-        User.findOne({ 'email' :  email }, function (err, user) {
+exports = module.exports = function(User, VerificationToken, mailer) {
+    return function(req, email, password, done) {
+        User.findOne({
+            'email': email
+        }, function(err, user) {
             if (err) return done(err);
             if (user) return done(null, false, req.flash('signupMessage', 'This email is already in use.'));
             if (!req.body.fullname) return done(null, false, req.flash('signupMessage', 'Please provide your full name.'));
@@ -17,25 +19,25 @@ exports = module.exports = function (User, VerificationToken, mailer){
             var uid;
 
             async.series({
-                saveUser: function (callback) {
-                    newUser.save(function (err, product) {
+                saveUser: function(callback) {
+                    newUser.save(function(err, product) {
                         if (err) return callback(err);
                         uid = product._id;
                         callback();
                     });
                 },
-                sendVerificationMail: function (callback) {
+                sendVerificationMail: function(callback) {
                     var newToken = new VerificationToken();
 
                     newToken.uid = uid;
                     newToken.token = newToken.generateToken(uid);
 
-                    newToken.save(function (err, product) {
+                    newToken.save(function(err, product) {
                         if (!err) mailer(newUser, 'local', 'signup', product.token);
                         callback(err);
                     });
                 }
-            }, function (err, results) {
+            }, function(err, results) {
                 if (err) return done(null, false, req.flash('signupMessage', 'An error occured! - ' + err));
                 return done(null, newUser, req.flash('signupMessage', 'You registered through local sign-up!'));
             });

@@ -1,4 +1,4 @@
-exports = module.exports = function (passport, services, helpers) {
+exports = module.exports = function(passport, services, helpers) {
     return {
         app: require('./app')(services, helpers),
         auth: require('./auth')(services, passport),

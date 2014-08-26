@@ -1,5 +1,5 @@
-exports = module.exports = function () {
-    return function (context) {
+exports = module.exports = function() {
+    return function(context) {
         return context.charAt(0).toUpperCase() + context.slice(1);
     };
 };

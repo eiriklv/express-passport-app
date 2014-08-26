@@ -1,5 +1,5 @@
-exports = module.exports = function (Comment, helpers) {
-    return function (body, callback) {
+exports = module.exports = function(Comment, helpers) {
+    return function(body, callback) {
         if (!body) callback('body missing');
         console.log(body);
 
@@ -8,7 +8,7 @@ exports = module.exports = function (Comment, helpers) {
             text: body.text
         });
 
-        comment.save(function (err, product) {
+        comment.save(function(err, product) {
             callback(err, product);
         });
     };

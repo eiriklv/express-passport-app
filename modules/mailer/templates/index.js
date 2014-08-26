@@ -1,4 +1,4 @@
-exports = module.exports = function (service) {
+exports = module.exports = function(service) {
     return {
         local: require('./local')(service),
         facebook: require('./facebook')(service),

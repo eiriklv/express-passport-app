@@ -1,4 +1,4 @@
-exports = module.exports = function (services, helpers) {
+exports = module.exports = function(services, helpers) {
     return {
         landing: require('./landing')(),
         home: require('./home')(services, helpers),

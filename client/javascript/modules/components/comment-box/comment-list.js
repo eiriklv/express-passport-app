@@ -10,8 +10,8 @@ var Comment = require('./comment');
 module.exports = React.createClass({
     displayName: 'CommentList',
 
-    render: function () {
-        var commentNodes = this.props.comments.map(function (comment) {
+    render: function() {
+        var commentNodes = this.props.comments.map(function(comment) {
             return (
                 <Comment key={comment._id} author={comment.author}>
                     {comment.text}

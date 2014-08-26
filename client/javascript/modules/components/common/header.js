@@ -8,7 +8,7 @@ var ReactAsync = require('react-async');
 module.exports = React.createClass({
     displayName: 'Header',
 
-    getInitialState: function () {
+    getInitialState: function() {
         return this.props.user;
     },
 
@@ -24,7 +24,7 @@ module.exports = React.createClass({
         return false;
     },
 
-    setActiveNavigationLink: function () {
+    setActiveNavigationLink: function() {
         document.getElementById('nav-' + document.body.id).className = 'active';
     },
 

@@ -16,12 +16,12 @@ module.exports = React.createClass({
 
     mixins: [SetIntervalMixin],
 
-    getInitialState: function () {
+    getInitialState: function() {
         return {comments: this.props.comments || []};
     },
 
-    loadCommentsFromServer: function () {
-        this.props.api.comments.get(null, function (err, comments) {
+    loadCommentsFromServer: function() {
+        this.props.api.comments.get(null, function(err, comments) {
             if (err) {
                 console.error(err.toString());
             } else {
@@ -30,8 +30,8 @@ module.exports = React.createClass({
         }.bind(this));
     },
 
-    postComment: function (comment) {
-        this.props.api.comments.create(comment, function (err, comment) {
+    postComment: function(comment) {
+        this.props.api.comments.create(comment, function(err, comment) {
             if (err) {
                 console.error(err.toString());
             } else {
@@ -42,16 +42,16 @@ module.exports = React.createClass({
         }.bind(this));
     },
 
-    handleCommentSubmit: function (comment) {
+    handleCommentSubmit: function(comment) {
         this.postComment(comment);
     },
 
-    componentDidMount: function () {
+    componentDidMount: function() {
         this.loadCommentsFromServer();
         this.setInterval(this.loadCommentsFromServer, this.props.pollInterval);
     },
 
-    render: function () {
+    render: function() {
         return (
             <div className='comment-box panel panel-default'>
 

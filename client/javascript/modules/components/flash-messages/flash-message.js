@@ -9,11 +9,11 @@ var Alert = require('react-bootstrap').Alert;
 module.exports = React.createClass({
     displayName: 'FlashMessage',
 
-    handleAlertDismiss: function () {
+    handleAlertDismiss: function() {
         this.getDOMNode().remove();
     },
 
-    render: function () {
+    render: function() {
         return (
             <Alert onDismiss={this.handleAlertDismiss} bsStyle="warning">
                 <strong>Message: </strong> {this.props.text}
