@@ -54,7 +54,6 @@
         "gulp-nodemon": "~1.0.x",
         "gulp-mocha": "~0.5.x",
         "nib": "~1.0.x",
-        "hbsfy": "~1.3.x",
         "envify": "~1.2.1",
         "reactify": "0.14.x",
         "jest-cli": "^0.1.18",
@@ -68,7 +67,6 @@
     },
     "browserify": {
         "transform": [
-            "hbsfy",
             "envify",
             "reactify"
         ]
