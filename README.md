@@ -21,7 +21,6 @@ This project will give you a complete scaffolding/boilerplate of the [node](http
 * [socket.io](http://www.socket.io/)
 * [convict](http://github.com/mozilla/node-convict/)
 * [browserify](http://www.browserify.org/)
- * [hbsfy](http://github.com/epeli/node-hbsfy/)
  * [envify](http://github.com/hughsk/envify/)
  * [reactify](https://github.com/andreypopp/reactify)
 * [react](http://facebook.github.io/react/)
