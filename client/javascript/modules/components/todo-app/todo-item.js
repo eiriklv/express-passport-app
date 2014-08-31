@@ -4,9 +4,6 @@
 
 var React = require('react');
 
-// sub-components
-var TodoItem = require('./todo-item');
-
 module.exports = React.createClass({
     displayName: 'TodoItem',
 
