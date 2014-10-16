@@ -1,4 +1,4 @@
-exports = module.exports = function (services, passport) {
+exports = module.exports = function(services, passport) {
     return {
         login: require('./login')(),
         loginSubmit: require('./login-submit')(passport),

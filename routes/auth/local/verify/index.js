@@ -1,4 +1,4 @@
-exports = module.exports = function (express, middleware, handlers, path) {
+exports = module.exports = function(express, middleware, handlers, path) {
     var router = express();
 
     router.route(path)

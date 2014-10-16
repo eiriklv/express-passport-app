@@ -17,7 +17,7 @@ var config = require('./config');
 var setup = require('./setup');
 
 // setup session store
-var sessionStore = setup.sessions(RedisStore, config);
+var sessionStore = setup.sessions(RedisStore, session, config);
 
 // setup application
 setup.db(mongoose, config);
@@ -45,7 +45,7 @@ var ipc = require('./modules/ipc')(0);
 var mailer = require('./modules/mailer')(config);
 var models = require('./models')(mongoose, helpers.validators);
 var services = require('./services')(models, helpers);
-var handlers = require('./handlers')(passport, services);
+var handlers = require('./handlers')(passport, services, helpers);
 var authentication = require('./modules/authentication')(models, mailer);
 
 // app specific modules

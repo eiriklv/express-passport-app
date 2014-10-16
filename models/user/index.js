@@ -1,6 +1,6 @@
-var bcrypt   = require('bcryptjs');
+var bcrypt = require('bcryptjs');
 
-exports = module.exports = function (collection, mongoose, validators) {
+exports = module.exports = function(collection, mongoose, validators) {
     var schema = mongoose.Schema({
         email: {
             type: String, // this is the verified email used to contact the user (must be verified for local signup)

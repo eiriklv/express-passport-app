@@ -1,12 +1,12 @@
-exports = module.exports = function (service) {
+exports = module.exports = function(service) {
     return {
-        message: function (user, route, token, password) {
-            return '<p>' + 'Welcome to ' + service + ' ' + user.fullname + '!' +'</p>' +
-                   '<p>' + 'You registered through Facebook' + '</p>' +
-                   '<p>' + 'Your username is: ' + user.email + '</p>' +
-                   '<p>' + 'Your password is: ' + password + '</p>';
+        message: function(user, route, token, password) {
+            return '<p>' + 'Welcome to ' + service + ' ' + user.fullname + '!' + '</p>' +
+                '<p>' + 'You registered through Facebook' + '</p>' +
+                '<p>' + 'Your username is: ' + user.email + '</p>' +
+                '<p>' + 'Your password is: ' + password + '</p>';
         },
-        title: function () {
+        title: function() {
             return 'Signup via Facebook';
         }
     };

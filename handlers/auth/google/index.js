@@ -1,4 +1,4 @@
-exports = module.exports = function (passport) {
+exports = module.exports = function(passport) {
     return {
         auth: require('./auth')(passport),
         link: require('./link')(passport),
