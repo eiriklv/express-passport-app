@@ -1,4 +1,4 @@
-exports = module.exports = function () {
+exports = module.exports = function() {
     return {
         logout: require('./logout')()
     };

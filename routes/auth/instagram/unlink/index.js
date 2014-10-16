@@ -1,8 +1,9 @@
-exports = module.exports = function (express, middleware, handlers, path) {
+exports = module.exports = function(express, middleware, handlers, path) {
     var router = express();
 
+    router.use(middleware.isLoggedIn);
+
     router.route(path)
-        .all(middleware.isLoggedIn)
         .get(handlers.unlink);
 
     return router;

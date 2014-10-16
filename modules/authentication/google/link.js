@@ -1,6 +1,8 @@
-exports = module.exports = function (User, mailer) {
-    return function (req, token, refreshToken, profile, done) {
-        User.findOne({ 'google.id' : profile.id }, function (err, user) {
+exports = module.exports = function(User, mailer) {
+    return function(req, token, refreshToken, profile, done) {
+        User.findOne({
+            'google.id': profile.id
+        }, function(err, user) {
             if (err) return done(err);
             if (user) return done(null, req.user, req.flash('errorMessage', 'This Google account is already linked to an account in our system. Please unlink it from the existing to be able to re-link.'));
 
@@ -11,7 +13,7 @@ exports = module.exports = function (User, mailer) {
             user.google.name = profile.displayName;
             user.google.email = profile.emails[0].value;
 
-            user.save(function (err) {
+            user.save(function(err) {
                 if (err) return done(null, false, req.flash('signupMessage', 'An error occured! - ' + err));
 
                 mailer(user, 'google', 'link');

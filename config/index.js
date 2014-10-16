@@ -1,5 +1,5 @@
 // throw error
-function _throw (m) {
+function _throw(m) {
     throw m;
 }
 
@@ -10,7 +10,7 @@ var debug = require('debug')('express-passport-app:configuration');
 var validator = require('validator');
 
 // catch all errors with no handler
-process.on('uncaughtException', function (err) {
+process.on('uncaughtException', function(err) {
     debug('Caught exception without specific handler: ' + util.inspect(err));
     debug(err.stack, 'error');
     process.exit(1);
@@ -47,7 +47,7 @@ var config = module.exports = convict({
         },
         secret: {
             doc: 'The application secret (sessions).',
-            format: function (val) {
+            format: function(val) {
                 if (!validator.isLength(val, 10)) _throw(new Error('Application secret must be at least 10 characters'));
             },
             default: 'somesillysecret',
@@ -61,6 +61,11 @@ var config = module.exports = convict({
                 default: '/api',
                 env: 'CLIENT_API_PATH'
             }
+        },
+        domain: {
+            doc: 'The client domain (hostname)',
+            default: 'localhost',
+            env: 'CLIENT_DOMAIN'
         }
     },
     database: {
@@ -181,7 +186,9 @@ var config = module.exports = convict({
 });
 
 // print the environment for debugging
-debug(util.inspect(process.env, { colors: true }));
+debug(util.inspect(process.env, {
+    colors: true
+}));
 
 // perform the config validation
 config.validate();

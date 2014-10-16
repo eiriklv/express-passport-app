@@ -19,8 +19,9 @@ This project will give you a complete scaffolding/boilerplate of the [node](http
 * [socket.io](http://www.socket.io/)
 * [convict](http://github.com/mozilla/node-convict/)
 * [browserify](http://www.browserify.org/)
- * [hbsfy](http://github.com/epeli/node-hbsfy/)
  * [envify](http://github.com/hughsk/envify/)
+ * [reactify](https://github.com/andreypopp/reactify)
+* [react](http://facebook.github.io/react/)
 * [handlebars](http://handlebarsjs.com/)
 * [stylus](http://learnboost.github.io/stylus/)
  * [nib](http://visionmedia.github.io/nib/)
@@ -71,6 +72,8 @@ This project will give you a complete scaffolding/boilerplate of the [node](http
  * example: `development`
 * `CLIENT_API_PATH` - Path to the client REST api (relative)
  * example: `/api`
+* `CLIENT_DOMAIN` - Server domain
+ * example: `localhost` or `someapp.herokuapp.com`
 * `MONGO_URL` - MongoDB url (including authentication)
  * example: `mongodb://user:pass@localhost:27017/mydatabase`
 * `REDIS_URL` - Redis url (including authentication)
@@ -124,6 +127,7 @@ export PORT=3000 \
 export SERVICE_NAME="Express Passport Application" \
 export DEBUG="*" \
 export NODE_ENV="development" \
+export CLIENT_DOMAIN="localhost" \
 export CLIENT_API_PATH="/api" \
 export MONGO_URL="mongodb://localhost/express-passport-app" \
 export REDIS_URL="redis://localhost:6379" \
@@ -154,5 +158,5 @@ gulp
 * ~~add unit test framework~~
 * look into using [jest](http://facebook.github.io/jest/) for testing
 * add complete test suite
-* replace jquery with [react](http://facebook.github.io/react/) or [mithril](http://lhorie.github.io/mithril/)
-* build simple client side example with the selected framework
+* ~~replace jquery with [react](http://facebook.github.io/react/) or [mithril](http://lhorie.github.io/mithril/)~~
+* ~~build simple client side example with the selected framework~~

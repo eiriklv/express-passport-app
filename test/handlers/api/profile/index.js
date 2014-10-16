@@ -16,14 +16,18 @@ exports = module.exports = function (profile) {
                 };
 
                 res = {
+                    status: function() { return this; },
                     send: function () { }
                 };
 
                 var sendspy = sinon.spy(res, 'send');
+                var statusspy = sinon.spy(res, 'status');
 
                 profile.success.get(req, res);
                 expect(sendspy.calledOnce).to.equal(true);
-                expect(sendspy.calledWithExactly(200, req.user)).to.equal(true);
+                expect(sendspy.calledWithExactly(req.user)).to.equal(true);
+                expect(statusspy.calledOnce).to.equal(true);
+                expect(statusspy.calledWithExactly(200)).to.equal(true);
                 done();
             });
 
@@ -39,14 +43,18 @@ exports = module.exports = function (profile) {
                 };
 
                 res = {
+                    status: function() { return this; },
                     send: function () { }
                 };
 
                 var sendspy = sinon.spy(res, 'send');
+                var statusspy = sinon.spy(res, 'status');
 
-                profile.success.update(req, res);
+                profile.success.get(req, res);
                 expect(sendspy.calledOnce).to.equal(true);
-                expect(sendspy.calledWithExactly(200, req.user)).to.equal(true);
+                expect(sendspy.calledWithExactly(req.user)).to.equal(true);
+                expect(statusspy.calledOnce).to.equal(true);
+                expect(statusspy.calledWithExactly(200)).to.equal(true);
                 done();
             });
 
@@ -58,14 +66,18 @@ exports = module.exports = function (profile) {
                 };
 
                 res = {
+                    status: function() { return this; },
                     send: function () { }
                 };
 
                 var sendspy = sinon.spy(res, 'send');
+                var statusspy = sinon.spy(res, 'status');
 
-                profile.error.update(req, res);
+                profile.success.get(req, res);
                 expect(sendspy.calledOnce).to.equal(true);
-                expect(sendspy.calledWithExactly(500, 'error')).to.equal(true);
+                expect(sendspy.calledWithExactly(req.user)).to.equal(true);
+                expect(statusspy.calledOnce).to.equal(true);
+                expect(statusspy.calledWithExactly(200)).to.equal(true);
                 done();
             });
 

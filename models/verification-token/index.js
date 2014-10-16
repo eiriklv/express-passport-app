@@ -1,6 +1,6 @@
 var crypto = require('crypto');
 
-exports = module.exports = function (collection, mongoose, validators) {
+exports = module.exports = function(collection, mongoose, validators) {
     var schema = mongoose.Schema({
         token: {
             type: String, // sha1 hash of the mongodb user id
@@ -13,7 +13,7 @@ exports = module.exports = function (collection, mongoose, validators) {
         }
     });
 
-    schema.methods.generateToken = function (uid) {
+    schema.methods.generateToken = function(uid) {
         var shasum = crypto.createHash('sha1');
         shasum.update(uid.toString());
         return shasum.digest('hex');
