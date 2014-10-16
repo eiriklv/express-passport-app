@@ -6,8 +6,6 @@ Express 4.x application with Passport authentication
 [![Dependency Status](https://david-dm.org/eiriklv/express-passport-app.svg)](https://david-dm.org/eiriklv/express-passport-app)
 [![devDependency Status](https://david-dm.org/eiriklv/express-passport-app/dev-status.svg)](https://david-dm.org/eiriklv/express-passport-app#info=devDependencies)
 
-##### Edit: This branch introduces a demo application with react
-
 #### Introduction:
 This project will give you a complete scaffolding/boilerplate of the [node](http://www.nodejs.org/)/[express](http://www.expressjs.com/) stack along with social logins through [passport]() and email verification through [mandrill](http://www.mandrill.com). It uses [mongodb](http://www.mongodb.org/) for database models and [redis](http://www.redis.io/) for session storage. Fork at will! :)
 
@@ -74,6 +72,8 @@ This project will give you a complete scaffolding/boilerplate of the [node](http
  * example: `development`
 * `CLIENT_API_PATH` - Path to the client REST api (relative)
  * example: `/api`
+* `CLIENT_DOMAIN` - Server domain
+ * example: `localhost` or `someapp.herokuapp.com`
 * `MONGO_URL` - MongoDB url (including authentication)
  * example: `mongodb://user:pass@localhost:27017/mydatabase`
 * `REDIS_URL` - Redis url (including authentication)
@@ -127,6 +127,7 @@ export PORT=3000 \
 export SERVICE_NAME="Express Passport Application" \
 export DEBUG="*" \
 export NODE_ENV="development" \
+export CLIENT_DOMAIN="localhost" \
 export CLIENT_API_PATH="/api" \
 export MONGO_URL="mongodb://localhost/express-passport-app" \
 export REDIS_URL="redis://localhost:6379" \

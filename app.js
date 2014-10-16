@@ -17,7 +17,7 @@ var config = require('./config');
 var setup = require('./setup');
 
 // setup session store
-var sessionStore = setup.sessions(RedisStore, config);
+var sessionStore = setup.sessions(RedisStore, session, config);
 
 // setup application
 setup.db(mongoose, config);

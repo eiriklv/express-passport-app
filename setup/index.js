@@ -3,9 +3,11 @@ var fs = require('fs');
 var url = require('url');
 var colors = require('colors');
 var debug = require('debug')('express-passport-app:setup');
+var util = require('util')
 
 // express dependencies
 var morgan = require('morgan');
+var compress = require('compression');
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 var methodOverride = require('method-override');
@@ -21,6 +23,7 @@ module.exports.configureExpress = function(options, app, config) {
     app.set('json spaces', 2);
 
     // express common config
+    app.use(compress());
     app.use(options.express.static(options.dir + '/client/public'));
     app.use(morgan('dev'));
     app.use(options.cookieParser());
@@ -32,7 +35,7 @@ module.exports.configureExpress = function(options, app, config) {
     app.use(options.session({
         secret: config.get('server.secret'),
         store: options.store,
-        key: config.get('session.key'),
+        name: config.get('session.key'),
         resave: true,
         saveUninitialized: true
     }));
@@ -76,7 +79,7 @@ module.exports.handleExpressError = function(app) {
     // handling other errors
     app.use(function(err, req, res, next) {
         console.error(err.stack);
-        res.send(500, 'Something broke!');
+        res.status(500).send('Something broke!');
     });
 };
 
@@ -107,10 +110,10 @@ module.exports.registerHelpers = function(helpers, handlebars) {
 };
 
 // create session store
-module.exports.sessions = function(SessionStore, config) {
+module.exports.sessions = function (SessionStore, session, config) {
     var authObject;
 
-    if (config.get('database.redis.url')) {
+    if (config.get('env') == 'production') {
         var parsedUrl = url.parse(config.get('database.redis.url'));
         authObject = {
             prefix: config.get('database.redis.prefix'),
@@ -120,9 +123,11 @@ module.exports.sessions = function(SessionStore, config) {
             pass: parsedUrl.auth ? parsedUrl.auth.split(":")[1] : null,
             secret: config.get('server.secret')
         };
-    }
 
-    return new SessionStore(authObject);
+        return new SessionStore(authObject);
+    } else {
+        return (new session.MemoryStore());
+    }
 };
 
 // connect to backend store (db)

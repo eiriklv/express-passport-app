@@ -61,6 +61,11 @@ var config = module.exports = convict({
                 default: '/api',
                 env: 'CLIENT_API_PATH'
             }
+        },
+        domain: {
+            doc: 'The client domain (hostname)',
+            default: 'localhost',
+            env: 'CLIENT_DOMAIN'
         }
     },
     database: {
@@ -181,7 +186,9 @@ var config = module.exports = convict({
 });
 
 // print the environment for debugging
-debug(util.inspect(process.env, { colors: true }));
+debug(util.inspect(process.env, {
+    colors: true
+}));
 
 // perform the config validation
 config.validate();

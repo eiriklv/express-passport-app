@@ -27,6 +27,8 @@ module.exports = React.createClass({
 
     componentDidMount: function() {
         this.props.api.profile.get(function(err, user) {
+            if (err) return console.log(err);
+            
             this.setState({
                 inputs: {
                     id: user._id,
