@@ -44,6 +44,14 @@ module.exports.configureExpress = function(options, app, config) {
     app.use(flash());
     app.use(favicon(options.dir + '/client/public/favicon.ico'));
 
+    // handle when session store disconnects
+    app.use(function(req, res, next) {
+        if (!req.session) {
+            return next(new Error('session store not available')) // handle error
+        }
+        next();
+    });
+
     // express dev config
     if ('development' == config.get('env')) {
         app.use(errorHandler());
