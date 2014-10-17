@@ -7,8 +7,7 @@ var RedisStore = require('connect-redis')(session);
 var cookieParser = require('cookie-parser');
 var hbs = require('hbs');
 var passport = require('passport');
-var socketio = require('socket.io');
-var SessionSockets = require('session.socket.io-express4');
+var socketio = require('socket.io')();
 var app = express();
 
 // config and setup helpers
@@ -37,8 +36,13 @@ setup.configureExpress({
 
 // http and socket.io server(s)
 var server = http.createServer(app);
-var io = socketio.listen(server);
-var sessionSockets = new SessionSockets(io, sessionStore, cookieParser(), config.get('session.key'));
+var io = socketio.attach(server);
+
+// configure socket.io
+setup.configureSockets(io, config, {
+    cookieParser: cookieParser,
+    sessionStore: sessionStore
+});
 
 // app dependencies (app specific)
 var ipc = require('./modules/ipc')(0);
@@ -49,7 +53,7 @@ var handlers = require('./handlers')(passport, services, helpers);
 var authentication = require('./modules/authentication')(models, mailer);
 
 // app specific modules
-require('./modules/sockets')(io, sessionSockets, ipc);
+require('./modules/sockets')(io, ipc);
 require('./modules/passport')(passport, config, authentication, models);
 require('./routes')(app, express, handlers, config);
 

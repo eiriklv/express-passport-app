@@ -125,7 +125,7 @@ This project will give you a complete scaffolding/boilerplate of the [node](http
 #!/bin/sh
 export PORT=3000 \
 export SERVICE_NAME="Express Passport Application" \
-export DEBUG="*" \
+export DEBUG="*,-engine:polling" \
 export NODE_ENV="development" \
 export CLIENT_DOMAIN="localhost" \
 export CLIENT_API_PATH="/api" \
