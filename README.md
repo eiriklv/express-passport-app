@@ -152,7 +152,7 @@ gulp
 ```
 
 #### TODO
-* upgrade to socket.io 1.x
+* ~~upgrade to socket.io 1.x~~
 * ~~continuous integration with [travis](http://www.travis-ci.org/)~~
 * add test coverage with [coveralls.io](http://www.coveralls.io/)
 * ~~add unit test framework~~
