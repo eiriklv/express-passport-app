@@ -1,4 +1,9 @@
-exports = module.exports = function(io, ioSession, ipc) {
-    require('./global')(io, ipc);
-    require('./session-global')(ioSession, ipc);
+var globalHandler = require('./global');
+var sessionHandler = require('./session');
+
+exports = module.exports = function(io, ipc) {
+    io.on('connection', function(socket) {
+        globalHandler(io, ipc);
+        sessionHandler(socket, ipc);
+    });
 };

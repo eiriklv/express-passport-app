@@ -14,6 +14,9 @@ var methodOverride = require('method-override');
 var errorHandler = require('errorhandler');
 var flash = require('express-flash');
 
+// socket.io dependecies
+var socketHandshake = require('socket.io-handshake');
+
 // configure express
 module.exports.configureExpress = function(options, app, config) {
     // set view engine and parsers
@@ -56,6 +59,16 @@ module.exports.configureExpress = function(options, app, config) {
     if ('development' == config.get('env')) {
         app.use(errorHandler());
     }
+};
+
+// configure socket.io
+module.exports.configureSockets = function(io, config, options) {
+    io.use(socketHandshake({
+        store: options.sessionStore,
+        key: config.get('session.key'),
+        secret: config.get('server.secret'),
+        parser: options.cookieParser()
+    }));
 };
 
 // handle express errors
@@ -118,7 +131,7 @@ module.exports.registerHelpers = function(helpers, handlebars) {
 };
 
 // create session store
-module.exports.sessions = function (SessionStore, session, config) {
+module.exports.sessions = function(SessionStore, session, config) {
     var authObject;
 
     if (config.get('env') == 'production') {
