@@ -3,7 +3,7 @@ var fs = require('fs');
 var url = require('url');
 var colors = require('colors');
 var debug = require('debug')('express-passport-app:setup');
-var util = require('util')
+var util = require('util');
 
 // express dependencies
 var morgan = require('morgan');
