@@ -4,46 +4,76 @@ var NopStream = require('../util/no-op-stream');
 var uglify = require('gulp-uglify');
 var gulp = require('gulp');
 var handleErrors = require('../util/handle-errors');
+var bundleLogger = require('../util/bundle-logger');
 var source = require('vinyl-source-stream');
+var browserSync = require('browser-sync');
+var watchify = require('watchify');
+var gutil = require('gulp-util');
 
 var production = process.env.NODE_ENV === 'production';
 
-function createSingleBundle(options) {
-    browserify({
-        entries: options.input,
-        extensions: options.extensions
-    })
-        .bundle({
-            debug: !production
-        })
-        .on('error', handleErrors)
-        .pipe(source(options.output))
-        .pipe(production ? streamify(uglify()) : (new NopStream()))
-        .pipe(gulp.dest(options.destination));
-}
+function createBundles(bundles, callback) {
+    var bundleQueue = bundles.length;
 
-function createBundles(bundles) {
-    bundles.forEach(function (bundle) {
-        createSingleBundle({
-            input: bundle.input,
-            output: bundle.output,
-            extensions: bundle.extensions,
-            destination: bundle.destination
+    function reportFinished(bundleOptions) {
+        bundleLogger.end(bundleOptions.output);
+
+        if (bundleQueue) {
+            bundleQueue--;
+            if (bundleQueue === 0) {
+                callback();
+            }
+        }
+    }
+
+    function createSingleBundle(bundler, bundleOptions) {
+        bundleLogger.start(bundleOptions.output);
+
+        bundler.bundle()
+            .on('error', handleErrors)
+            .pipe(source(bundleOptions.output))
+            .pipe(production ? streamify(uglify()) : (new NopStream()))
+            .pipe(gulp.dest(bundleOptions.destination))
+            .on('end', function() {
+                reportFinished(bundleOptions);
+            });
+    }
+
+    bundles.forEach(function(bundleOptions) {
+        var bundler = browserify({
+            debug: !production,
+            cache: {},
+            packageCache: {},
+            fullPaths: true,
+            entries: bundleOptions.input,
+            extensions: bundleOptions.extensions
         });
+
+        if (global.isWatching) {
+            bundler = watchify(bundler);
+            
+            // Rebundle on update
+            bundler.on('update', function() {
+                createSingleBundle(bundler, bundleOptions);
+            });
+        }
+
+        createSingleBundle(bundler, bundleOptions);
     });
 }
 
-gulp.task('browserify', function() {
-    createBundles([
-        {
-            input: ['./client/javascript/home.js'],
-            output: 'home.js',
-            destination: './client/public/javascript/'
-        },
-        {
-            input: ['./client/javascript/profile.js'],
-            output: 'profile.js',
-            destination: './client/public/javascript/'
-        },
-    ]);
+gulp.task('browserify', function(callback) {
+    if(global.isWatching) {
+        gutil.log('Watchify is enabled!');
+    }
+
+    createBundles([{
+        input: ['./client/javascript/home.js'],
+        output: 'home.js',
+        destination: './client/public/javascript/'
+    }, {
+        input: ['./client/javascript/profile.js'],
+        output: 'profile.js',
+        destination: './client/public/javascript/'
+    }], callback);
 });
