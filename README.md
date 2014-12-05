@@ -148,7 +148,7 @@ export MANDRILL_API_KEY="000000000000000000000000000000" \
 export MANDRILL_SENDER="Express Passport Application <noreply@expresspassportapp.com>" \
 export EMAIL_VERIFICATION_ROUTE="http://localhost:3000/auth/local/verify" \
 
-gulp
+gulp develop
 ```
 
 #### TODO

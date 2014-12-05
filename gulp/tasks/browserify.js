@@ -6,7 +6,6 @@ var gulp = require('gulp');
 var handleErrors = require('../util/handle-errors');
 var bundleLogger = require('../util/bundle-logger');
 var source = require('vinyl-source-stream');
-var browserSync = require('browser-sync');
 var watchify = require('watchify');
 var gutil = require('gulp-util');
 

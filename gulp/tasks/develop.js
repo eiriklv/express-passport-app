@@ -1,5 +1,5 @@
 var gulp = require('gulp');
 
-gulp.task('develop', ['default-watch', 'browser-sync'], function(callback) {
+gulp.task('develop', ['default-watch', 'run'], function(callback) {
     callback();
 });
