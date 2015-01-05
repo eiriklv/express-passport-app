@@ -154,7 +154,7 @@ gulp develop
 #### TODO
 * ~~upgrade to socket.io 1.x~~
 * ~~continuous integration with [travis](http://www.travis-ci.org/)~~
-* add test coverage with [coveralls.io](http://www.coveralls.io/)
+* ~~add test coverage with [coveralls.io](http://www.coveralls.io/)~~
 * ~~add unit test framework~~
 * look into using [jest](http://facebook.github.io/jest/) for testing
 * add complete test suite
