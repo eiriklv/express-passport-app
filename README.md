@@ -160,3 +160,4 @@ gulp develop
 * add complete test suite
 * ~~replace jquery with [react](http://facebook.github.io/react/) or [mithril](http://lhorie.github.io/mithril/)~~
 * ~~build simple client side example with the selected framework~~
+* use [material ui](http://facebook.github.io/react/) instead of [bootstrap](http://getbootstrap.com/)
