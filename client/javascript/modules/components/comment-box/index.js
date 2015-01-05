@@ -5,7 +5,7 @@
 var React = require('react');
 
 // mixins
-var SetIntervalMixin = require('../../mixins/set-interval');
+var SetIntervalMixin = require('client/modules/mixins/set-interval');
 
 // sub-components
 var CommentList = require('./comment-list');

@@ -1,4 +1,4 @@
-exports = module.exports = function(Comment, helpers) {
+exports = module.exports = function(Comment) {
     return function(body, callback) {
         if (!body) callback('body missing');
         console.log(body);

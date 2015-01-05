@@ -82,10 +82,12 @@ var config = module.exports = convict({
                 default: 'redis://localhost:6379',
                 env: 'REDIS_URL'
             },
-            prefix: {
-                doc: 'Redis session prefix (to separate session for different processes)',
-                default: 'sess:',
-                env: 'REDIS_SESSION_PREFIX'
+            session: {
+                prefix: {
+                    doc: 'Redis session prefix (to separate session for different processes)',
+                    default: 'sess:',
+                    env: 'REDIS_SESSION_PREFIX'
+                }
             },
             db: {
                 doc: 'Redis database number (0-15)',

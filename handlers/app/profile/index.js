@@ -1,7 +1,9 @@
 var nodejsx = require('node-jsx').install();
-var App = require('../../../client/javascript/profile');
+var App = require('client/profile');
+var _ = require('highland');
+var helpers = require('helpers');
 
-exports = module.exports = function(services, helpers) {
+exports = module.exports = function(services) {
     return function(req, res, next) {
         var context = {
             title: 'Profile page',
@@ -10,15 +12,16 @@ exports = module.exports = function(services, helpers) {
             messages: req.flash()
         };
 
-        helpers.react.renderMarkupToString({
+        var data = _([{
             component: App,
             clientScripts: ['/javascript/profile.js'],
             context: context,
             staticPage: false,
-            callback: function(err, markup) {
-                if (err) return next(err);
-                res.send(markup);
-            }
-        });
+        }]);
+
+        data
+            .map(_.wrapCallback(helpers.react.renderMarkupToString)).series()
+            .errors(next.bind(next))
+            .each(res.send.bind(res));
     };
 };

@@ -1,3 +1,3 @@
-exports = module.exports = function(collection, mongoose, validators) {
+exports = module.exports = function(collection, mongoose) {
     return {}; // empty dummy model
 };

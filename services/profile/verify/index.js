@@ -1,6 +1,6 @@
 var async = require('async');
 
-exports = module.exports = function(models, helpers) {
+exports = module.exports = function(models) {
     return function(req, callback) {
         if (!req.query) return callback('no request query');
         if (!req.query.token) return callback('verification token missing! try again with a valid token (see e-mail)');

@@ -4,7 +4,7 @@
 
 var React = require('react');
 
-var SetIntervalMixin = require('../mixins/set-interval');
+var SetIntervalMixin = require('client/modules/mixins/set-interval');
 
 module.exports = React.createClass({
     displayName: 'Time',

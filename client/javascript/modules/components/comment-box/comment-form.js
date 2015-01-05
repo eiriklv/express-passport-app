@@ -9,13 +9,11 @@ module.exports = React.createClass({
 
     handleSubmit: function() {
         var text = this.refs.text.getDOMNode().value.trim();
-        if (!text) {
-            return false;
-        }
+        if (!text) return false;
 
         // submit to server
         this.props.onCommentSubmit({
-            author: this.props.user.name,
+            author: this.props.user.fullname,
             text: text
         });
 

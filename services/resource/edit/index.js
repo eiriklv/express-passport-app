@@ -1,4 +1,4 @@
-exports = module.exports = function(Resource, helpers) {
+exports = module.exports = function(Resource) {
     return function(body, callback) {
         callback(null, body);
     };

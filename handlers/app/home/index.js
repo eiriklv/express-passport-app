@@ -1,7 +1,9 @@
 var nodejsx = require('node-jsx').install();
-var App = require('../../../client/javascript/home');
+var App = require('client/home');
+var _ = require('highland');
+var helpers = require('helpers');
 
-exports = module.exports = function(services, helpers) {
+exports = module.exports = function(services) {
     return function(req, res, next) {
         var context = {
             title: 'React demo',
@@ -42,15 +44,16 @@ exports = module.exports = function(services, helpers) {
             startTime: new Date()
         };
 
-        helpers.react.renderMarkupToString({
+        var data = _([{
             component: App,
             clientScripts: ['/javascript/home.js'],
             context: context,
-            staticPage: false,
-            callback: function(err, markup) {
-                if (err) return next(err);
-                res.send(markup);
-            }
-        });
+            staticPage: false
+        }]);
+
+        data
+            .map(_.wrapCallback(helpers.react.renderMarkupToString)).series()
+            .errors(next.bind(next))
+            .each(res.send.bind(res));
     };
 };

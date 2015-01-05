@@ -1,7 +1,9 @@
 var debug = require('debug')('express-passport-app:service:profile:update');
 var async = require('async');
+var formatName = require('helpers').common.formatName;
 
-exports = module.exports = function(models, helpers) {
+
+exports = module.exports = function(models) {
     return function(req, callback) {
         if (!req.body) return callback('no request body');
 
@@ -9,7 +11,7 @@ exports = module.exports = function(models, helpers) {
 
         async.series({
             updateProfile: function(callback) {
-                user.fullname = helpers.formatName(req.body.fullname) || 'no name given';
+                user.fullname = formatName(req.body.fullname) || 'no name given';
                 callback();
             },
             updatePassword: function(callback) {

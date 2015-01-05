@@ -1,6 +1,7 @@
 var crypto = require('crypto');
+var validators = require('helpers').validators;
 
-exports = module.exports = function(collection, mongoose, validators) {
+exports = module.exports = function(collection, mongoose) {
     var schema = mongoose.Schema({
         token: {
             type: String, // sha1 hash of the mongodb user id

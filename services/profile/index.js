@@ -1,6 +1,6 @@
-exports = module.exports = function(models, helpers) {
+exports = module.exports = function(models) {
     return {
-        update: require('./update')(models, helpers.common),
-        verify: require('./verify')(models, helpers.common)
+        update: require('./update')(models),
+        verify: require('./verify')(models)
     };
 };

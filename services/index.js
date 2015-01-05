@@ -1,7 +1,7 @@
-exports = module.exports = function(models, helpers) {
+exports = module.exports = function(models) {
     return {
-        profile: require('./profile')(models, helpers),
-        resource: require('./resource')(models.Resource, helpers),
-        comments: require('./comment')(models.Comment, helpers)
+        profile: require('./profile')(models),
+        resource: require('./resource')(models.Resource),
+        comments: require('./comment')(models.Comment)
     };
 };

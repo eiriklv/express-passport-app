@@ -2,8 +2,9 @@ var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var InstagramStrategy = require('passport-instagram').Strategy;
+var config = require('config');
 
-exports = module.exports = function(passport, config, authentication, models) {
+exports = module.exports = function(passport, authentication, models) {
     passport.serializeUser(function(user, done) {
         done(null, user.id); // this is what gets attached to the session
     });

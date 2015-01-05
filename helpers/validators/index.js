@@ -1,5 +1,3 @@
-exports = module.exports = function() {
-    return {
-        email: require('./email')()
-    };
+exports = module.exports = {
+    email: require('./email')
 };

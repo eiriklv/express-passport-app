@@ -1,5 +1,3 @@
-exports = module.exports = function() {
-    return function(context) {
-        return context.toString();
-    };
+exports = module.exports = function(context) {
+    return context.toString();
 };

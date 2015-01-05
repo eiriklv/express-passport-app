@@ -1,5 +1,3 @@
-exports = module.exports = function() {
-    return {
-        formatName: require('./format-name')()
-    };
+exports = module.exports = {
+    formatName: require('./format-name')
 };

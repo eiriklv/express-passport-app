@@ -1,13 +1,15 @@
 var debug = require('debug')('express-passport-app:mailer');
+var Templates = require('./templates');
+var mandrillEmail = require('mandrill-send');
 
-exports = module.exports = function(config) {
-    var templates = require('./templates')(config.get('service.name'));
+exports = module.exports = function(options) {
+    var templates = Templates(options.serviceName);
     var email, sender, title, verificationRoute;
 
-    if (config.get('env') === 'production') {
-        email = require('mandrill-send')(config.get('mandrill.api.key'));
-        sender = config.get('mandrill.sender');
-        verificationRoute = config.get('email.verification.route');
+    if (options.env === 'production') {
+        email = mandrillEmail(options.apiKey);
+        sender = options.senderAddress;
+        verificationRoute = options.verificationRoute;
 
         return function(user, provider, action, token, password) {
             email({

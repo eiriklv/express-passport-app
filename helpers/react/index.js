@@ -1,5 +1,3 @@
-exports = module.exports = function() {
-    return {
-        renderMarkupToString: require('./render-markup-to-string')()
-    };
+exports = module.exports = {
+    renderMarkupToString: require('./render-markup-to-string')
 };

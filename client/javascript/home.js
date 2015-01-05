@@ -4,30 +4,30 @@
 'use strict';
 
 // config
-var config = require('./config');
-var api = require('./modules/api')(config);
+var config = require('client/config');
+var api = require('client/modules/api')(config);
 
 // dependencies
 var React = require('react');
 var ReactAsync = require('react-async');
 var superagent = require('superagent');
 var io = require('socket.io-client');
-var sockets = require('./modules/sockets/home');
+var sockets = require('client/modules/sockets/home');
 
 // common components
-var Head = require('./modules/components/common/head');
-var Header = require('./modules/components/common/header');
-var ClientScripts = require('./modules/components/common/client-scripts');
+var Head = require('client/modules/components/common/head');
+var Header = require('client/modules/components/common/header');
+var ClientScripts = require('client/modules/components/common/client-scripts');
 
 // custom components
-var TodoApp = require('./modules/components/todo-app');
-var CommentBox = require('./modules/components/comment-box');
-var Avatar = require('./modules/components/avatar');
-var Counter = require('./modules/components/counter');
-var LikeButton = require('./modules/components/like-button');
-var Ticker = require('./modules/components/ticker');
-var Time = require('./modules/components/time');
-var FilterableProductTable = require('./modules/components/filterable-product-table');
+var TodoApp = require('client/modules/components/todo-app');
+var CommentBox = require('client/modules/components/comment-box');
+var Avatar = require('client/modules/components/avatar');
+var Counter = require('client/modules/components/counter');
+var LikeButton = require('client/modules/components/like-button');
+var Ticker = require('client/modules/components/ticker');
+var Time = require('client/modules/components/time');
+var FilterableProductTable = require('client/modules/components/filterable-product-table');
 
 var App = React.createClass({
 
@@ -40,6 +40,7 @@ var App = React.createClass({
     componentDidMount: function() {
         // intialize socket.io
         sockets(io);
+        console.log(config);
     },
 
     render: function() {

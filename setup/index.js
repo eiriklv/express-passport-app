@@ -6,6 +6,7 @@ var debug = require('debug')('express-passport-app:setup');
 var util = require('util');
 
 // express dependencies
+var express = require('express');
 var morgan = require('morgan');
 var compress = require('compression');
 var bodyParser = require('body-parser');
@@ -18,16 +19,27 @@ var flash = require('express-flash');
 var socketHandshake = require('socket.io-handshake');
 
 // configure express
-module.exports.configureExpress = function(options, app, config) {
+module.exports.createExpressApp = function(options) {
+    if (!options.session) throw (new Error('missing session middleware'));
+    if (!options.store) throw (new Error('missing session store'));
+    if (!options.dir) throw (new Error('missing root dir'));
+    if (!options.static) throw (new Error('missing static dir reference'));
+    if (!options.favicon) throw (new Error('missing favicon reference'));
+    if (!options.views) throw (new Error('missing viewdir reference'));
+
+    options.env = options.env || 'development';
+    
+    var app = express();
+
     // set view engine and parsers
-    app.set('views', options.dir + '/views');
+    app.set('views', options.dir + options.views);
     app.set('view engine', 'html');
     app.engine('.html', options.handlebars.__express);
     app.set('json spaces', 2);
 
     // express common config
     app.use(compress());
-    app.use(options.express.static(options.dir + '/client/public'));
+    app.use(express.static(options.dir + options.static));
     app.use(morgan('dev'));
     app.use(options.cookieParser());
     app.use(bodyParser.urlencoded({
@@ -36,39 +48,33 @@ module.exports.configureExpress = function(options, app, config) {
     app.use(bodyParser.json());
     app.use(methodOverride());
     app.use(options.session({
-        secret: config.get('server.secret'),
+        secret: options.sessionSecret,
         store: options.store,
-        name: config.get('session.key'),
+        name: options.sessionKey,
         resave: true,
         saveUninitialized: true
     }));
+
     app.use(options.passport.initialize());
     app.use(options.passport.session());
     app.use(flash());
-    app.use(favicon(options.dir + '/client/public/favicon.ico'));
 
-    // handle when session store disconnects
+    // handle session store disconnect
     app.use(function(req, res, next) {
         if (!req.session) {
-            return next(new Error('session store not available')) // handle error
+            return next(new Error('session store not available'));
         }
         next();
     });
 
+    app.use(favicon(options.dir + options.favicon));
+
     // express dev config
-    if ('development' == config.get('env')) {
+    if ('development' == options.env) {
         app.use(errorHandler());
     }
-};
 
-// configure socket.io
-module.exports.configureSockets = function(io, config, options) {
-    io.use(socketHandshake({
-        store: options.sessionStore,
-        key: config.get('session.key'),
-        secret: config.get('server.secret'),
-        parser: options.cookieParser()
-    }));
+    return app;
 };
 
 // handle express errors
@@ -130,31 +136,42 @@ module.exports.registerHelpers = function(helpers, handlebars) {
     return;
 };
 
+// configure socket.io
+module.exports.configureSockets = function(io, options) {
+    io.use(socketHandshake({
+        store: options.sessionStore,
+        key: options.sessionKey,
+        secret: options.sessionSecret,
+        parser: options.cookieParser()
+    }));
+};
+
 // create session store
-module.exports.sessions = function(SessionStore, session, config) {
+module.exports.sessions = function(options) {
     var authObject;
 
-    if (config.get('env') == 'production') {
-        var parsedUrl = url.parse(config.get('database.redis.url'));
+    if ('production' == options.env) {
+        var parsedUrl = url.parse(options.url);
+        
         authObject = {
-            prefix: config.get('database.redis.prefix'),
+            prefix: options.prefix,
             host: parsedUrl.hostname,
             port: parsedUrl.port,
-            db: config.get('database.redis.db'),
+            db: options.db,
             pass: parsedUrl.auth ? parsedUrl.auth.split(":")[1] : null,
-            secret: config.get('server.secret')
+            secret: options.secret
         };
 
-        return new SessionStore(authObject);
+        return new options.Store(authObject);
     } else {
-        return (new session.MemoryStore());
+        return (new options.session.MemoryStore());
     }
 };
 
 // connect to backend store (db)
-module.exports.db = function(mongoose, config) {
+module.exports.connectToDatabase = function(mongoose, urlString) {
     function connect() {
-        mongoose.connect(config.get('database.mongo.url'));
+        mongoose.connect(urlString);
     }
 
     // connection is open and ready

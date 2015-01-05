@@ -1,8 +1,8 @@
-exports = module.exports = function(Comment, helpers) {
+exports = module.exports = function(Comment) {
     return {
-        get: require('./get')(Comment, helpers),
-        remove: require('./remove')(Comment, helpers),
-        create: require('./create')(Comment, helpers),
-        edit: require('./edit')(Comment, helpers)
+        get: require('./get')(Comment),
+        remove: require('./remove')(Comment),
+        create: require('./create')(Comment),
+        edit: require('./edit')(Comment)
     };
 };
