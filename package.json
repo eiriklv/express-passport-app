@@ -65,7 +65,6 @@
     "reactify": "0.14.x",
     "request": "2.45.x",
     "serve-favicon": "2.1.x",
-    "session.socket.io-express4": "0.0.x",
     "sinon": "1.10.x",
     "sinon-chai": "2.5.x",
     "socket.io": "1.1.0",
