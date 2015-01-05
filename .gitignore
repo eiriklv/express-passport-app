@@ -34,6 +34,10 @@ node_modules/*
 !node_modules/helpers
 !node_modules/client
 
+# generated bundles
+client/public/javascript/*
+client/public/stylesheets/*
+
 # Vagrant
 .vagrant
 
