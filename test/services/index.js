@@ -9,12 +9,11 @@ mockgoose(mongoose);
 mongoose.connect('mongodb://localhost/fakedb');
 
 // test subjects dependencies
-var helpers = require('../../helpers')();
-var models = require('../../models')(mongoose, helpers.validators);
+var models = require('../../models')(mongoose);
 
 // test subjects
-var profile = require('../../services/profile')(models, helpers);
-var resource = require('../../services/resource')(models, helpers);
+var profile = require('../../services/profile')(models);
+var resource = require('../../services/resource')(models);
 
 // tests
 describe('Services', function(){
