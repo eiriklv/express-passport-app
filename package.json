@@ -72,7 +72,7 @@
     "socket.io-handshake": "0.0.10",
     "stylus": "0.49.x",
     "superagent": "0.20.x",
-    "validator": "3.22.x",
+    "validator": "3.27.x",
     "vinyl-source-stream": "1.0.x",
     "watchify": "2.1.x"
   },
