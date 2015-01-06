@@ -3,7 +3,7 @@ var sessionHandler = require('./session');
 
 exports = module.exports = function(io, ipc) {
     io.on('connection', function(socket) {
-        globalHandler(io, ipc);
+        globalHandler(socket, ipc);
         sessionHandler(socket, ipc);
     });
 };
