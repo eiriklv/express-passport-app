@@ -27,16 +27,16 @@ build/Release
 # Deployed apps should consider commenting this line out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 
+# generated bundles
+client/public/javascript/*
+client/public/stylesheets/*
+
 # node_modules
 node_modules/*
 !node_modules/config
 !node_modules/modules
 !node_modules/helpers
 !node_modules/client
-
-# generated bundles
-client/public/javascript/*
-client/public/stylesheets/*
 
 # Vagrant
 .vagrant
