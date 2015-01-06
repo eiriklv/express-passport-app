@@ -1,6 +1,5 @@
 // dependencies
 var http = require('http');
-var express = require('express');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
@@ -8,7 +7,6 @@ var cookieParser = require('cookie-parser');
 var handlebars = require('hbs');
 var passport = require('passport');
 var socketio = require('socket.io')();
-var app = express();
 
 // config and setup helpers
 var helpers = require('helpers');
@@ -84,4 +82,4 @@ require('./routes')(app, handlers);
 setup.handleExpressError(app);
 
 // run application
-setup.run(server, config);
+setup.run(server, config.get('server.port'));
