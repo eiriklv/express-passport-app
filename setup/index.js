@@ -215,8 +215,8 @@ module.exports.connectToDatabase = function(mongoose, urlString) {
 };
 
 // run application
-module.exports.run = function(server, config) {
-    server.listen(config.get('server.port'), function() {
+module.exports.run = function(server, port) {
+    server.listen(port, function() {
         debug('listening on port %d'.green, server.address().port);
     });
 };
