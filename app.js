@@ -13,11 +13,6 @@ var helpers = require('helpers');
 var config = require('config');
 var setup = require('./setup');
 
-// setup application
-setup.connectToDatabase(mongoose, config.get('database.mongo.url'));
-setup.registerPartials('./views/partials/', handlebars);
-setup.registerHelpers(helpers.handlebars, handlebars);
-
 // setup session store
 var sessionStore = setup.sessions({
     cookieParser: cookieParser,
@@ -46,19 +41,7 @@ var app = setup.createExpressApp({
     env: config.get('env')
 });
 
-// http and socket.io server(s)
-var server = http.createServer(app);
-var io = socketio.attach(server);
-
-// configure socket.io
-setup.configureSockets(io, {
-    cookieParser: cookieParser,
-    sessionStore: sessionStore,
-    sessionKey: config.get('session.key'),
-    sessionSecret: config.get('server.secret'),
-});
-
-// app dependencies (app specific)
+// mail module
 var mailer = require('modules/mailer')({
     env: config.get('env'),
     serviceName: config.get('service.name'),
@@ -67,11 +50,29 @@ var mailer = require('modules/mailer')({
     verificationRoute: config.get('email.verification.route')
 });
 
+// http and socket.io server(s)
+var server = http.createServer(app);
+var io = socketio.attach(server);
+
+// app dependencies (app specific)
 var ipc = require('modules/ipc')(0);
 var models = require('./models')(mongoose);
 var services = require('./services')(models);
 var handlers = require('./handlers')(passport, services);
 var authentication = require('modules/authentication')(models, mailer);
+
+// setup application
+setup.connectToDatabase(mongoose, config.get('database.mongo.url'));
+setup.registerPartials('./views/partials/', handlebars);
+setup.registerHelpers(helpers.handlebars, handlebars);
+
+// configure socket.io
+setup.configureSockets(io, {
+    cookieParser: cookieParser,
+    sessionStore: sessionStore,
+    sessionKey: config.get('session.key'),
+    sessionSecret: config.get('server.secret'),
+});
 
 // app specific modules
 require('modules/sockets')(io, ipc);
