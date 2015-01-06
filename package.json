@@ -28,7 +28,7 @@
     "express-flash": "0.0.2",
     "express-session": "1.8.x",
     "fibers": "1.0.1",
-    "gulp": "3.8.9",
+    "gulp": "^3.8.10",
     "gulp-cssmin": "0.1.x",
     "gulp-jsxcs": "0.1.x",
     "gulp-mocha": "1.1.x",
