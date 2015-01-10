@@ -52,7 +52,7 @@ exports = module.exports = function(services) {
         }]);
 
         data
-            .map(_.wrapCallback(helpers.react.renderMarkupToString)).series()
+            .flatMap(_.wrapCallback(helpers.react.renderMarkupToString))
             .errors(next.bind(next))
             .each(res.send.bind(res));
     };
