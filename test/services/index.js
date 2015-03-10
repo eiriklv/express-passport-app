@@ -1,15 +1,8 @@
 // dependencies
-var mongoose = require('mongoose');
-var mockgoose = require('mockgoose');
-
-// mock mongoose
-mockgoose(mongoose);
-
-// fake connect to db
-mongoose.connect('mongodb://localhost/fakedb');
+var sequelize = require('../../database/sequelize.js');
 
 // test subjects dependencies
-var models = require('../../models')(mongoose);
+var models = require('../../models')(sequelize);
 
 // test subjects
 var profile = require('../../services/profile')(models);

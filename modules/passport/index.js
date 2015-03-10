@@ -27,24 +27,24 @@ exports = module.exports = function(passport, authentication, models) {
         passReqToCallback: true // allows us to pass back the entire request to the callback
     }, authentication.local.login));
 
-    passport.use(new FacebookStrategy({
-        clientID: config.get('facebook.client.id'),
-        clientSecret: config.get('facebook.client.secret'),
-        callbackURL: config.get('facebook.callback.url'),
-        passReqToCallback: true
-    }, authentication.facebook.auth));
+    // passport.use(new FacebookStrategy({
+    //     clientID: config.get('facebook.client.id'),
+    //     clientSecret: config.get('facebook.client.secret'),
+    //     callbackURL: config.get('facebook.callback.url'),
+    //     passReqToCallback: true
+    // }, authentication.facebook.auth));
 
-    passport.use(new GoogleStrategy({
-        clientID: config.get('google.client.id'),
-        clientSecret: config.get('google.client.secret'),
-        callbackURL: config.get('google.callback.url'),
-        passReqToCallback: true
-    }, authentication.google.auth));
+    // passport.use(new GoogleStrategy({
+    //     clientID: config.get('google.client.id'),
+    //     clientSecret: config.get('google.client.secret'),
+    //     callbackURL: config.get('google.callback.url'),
+    //     passReqToCallback: true
+    // }, authentication.google.auth));
 
-    passport.use(new InstagramStrategy({
-        clientID: config.get('instagram.client.id'),
-        clientSecret: config.get('instagram.client.secret'),
-        callbackURL: config.get('instagram.callback.url'),
-        passReqToCallback: true
-    }, authentication.instagram.auth));
+    // passport.use(new InstagramStrategy({
+    //     clientID: config.get('instagram.client.id'),
+    //     clientSecret: config.get('instagram.client.secret'),
+    //     callbackURL: config.get('instagram.callback.url'),
+    //     passReqToCallback: true
+    // }, authentication.instagram.auth));
 };

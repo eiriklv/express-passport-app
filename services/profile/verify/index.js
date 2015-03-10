@@ -10,33 +10,36 @@ exports = module.exports = function(models) {
         // todo - use async.waterfall for better flow
         async.series({
             checkToken: function(callback) {
-                models.VerificationToken.findOne({
-                    token: req.query.token
-                }, function(err, tokenEntry) {
-                    if (err) return callback(err);
-                    if (!tokenEntry) return callback('invalid token');
+                models.VerificationToken.find(req.query.token)
+                    .then(function(tokenEntry) {
+                        if (!tokenEntry) return callback('invalid token');
 
-                    uid = tokenEntry.uid;
+                        uid = tokenEntry.uid;
 
-                    tokenEntry.remove(function(err) {
-                        callback(err);
+                        tokenEntry.remove(function(err) {
+                            callback(err);
+                        });
+                    }).catch(function(err) {
+                        return callback(err);
                     });
-                });
             },
             verifyUser: function(callback) {
                 if (!uid) return callback('invalid verification token!');
 
-                models.User.findById(uid, function(err, userEntry) {
-                    if (err) return callback(err);
-                    if (!userEntry) return callback('no user entry for supplied token');
+                models.User.find(uid)
+                    .then(function(userEntry) {
+                        if (err) return callback(err);
+                        if (!userEntry) return callback('no user entry for supplied token');
 
-                    user = userEntry;
-                    userEntry.verified = true;
+                        user = userEntry;
+                        userEntry.verified = true;
 
-                    userEntry.save(function(err) {
-                        callback(err);
-                    });
-                });
+                        userEntry.save(function(err) {
+                            callback(err);
+                        });
+                    }).catch(function(err) {
+                        return callback(err);
+                    })
 
             },
             logInUser: function(callback) {

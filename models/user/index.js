@@ -1,63 +1,46 @@
 var bcrypt = require('bcryptjs');
 var validators = require('helpers').validators;
 
-exports = module.exports = function(collection, mongoose) {
-    var schema = mongoose.Schema({
+exports = module.exports = function(collection, sequelize) {
+    var schema = {
+        id: {
+            type: sequelize.Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
         email: {
-            type: String, // this is the verified email used to contact the user (must be verified for local signup)
-            validate: [validators.email, 'email is not valid'],
-            required: true,
-            index: true
+            type: sequelize.Sequelize.STRING,
+            allowNull: false,
+            validator: validators.email,
+            unique: true
         },
         password: {
-            type: String, // need validator for this (password strength - do this on frontend)
-            required: true
+            type: sequelize.Sequelize.STRING,
+            allowNull: false
         },
-        fullname: {
-            type: String, // this needs verification/escape/cleaning
-            required: true
+        activationKey: {
+            type: sequelize.Sequelize.STRING,
+            allowNull: true
+        },
+        resetPasswordKey: {
+            type: sequelize.Sequelize.STRING,
+            allowNull: true
         },
         verified: {
-            type: Boolean,
-            default: false // this is automatically set true for both facebook and google, but must be verified for local
-        },
-        facebook: {
-            id: {
-                type: String,
-                index: true
-            },
-            token: String,
-            email: String,
-            name: String
-        },
-        google: {
-            id: {
-                type: String,
-                index: true
-            },
-            token: String,
-            email: String,
-            name: String
-        },
-        instagram: {
-            id: {
-                type: String,
-                index: true
-            },
-            token: String,
-            username: String,
-            name: String,
-            profile_picture: String
+            type: sequelize.Sequelize.BOOLEAN,
+            defaultValue: false
         }
-    });
+    };
 
-    schema.methods.generateHash = function(password) {
+    var User = sequelize.define('User', schema);
+
+    User.generateHash = function(password) {
         return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null); // this is syncronous (future: async)
     };
 
-    schema.methods.validPassword = function(password) {
+    User.validPassword = function(password) {
         return bcrypt.compareSync(password, this.password); // this is syncronous (future: async)
     };
 
-    return mongoose.model(collection, schema);
+    return User;
 };

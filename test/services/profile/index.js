@@ -9,25 +9,25 @@ exports = module.exports = function (profile, models) {
 
             before(function (done) {
                 // create fake user
-                user = new models.User({
+                user = models.User.build({
                     email: 'john@doe.com',
                     fullname: 'John Doe',
                     verified: false
                 });
 
                 // set password
-                user.password = user.generateHash('1234');
+                user.password = models.User.generateHash('1234');
 
                 // save user
-                user.save(function (err) {
+                user.save().then(function () {
                     // create fake verification token
-                    var validToken = new models.VerificationToken({
+                    var validToken = models.VerificationToken.build({
                         token: 'aa',
                         uid: user._id
                     });
 
                     // save token
-                    validToken.save(function (err) {
+                    validToken.save().then(function (err) {
                         done();
                     });
                 });

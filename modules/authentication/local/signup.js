@@ -3,10 +3,11 @@ var util = require('util');
 
 exports = module.exports = function(User, VerificationToken, mailer) {
     return function(req, email, password, done) {
-        User.findOne({
-            'email': email
-        }, function(err, user) {
-            if (err) return done(err);
+        User.find({
+            'where': {
+                {'email': email}
+            }
+        }).then(function(user) {
             if (user) return done(null, false, req.flash('signupMessage', 'This email is already in use.'));
             if (!req.body.fullname) return done(null, false, req.flash('signupMessage', 'Please provide your full name.'));
 
@@ -41,6 +42,8 @@ exports = module.exports = function(User, VerificationToken, mailer) {
                 if (err) return done(null, false, req.flash('signupMessage', 'An error occured! - ' + err));
                 return done(null, newUser, req.flash('signupMessage', 'You registered through local sign-up!'));
             });
+        }).catch(function(err) {
+            return done(err);
         });
     };
 };
