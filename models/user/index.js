@@ -32,14 +32,15 @@ exports = module.exports = function(collection, sequelize) {
         }
     };
 
-    var User = sequelize.define('User', schema);
+    var User = sequelize.define('user', schema);
 
     User.generateHash = function(password) {
         return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null); // this is syncronous (future: async)
     };
 
-    User.validPassword = function(password) {
-        return bcrypt.compareSync(password, this.password); // this is syncronous (future: async)
+    User.validPassword = function(toCheck, existing) {
+        console.log(toCheck, existing);
+        return bcrypt.compareSync(toCheck, existing); // this is syncronous (future: async)
     };
 
     return User;

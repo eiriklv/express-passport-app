@@ -16,9 +16,13 @@ exports = module.exports = function(models) {
 
                         uid = tokenEntry.uid;
 
-                        tokenEntry.remove(function(err) {
-                            callback(err);
+                        return tokenEntry.destroy().then(function(res) {
+                            // console.log("tokenEntry res", res);
+                        }).catch(function(err) {
+                            throw new Error("Oh shit" + err.message);
                         });
+                    }).then(function() {
+                        callback(null);
                     }).catch(function(err) {
                         return callback(err);
                     });
@@ -28,18 +32,21 @@ exports = module.exports = function(models) {
 
                 models.User.find(uid)
                     .then(function(userEntry) {
-                        if (err) return callback(err);
                         if (!userEntry) return callback('no user entry for supplied token');
 
                         user = userEntry;
                         userEntry.verified = true;
 
-                        userEntry.save(function(err) {
-                            callback(err);
+                        return userEntry.save().then(function(res) {
+                            // console.log("tokenEntry res", res);
+                        }).catch(function(err) {
+                            throw new Error("Oh shit" + err);
                         });
+                    }).then(function() {
+                        callback(null);
                     }).catch(function(err) {
                         return callback(err);
-                    })
+                    });
 
             },
             logInUser: function(callback) {

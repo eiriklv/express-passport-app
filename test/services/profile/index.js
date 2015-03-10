@@ -8,10 +8,11 @@ exports = module.exports = function (profile, models) {
             var user;
 
             before(function (done) {
+                models.User.sync();
+                models.VerificationToken.sync();
                 // create fake user
                 user = models.User.build({
                     email: 'john@doe.com',
-                    fullname: 'John Doe',
                     verified: false
                 });
 
@@ -23,13 +24,18 @@ exports = module.exports = function (profile, models) {
                     // create fake verification token
                     var validToken = models.VerificationToken.build({
                         token: 'aa',
-                        uid: user._id
+                        uid: user.id
                     });
 
                     // save token
-                    validToken.save().then(function (err) {
-                        done();
+                    return validToken.save().catch(function(err) {
+                        throw new Error("User save error" + err.message + err.stack);
+                        done(err);
                     });
+                }).then(function() {
+                    done();
+                }).catch(function(err) {
+                    throw new Error("User save error" + err.message + err.stack);
                 });
             });
 
@@ -92,18 +98,20 @@ exports = module.exports = function (profile, models) {
 
             before(function (done) {
                 // create fake user
-                user = new models.User({
-                    email: 'john@doe.com',
-                    fullname: 'John Doe',
+                user = models.User.build({
+                    email: 'john2@doe.com',
                     verified: false
                 });
 
                 // set password
-                user.password = user.generateHash('1234');
+                user.password = models.User.generateHash('1234');
 
                 // save user
-                user.save(function (err) {
+                user.save().then(function(res) {
+                    // console.log("\n\nRES\n\n", res);
                     done();
+                }).catch(function(err) {
+                    throw new Error("User save error" + err.message + err.stack);
                 });
             });
 
@@ -120,7 +128,7 @@ exports = module.exports = function (profile, models) {
                 var req = {
                     user: user,
                     body: {
-                        fullname: user.fullname
+                        email: user.email
                     }
                 };
 
@@ -132,17 +140,17 @@ exports = module.exports = function (profile, models) {
             });
 
             it('should update your name', function (done) {
-                var updatedName = 'John Douchebag';
+                var updatedEmail = 'john2@doe.com';
 
                 var req = {
                     user: user,
                     body: {
-                        fullname: updatedName
+                        email: updatedEmail
                     }
                 };
 
                 profile.update(req, function (err, updatedUser) {
-                    expect(updatedUser.fullname).to.equal(updatedName);
+                    expect(updatedUser.email).to.equal(updatedEmail);
                     done();
                 });
             });

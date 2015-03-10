@@ -13,7 +13,7 @@ exports = module.exports = function(collection, sequelize) {
         }
     };
 
-    var VerificationToken = sequelize.define('VerificationToken', schema);
+    var VerificationToken = sequelize.define('verification_token', schema);
 
     VerificationToken.generateToken = function(uid) {
         var shasum = crypto.createHash('sha1');

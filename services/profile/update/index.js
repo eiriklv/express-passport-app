@@ -21,7 +21,7 @@ exports = module.exports = function(models) {
                 var oldPass = req.body.old_password;
                 var newPass = req.body.new_password;
                 var confirmPass = req.body.new_password_confirm;
-                var passCheck = user.validPassword(oldPass);
+                var passCheck = models.User.validPassword(oldPass, newPass);
                 var newPassLength = newPass ? newPass.length : 0;
                 var passValid = newPassLength > 5 && newPass === confirmPass;
 
@@ -35,7 +35,9 @@ exports = module.exports = function(models) {
                 }
             },
             saveProfile: function(callback) {
-                user.save(function(err) {
+                user.save().then(function() {
+                    callback();
+                }).catch(function(err) {
                     callback(err);
                 });
             }
