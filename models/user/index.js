@@ -40,7 +40,6 @@ exports = module.exports = function(collection, sequelize) {
     };
 
     User.validPassword = function(password1, password2) {
-        console.log(password1, password2);
         return bcrypt.compareSync(password1, password2); // this is syncronous (future: async)
     };
 

@@ -9,6 +9,7 @@ var database = "express_passport_app",
 var sequelize = new Sequelize(database, username, password, {
   host: 'localhost',
   dialect: 'postgres',
+  logging: false,
 
   pool: {
     max: 5,

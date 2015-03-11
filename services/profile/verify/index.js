@@ -3,8 +3,8 @@ var logger = require('edge-logger').Logger();
 
 exports = module.exports = function(models) {
     return function(req, callback) {
-        if (!req.query) return callback('no request query');
-        if (!req.query.token) return callback('verification token missing! try again with a valid token (see e-mail)');
+        if (!req.query) return callback(new Error('no request query'));
+        if (!req.query.token) return callback(new Error('verification token missing! try again with a valid token (see e-mail)'));
 
         models.VerificationToken.find(req.query.token)
             .then(destroyToken)
@@ -28,15 +28,16 @@ exports = module.exports = function(models) {
             return tokenEntry.uid;
         }).catch(function(err) {
             logger.error("tokenEntry destroy Error", err);
+            throw err;
         });
     }
 
     function verifyUser(uid) {
-        if (!uid) return callback('invalid verification token!');
+        if (!uid) throw new Error('invalid verification token!');
 
         return models.User.find(uid)
             .then(function(userEntry) {
-                if (!userEntry) return callback('no user entry for supplied token');
+                if (!userEntry) throw new Error('no user entry for supplied token');
 
                 userEntry.verified = true;
 
@@ -47,6 +48,7 @@ exports = module.exports = function(models) {
                 });
             }).catch(function(err) {
                 logger.error("verifyUser Error", err);
+                throw err;
             });
     }
 };

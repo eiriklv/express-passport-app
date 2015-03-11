@@ -70,7 +70,7 @@ exports = module.exports = function (profile, models) {
                 var req = {};
 
                 profile.verify(req, function (err) {
-                    expect(err).to.equal('no request query');
+                    expect(err.message).to.equal('no request query');
                     done();
                 });
             });
@@ -80,7 +80,7 @@ exports = module.exports = function (profile, models) {
                 var req = { query: {} };
 
                 profile.verify(req, function (err) {
-                    expect(err).to.equal('verification token missing! try again with a valid token (see e-mail)');
+                    expect(err.message).to.equal('verification token missing! try again with a valid token (see e-mail)');
                     done();
                 });
             });
@@ -95,7 +95,7 @@ exports = module.exports = function (profile, models) {
                 };
 
                 profile.verify(req, function (err) {
-                    expect(err).to.be.an.instanceOf(Error);
+                    expect(err.message).to.equal('invalid token');
                     done();
                 });
             });
@@ -134,7 +134,6 @@ exports = module.exports = function (profile, models) {
 
                 // save user
                 user.save().then(function(res) {
-                    // console.log("\n\nRES\n\n", res);
                     done();
                 }).catch(function(err) {
                     throw new Error("User save error" + err.message + err.stack);
@@ -145,7 +144,7 @@ exports = module.exports = function (profile, models) {
                 var req = {};
 
                 profile.update(req, function (err, user) {
-                    expect(err).to.equal('no request body');
+                    expect(err.message).to.equal('no request body');
                     done();
                 });
             });
@@ -159,14 +158,14 @@ exports = module.exports = function (profile, models) {
                 };
 
                 profile.update(req, function (err, updatedUser) {
-                    expect(err).to.equal();
-                    expect(updatedUser).to.equal(user);
+                    expect(err).to.be.null;
+                    expect(updatedUser.get()).to.equal(user.get());
                     done();
                 });
             });
 
-            it('should update your name', function (done) {
-                var updatedEmail = 'john2@doe.com';
+            it('should update your email', function (done) {
+                var updatedEmail = 'john3@doe.com';
 
                 var req = {
                     user: user,
@@ -185,13 +184,14 @@ exports = module.exports = function (profile, models) {
                 var req = {
                     user: user,
                     body: {
-                        old_password: '4321'
+                        old_password: '4321',
+                        new_password: '2345'
                     }
                 };
 
                 profile.update(req, function (err, updatedUser) {
-                    expect(err).to.equal('password not valid');
-                    expect(updatedUser).to.equal(user);
+                    expect(err.message).to.equal('password not valid');
+                    expect(updatedUser.get()).to.equal(user.get());
                     done();
                 });
             });
@@ -200,13 +200,14 @@ exports = module.exports = function (profile, models) {
                 var req = {
                     user: user,
                     body: {
-                        old_password: '1234'
+                        old_password: '1234',
+                        new_password: null
                     }
                 };
 
                 profile.update(req, function (err, updatedUser) {
-                    expect(err).to.equal('passwords did not match, or was shorter than 6 characters! try again');
-                    expect(updatedUser).to.equal(user);
+                    expect(err.message).to.equal('passwords did not match, or was shorter than 6 characters! try again');
+                    expect(updatedUser.get()).to.equal(user.get());
                     done();
                 });
             });
@@ -221,8 +222,8 @@ exports = module.exports = function (profile, models) {
                 };
 
                 profile.update(req, function (err, updatedUser) {
-                    expect(err).to.equal('passwords did not match, or was shorter than 6 characters! try again');
-                    expect(updatedUser).to.equal(user);
+                    expect(err.message).to.equal('passwords did not match, or was shorter than 6 characters! try again');
+                    expect(updatedUser.get()).to.equal(user.get());
                     done();
                 });
             });
@@ -238,8 +239,8 @@ exports = module.exports = function (profile, models) {
                 };
 
                 profile.update(req, function (err, updatedUser) {
-                    expect(err).to.equal('passwords did not match, or was shorter than 6 characters! try again');
-                    expect(updatedUser).to.equal(user);
+                    expect(err.message).to.equal('passwords did not match, or was shorter than 6 characters! try again');
+                    expect(updatedUser.get()).to.equal(user.get());
                     done();
                 });
             });
@@ -255,8 +256,8 @@ exports = module.exports = function (profile, models) {
                 };
 
                 profile.update(req, function (err, updatedUser) {
-                    expect(err).to.equal();
-                    expect(updatedUser.validPassword(req.body.new_password)).to.equal(true);
+                    expect(err).to.be.null;
+                    expect(models.User.validPassword(req.body.new_password, updatedUser.password)).to.equal(true);
                     done();
                 });
             });
