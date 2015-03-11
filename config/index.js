@@ -54,6 +54,20 @@ var config = module.exports = convict({
             env: 'APPSECRET'
         }
     },
+    client: {
+        api: {
+            path: {
+                doc: 'The client api url path (relative)',
+                default: '/api',
+                env: 'CLIENT_API_PATH'
+            }
+        },
+        domain: {
+            doc: 'The client domain (hostname)',
+            default: 'localhost',
+            env: 'CLIENT_DOMAIN'
+        }
+    },
     database: {
         redis: {
             url: {

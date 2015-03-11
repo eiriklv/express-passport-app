@@ -49,7 +49,6 @@ module.exports.createExpressApp = function(options) {
 
     app.use(options.passport.initialize());
     app.use(options.passport.session());
-    app.use(flash());
 
     // handle session store disconnect
     app.use(function(req, res, next) {
@@ -63,7 +62,7 @@ module.exports.createExpressApp = function(options) {
     if ('development' == options.env) {
         app.use(errorHandler());
     }
-
+    console.log(app._router.stack);
     return app;
 };
 
