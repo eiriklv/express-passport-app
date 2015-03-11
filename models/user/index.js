@@ -2,6 +2,7 @@ var bcrypt = require('bcryptjs');
 var validators = require('helpers').validators;
 
 exports = module.exports = function(collection, sequelize) {
+    var self = this;
     var schema = {
         id: {
             type: sequelize.Sequelize.INTEGER,
@@ -38,9 +39,9 @@ exports = module.exports = function(collection, sequelize) {
         return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null); // this is syncronous (future: async)
     };
 
-    User.validPassword = function(toCheck, existing) {
-        console.log(toCheck, existing);
-        return bcrypt.compareSync(toCheck, existing); // this is syncronous (future: async)
+    User.validPassword = function(password1, password2) {
+        console.log(password1, password2);
+        return bcrypt.compareSync(password1, password2); // this is syncronous (future: async)
     };
 
     return User;

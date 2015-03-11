@@ -11,7 +11,6 @@ exports = module.exports = function(models) {
 
         async.series({
             updateProfile: function(callback) {
-                user.fullname = formatName(req.body.fullname) || 'no name given';
                 callback();
             },
             updatePassword: function(callback) {
@@ -26,7 +25,7 @@ exports = module.exports = function(models) {
                 var passValid = newPassLength > 5 && newPass === confirmPass;
 
                 if (passCheck && passValid) {
-                    user.password = user.generateHash(newPass);
+                    user.password = models.User.generateHash(newPass);
                     callback();
                 } else if (!passCheck) {
                     callback('password not valid');

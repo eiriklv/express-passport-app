@@ -1,15 +1,41 @@
 // dependencies
 var expect = require('chai').expect;
+var logger = require('edge-logger').Logger();
 
 exports = module.exports = function (profile, models) {
     // test
     describe('Profile', function(){
+        var all = {
+            'truncate': true
+        };
+
+        before(function (done) {
+            models.User.sync();
+            models.VerificationToken.sync();
+            models.User.destroy(all)
+                .then(function (res) {
+                    logger.info('Destroyed all user records');
+                    return models.VerificationToken
+                        .destroy(all)
+                        .then(function (res) {
+                            logger.info('Destroyed all verification tokens');
+                        })
+                        .catch(function (err) {
+                            logger.error('Error destroying all verification tokens', err);
+                        });
+                })
+                .then(function () {
+                    done();
+                })
+                .catch(function (err) {
+                    logger.error('Error destroying all users', err);
+                });
+        });
+
         describe('#verify()', function () {
             var user;
 
             before(function (done) {
-                models.User.sync();
-                models.VerificationToken.sync();
                 // create fake user
                 user = models.User.build({
                     email: 'john@doe.com',
@@ -69,7 +95,7 @@ exports = module.exports = function (profile, models) {
                 };
 
                 profile.verify(req, function (err) {
-                    expect(err).to.equal('invalid token');
+                    expect(err).to.be.an.instanceOf(Error);
                     done();
                 });
             });
