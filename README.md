@@ -1,42 +1,27 @@
 Express 4.x application with Passport authentication
 ====================================================
 
-[![Build Status](https://travis-ci.org/eiriklv/express-passport-app.svg?branch=master)](https://travis-ci.org/eiriklv/express-passport-app)
-[![Coverage Status](https://img.shields.io/coveralls/eiriklv/express-passport-app.svg)](https://coveralls.io/r/eiriklv/express-passport-app?branch=master)
-[![Dependency Status](https://david-dm.org/eiriklv/express-passport-app.svg)](https://david-dm.org/eiriklv/express-passport-app)
-[![devDependency Status](https://david-dm.org/eiriklv/express-passport-app/dev-status.svg)](https://david-dm.org/eiriklv/express-passport-app#info=devDependencies)
+Forked from [@eiriklv](https://github.com/eiriklv/)'s repo by the [samename](https://github.com/eiriklv/express-passport-app/)
 
 #### Introduction:
-This project will give you a complete scaffolding/boilerplate of the [node](http://www.nodejs.org/)/[express](http://www.expressjs.com/) stack along with social logins through [passport]() and email verification through [mandrill](http://www.mandrill.com). It uses [mongodb](http://www.mongodb.org/) for database models and [redis](http://www.redis.io/) for session storage. Fork at will! :)
-
-![express passport application](http://s29.postimg.org/6zbwl1fnb/preview.png "Express Passport Application")
+This project will give you a complete scaffolding/boilerplate of the [node](http://www.nodejs.org/)/[express](http://www.expressjs.com/) stack along with social logins through [passport]() and email verification through [mandrill](http://www.mandrill.com). It uses [postgresql](http://www.postgresql.org/) for database models and [redis](http://www.redis.io/) for session storage. Fork at will! :)
 
 #### Built with:
 * [node.js](http://www.nodejs.org/)
 * [express](http://www.expressjs.com/)
 * [passport](http://www.passportjs.org/)
 * [gulp](http://www.gulpjs.com/)
+* [sequelize](http://docs.sequelizejs.com/en/latest/)
 * [socket.io](http://www.socket.io/)
 * [convict](http://github.com/mozilla/node-convict/)
-* [browserify](http://www.browserify.org/)
- * [envify](http://github.com/hughsk/envify/)
- * [reactify](https://github.com/andreypopp/reactify)
-* [react](http://facebook.github.io/react/)
-* [handlebars](http://handlebarsjs.com/)
-* [stylus](http://learnboost.github.io/stylus/)
- * [nib](http://visionmedia.github.io/nib/)
-* [bootstrap](http://getbootstrap.com/)
-* [fontawesome](http://fortawesome.github.io/Font-Awesome/)
-* [jquery](http://www.jquery.com/)
 
 #### Testing:
 * [mocha](http://visionmedia.github.io/mocha/)
 * [chai](http://chaijs.com/)
-* [sinon](http://sinonjs.org/)
 
 #### Dependencies:
 * [nodejs](http://www.nodejs.org/)
-* [mongodb](http://www.mongodb.org/)
+* [postgresql](http://www.postgresql.org/)
 * [redis](http://redis.io/)
 
 #### Social logins supported:
@@ -48,7 +33,6 @@ This project will give you a complete scaffolding/boilerplate of the [node](http
 #### Install dependencies (some might need to use `sudo` for various reasons):
 * `brew/apt-get install nodejs`
 * `brew/apt-get install redis`
-* `brew/apt-get install mongodb`
 * `npm install -g mocha`
 * `npm install -g gulp`
 * `npm install`
@@ -150,14 +134,3 @@ export EMAIL_VERIFICATION_ROUTE="http://localhost:3000/auth/local/verify" \
 
 gulp develop
 ```
-
-#### TODO
-* ~~upgrade to socket.io 1.x~~
-* ~~continuous integration with [travis](http://www.travis-ci.org/)~~
-* ~~add test coverage with [coveralls.io](http://www.coveralls.io/)~~
-* ~~add unit test framework~~
-* look into using [jest](http://facebook.github.io/jest/) for testing
-* add complete test suite
-* ~~replace jquery with [react](http://facebook.github.io/react/) or [mithril](http://lhorie.github.io/mithril/)~~
-* ~~build simple client side example with the selected framework~~
-* use [material ui](http://facebook.github.io/react/) instead of [bootstrap](http://getbootstrap.com/)
