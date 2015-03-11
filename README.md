@@ -58,8 +58,6 @@ This project will give you a complete scaffolding/boilerplate of the [node](http
  * example: `/api`
 * `CLIENT_DOMAIN` - Server domain
  * example: `localhost` or `someapp.herokuapp.com`
-* `MONGO_URL` - MongoDB url (including authentication)
- * example: `mongodb://user:pass@localhost:27017/mydatabase`
 * `REDIS_URL` - Redis url (including authentication)
  * example: `redis://user:pass@localhost:6379`
 * `REDIS_DB` - Redis database number (0-15)
@@ -113,7 +111,6 @@ export DEBUG="*,-engine:polling" \
 export NODE_ENV="development" \
 export CLIENT_DOMAIN="localhost" \
 export CLIENT_API_PATH="/api" \
-export MONGO_URL="mongodb://localhost/express-passport-app" \
 export REDIS_URL="redis://localhost:6379" \
 export REDIS_DB=0 \
 export REDIS_SESSION_PREFIX="sess:" \
