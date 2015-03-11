@@ -1,6 +1,5 @@
 // dependencies
 var http = require('http');
-// var mongoose = require('mongoose');
 var sequelize = require('./database/sequelize.js');
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
@@ -57,16 +56,12 @@ var io = socketio.attach(server);
 
 // app dependencies (app specific)
 var ipc = require('modules/ipc')(0);
-// var models = require('./models')(mongoose);
 var models = require('./models')(sequelize);
 var services = require('./services')(models);
 var handlers = require('./handlers')(passport, services);
 var authentication = require('modules/authentication')(models, mailer);
 
 // setup application
-// setup.connectToDatabase(mongoose, config.get('database.mongo.url'));
-// setup.registerPartials('./views/partials/', handlebars);
-// setup.registerHelpers(helpers.handlebars, handlebars);
 
 // configure socket.io
 setup.configureSockets(io, {
