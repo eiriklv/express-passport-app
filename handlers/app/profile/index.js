@@ -8,7 +8,7 @@ exports = module.exports = function(services) {
         var context = {
             title: 'Profile page',
             description: 'React profile page',
-            user: req.user.toObject(),
+            user: req.user.get(),
             messages: req.flash()
         };
 

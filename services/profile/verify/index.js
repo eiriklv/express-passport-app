@@ -1,5 +1,4 @@
 var async = require('async');
-var logger = require('edge-logger').Logger();
 
 exports = module.exports = function(models) {
     return function(req, callback) {
@@ -27,7 +26,7 @@ exports = module.exports = function(models) {
         return tokenEntry.destroy().then(function(res) {
             return tokenEntry.uid;
         }).catch(function(err) {
-            logger.error("tokenEntry destroy Error", err);
+            console.error("tokenEntry destroy Error", err);
             throw err;
         });
     }
@@ -44,10 +43,10 @@ exports = module.exports = function(models) {
                 return userEntry.save().then(function(res) {
                     return res;
                 }).catch(function(err) {
-                    logger.error("userEntry save Error", err);
+                    console.error("userEntry save Error", err);
                 });
             }).catch(function(err) {
-                logger.error("verifyUser Error", err);
+                console.error("verifyUser Error", err);
                 throw err;
             });
     }

@@ -1,6 +1,5 @@
 // dependencies
 var expect = require('chai').expect;
-var logger = require('edge-logger').Logger();
 
 exports = module.exports = function (profile, models) {
     // test
@@ -14,21 +13,21 @@ exports = module.exports = function (profile, models) {
             models.VerificationToken.sync();
             models.User.destroy(all)
                 .then(function (res) {
-                    logger.info('Destroyed all user records');
+                    console.log('Destroyed all user records');
                     return models.VerificationToken
                         .destroy(all)
                         .then(function (res) {
-                            logger.info('Destroyed all verification tokens');
+                            console.log('Destroyed all verification tokens');
                         })
                         .catch(function (err) {
-                            logger.error('Error destroying all verification tokens', err);
+                            console.error('Error destroying all verification tokens', err);
                         });
                 })
                 .then(function () {
                     done();
                 })
                 .catch(function (err) {
-                    logger.error('Error destroying all users', err);
+                    console.error('Error destroying all users', err);
                 });
         });
 

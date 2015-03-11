@@ -54,28 +54,7 @@ var config = module.exports = convict({
             env: 'APPSECRET'
         }
     },
-    client: {
-        api: {
-            path: {
-                doc: 'The client api url path (relative)',
-                default: '/api',
-                env: 'CLIENT_API_PATH'
-            }
-        },
-        domain: {
-            doc: 'The client domain (hostname)',
-            default: 'localhost',
-            env: 'CLIENT_DOMAIN'
-        }
-    },
     database: {
-        mongo: {
-            url: {
-                doc: 'MongoDB url to connect to (including db reference)',
-                default: 'mongodb://localhost/express-passport-app',
-                env: 'MONGO_URL'
-            }
-        },
         redis: {
             url: {
                 doc: 'Redis url to connect to (including auth string)',

@@ -65,8 +65,8 @@ var authentication = require('modules/authentication')(models, mailer);
 
 // setup application
 // setup.connectToDatabase(mongoose, config.get('database.mongo.url'));
-setup.registerPartials('./views/partials/', handlebars);
-setup.registerHelpers(helpers.handlebars, handlebars);
+// setup.registerPartials('./views/partials/', handlebars);
+// setup.registerHelpers(helpers.handlebars, handlebars);
 
 // configure socket.io
 setup.configureSockets(io, {
