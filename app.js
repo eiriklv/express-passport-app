@@ -35,6 +35,7 @@ var app = setup.createExpressApp({
     sessionKey: config.get('session.key'),
     sessionSecret: config.get('server.secret'),
     dir: __dirname,
+    views: '/views',
     env: config.get('env')
 });
 
