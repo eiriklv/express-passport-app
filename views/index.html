@@ -6,6 +6,14 @@
         <p><%= messages[message] %></p>    
       <% } %>
     <% } %>
-    <p>Home</p>
+    <h3>Home</h3>
+    <% if (user) { %>
+      <% for (var prop in user) { %>
+        <p><%= prop %>: <%= user[prop] %></p>
+      <% } %>
+    <% } %>
+    <a href="/auth/local/login">Login</a>
+    <a href="/auth/local/signup">Sign Up</a>
+    <a href="/auth/local/logout">Log Out</a>
   </body>
 </html>

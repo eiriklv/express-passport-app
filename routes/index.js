@@ -6,6 +6,10 @@ exports = module.exports = function(app, handlers) {
     require('./api')(app, express, handlers.middleware, handlers.api, config.get('client.api.path'));
 
     app.get('/', function (req, res) {
-        res.render('index');
+        var user = null;
+        if (req.user) {
+          user = req.user.dataValues;
+        }
+        res.render('index', {user: user});
     });
 };

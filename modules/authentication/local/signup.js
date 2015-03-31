@@ -28,18 +28,18 @@ exports = module.exports = function(User, VerificationToken, mailer) {
                 return done(err);
             });
 
-        function sendVerificationMail(product) {
-            var newToken = VerificationToken.Build({
-                uid: product.id,
-                token: VerificationToken.generateToken(product.id)
+        function sendVerificationMail(user) {
+            var newToken = VerificationToken.build({
+                uid: user.id,
+                token: VerificationToken.generateToken(user.id)
             });
 
             return newToken.save()
                 .then(function() {
-                    if (!err) mailer(product, 'local', 'signup', product.token);
+                    if (!err) mailer(user, 'local', 'signup', user.token);
                 })
                 .catch(function(err) {
-                    console.error('newToken save error', error);
+                    console.error('newToken save error', err);
                 });
         }
     };
