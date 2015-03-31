@@ -21,8 +21,6 @@ exports = module.exports = function(models) {
     function destroyToken(tokenEntry) {
         if (!tokenEntry) throw new Error('invalid token');
 
-        console.log("found token with uid:", tokenEntry.uid);
-
         return tokenEntry.destroy().then(function(res) {
             return tokenEntry.uid;
         }).catch(function(err) {

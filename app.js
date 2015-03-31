@@ -35,9 +35,6 @@ var app = setup.createExpressApp({
     sessionKey: config.get('session.key'),
     sessionSecret: config.get('server.secret'),
     dir: __dirname,
-    static: '/client/public',
-    favicon: '/client/public/images/favicon.ico',
-    views: '/views',
     env: config.get('env')
 });
 

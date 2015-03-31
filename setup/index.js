@@ -12,6 +12,7 @@ var compress = require('compression');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var errorHandler = require('errorhandler');
+var flash = require('express-flash');
 
 // socket.io dependecies
 var socketHandshake = require('socket.io-handshake');
@@ -27,6 +28,9 @@ module.exports.createExpressApp = function(options) {
     var app = express();
 
     // set view engine and parsers
+    app.set('views', options.dir + options.views);
+    app.set('view engine', 'html');
+    app.engine('html', require('ejs').renderFile);
     app.set('json spaces', 2);
 
     // express common config
@@ -49,6 +53,7 @@ module.exports.createExpressApp = function(options) {
 
     app.use(options.passport.initialize());
     app.use(options.passport.session());
+    app.use(flash());
 
     // handle session store disconnect
     app.use(function(req, res, next) {
@@ -62,7 +67,7 @@ module.exports.createExpressApp = function(options) {
     if ('development' == options.env) {
         app.use(errorHandler());
     }
-    console.log(app._router.stack);
+
     return app;
 };
 
@@ -74,9 +79,7 @@ module.exports.handleExpressError = function(app) {
 
         // respond with html page
         if (req.accepts('html')) {
-            res.render('404', {
-                url: req.url
-            });
+            res.send(404);
             return;
         }
 

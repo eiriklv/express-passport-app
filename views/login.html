@@ -1,0 +1,19 @@
+<html>
+  <head></head>
+  <body>
+    <% if (messages) { %>
+      <% for (var message in messages) { %>
+        <p><%= messages[message] %></p>    
+      <% } %>
+    <% } %>
+    <form action="/auth/local/login" method="post">
+      Email:<br>
+      <input type="text" name="email"><br>
+      Username:<br>
+      <input type="text" name="username"><br>
+      Password:<br>
+      <input type="password" name="password">
+      <button type="submit">Login</button>
+    </form>
+  </body>
+</html>
