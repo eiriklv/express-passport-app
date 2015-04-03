@@ -35,7 +35,7 @@ module.exports.createExpressApp = function(options) {
 
     // express common config
     app.use(compress());
-    app.use(express.static(options.dir + options.static));
+    // app.use(express.static(options.dir + options.static));
     app.use(morgan('dev'));
     app.use(options.cookieParser());
     app.use(bodyParser.urlencoded({

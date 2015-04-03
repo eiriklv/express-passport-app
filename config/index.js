@@ -89,18 +89,23 @@ var config = module.exports = convict({
             }
         }
     },
-    mandrill: {
+    sendgrid: {
         api: {
             key: {
-                doc: 'Mandrill API key',
+                doc: 'sendgrid API key',
                 default: '0000000000',
-                env: 'MANDRILL_API_KEY'
+                env: 'SENDGRID_API_KEY'
+            },
+            user: {
+                doc: 'sendgrid user',
+                default: 'abcdefghijk',
+                env: 'SENDGRID_USER'
             }
         },
         sender: {
             doc: 'The "from" field for the verification emails',
-            default: 'Some User <someuser@company.com>',
-            env: 'MANDRILL_SENDER'
+            default: 'someuser@company.com',
+            env: 'SENDGRID_SENDER'
         }
     },
     email: {

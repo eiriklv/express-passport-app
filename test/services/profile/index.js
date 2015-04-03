@@ -28,6 +28,7 @@ exports = module.exports = function (profile, models) {
                 })
                 .catch(function (err) {
                     console.error('Error destroying all users', err);
+                    done();
                 });
         });
 

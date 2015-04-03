@@ -52,6 +52,7 @@
     "pg-hstore": "^2.3.1",
     "pretty-hrtime": "0.2.x",
     "request": "2.45.x",
+    "sendgrid": "^1.6.0",
     "sequelize": "^2.0.4",
     "serve-favicon": "2.1.x",
     "sinon": "1.10.x",
@@ -60,6 +61,7 @@
     "socket.io-client": "1.2.x",
     "socket.io-handshake": "0.0.x",
     "superagent": "0.20.x",
+    "type-is": "^1.6.1",
     "validator": "3.27.x",
     "vinyl-source-stream": "1.0.x",
     "watchify": "2.1.x"

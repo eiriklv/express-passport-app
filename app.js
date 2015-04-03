@@ -43,8 +43,7 @@ var app = setup.createExpressApp({
 var mailer = require('modules/mailer')({
     env: config.get('env'),
     serviceName: config.get('service.name'),
-    apiKey: config.get('mandrill.api.key'),
-    senderAddress: config.get('mandrill.sender'),
+    senderAddress: config.get('sendgrid.sender'),
     verificationRoute: config.get('email.verification.route')
 });
 

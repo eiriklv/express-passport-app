@@ -6,7 +6,7 @@ exports = module.exports = function(models) {
     return function(req, callback) {
         if (!req.body) return callback(new Error('no request body'));
 
-        var user = req.user;
+        var user = req.user.dataValues;
         var body = req.body;
         var dirty = false;
 
@@ -25,10 +25,11 @@ exports = module.exports = function(models) {
             updatePassword(user, body);
         }
         catch(ex) {
+            console.error(ex);
             return callback(ex, user);
         }
 
-        user.save().then(function() {
+        req.user.save().then(function() {
             return callback(null, user);
         }).catch(function(err) {
             return callback(err, user);
@@ -46,7 +47,7 @@ exports = module.exports = function(models) {
         var passCheck = models.User.validPassword(oldPass, user.password);
         var newPassLength = newPass ? newPass.length : 0;
         var passValid = newPassLength > 5 && newPass === confirmPass;
-
+        console.log(confirmPass, passCheck, passValid);
         if (passCheck && passValid) {
             user.password = models.User.generateHash(newPass);
         } else if (!passCheck) {

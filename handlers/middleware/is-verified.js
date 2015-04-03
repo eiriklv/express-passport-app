@@ -4,7 +4,7 @@ exports = module.exports = function() {
         if (req.isAuthenticated() && !req.user.verified) {
             req.flash('notVerified'); // avoid duplicate message (bug/edge-case)
             req.flash('notVerified', 'You need to verify your email before you can have full use of the account');
-            // return res.redirect('/'); // do redirection here
+            return res.redirect('/'); // do redirection here
         }
         return next();
     };

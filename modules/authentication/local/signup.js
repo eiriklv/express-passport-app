@@ -30,13 +30,13 @@ exports = module.exports = function(User, VerificationToken, mailer) {
 
         function sendVerificationMail(user) {
             var newToken = VerificationToken.build({
-                uid: user.id,
+                uid: user.dataValues.id,
                 token: VerificationToken.generateToken(user.id)
             });
 
             return newToken.save()
                 .then(function() {
-                    if (!err) mailer(user, 'local', 'signup', user.token);
+                    mailer(user.dataValues, 'local', 'signup', newToken.token);
                 })
                 .catch(function(err) {
                     console.error('newToken save error', err);
