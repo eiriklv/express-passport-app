@@ -6,13 +6,13 @@ exports = module.exports = function(models) {
     return function(req, callback) {
         if (!req.body) return callback(new Error('no request body'));
 
-        var user = req.user.dataValues;
+        var user = req.user;
         var body = req.body;
         var dirty = false;
 
         for (var b in body) {
-            if (user[b] !== body[b]) {
-                user[b] = body[b];
+            if (user.dataValues[b] !== body[b]) {
+                user.dataValues[b] = body[b];
                 dirty = true;
             }
         }
@@ -47,7 +47,7 @@ exports = module.exports = function(models) {
         var passCheck = models.User.validPassword(oldPass, user.password);
         var newPassLength = newPass ? newPass.length : 0;
         var passValid = newPassLength > 5 && newPass === confirmPass;
-        console.log(confirmPass, passCheck, passValid);
+
         if (passCheck && passValid) {
             user.password = models.User.generateHash(newPass);
         } else if (!passCheck) {
