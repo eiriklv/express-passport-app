@@ -1,20 +1,19 @@
-// MAGIC!!
-
 exports = module.exports = function(User, mailer) {
-    return function(req, email, done) {
+    return function(req, done) {
         User.find({
                 'where': {
-                    'email': email
+                    'passwordResetToken': req.body.token
                 }
             }).then(function(user) {
-                // generate reset token
-                sendResetMail(user);
+                
+                sendResetMail();
+                done(null, user);
             }).catch(function(err) {
                 return done(err);
             });
 
-        function sendResetMail(user) {
-            mailer(user.dataValues, 'local', 'reset');
+        function sendResetMail() {
+            mailer('local', 'reset');
         }
     };
 };

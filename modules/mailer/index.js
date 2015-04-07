@@ -12,23 +12,31 @@ exports = module.exports = function (options) {
     if (options.env === 'production') {
         sender = options.senderAddress;
 
-        return function(user, provider, action, token, password) {
+        return function(provider, action, user, mailerOptions) {
+            mailerOptions = mailerOptions || {};
+            mailerOptions.verificationRoute = options.verificationRoute;
+            mailerOptions.resetRoute = options.resetRoute;
+
             var email = new sendgrid.Email({
                 from: sender,
                 to: [user.email],
                 subject: templates[provider][action].title(),
-                html: templates[provider][action].message(user, options.verificationRoute, token, password)
+                html: templates[provider][action].message(user, mailerOptions)
             });
 
             sendgrid.send(email, function (err, res) {
                 if (err) return debug(err);
-                if (token) debug('token: ' + token);
+
                 debug('successfully sent email for action: ' + action + ' for provider: ' + provider + ' to user via email: ' + user.email);
             });
         };
     } else {
-        return function(user, provider, action, token, password) {
-            debug(templates[provider][action].message(user, options.verificationRoute, token, password));
+        return function(provider, action, user, mailerOptions) {
+            mailerOptions = mailerOptions || {};
+            mailerOptions.verificationRoute = options.verificationRoute;
+            mailerOptions.resetRoute = options.resetRoute;
+            console.log(mailerOptions);
+            debug(templates[provider][action].message(user, mailerOptions));
         };
     }
 };

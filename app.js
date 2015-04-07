@@ -44,7 +44,8 @@ var mailer = require('modules/mailer')({
     env: config.get('env'),
     serviceName: config.get('service.name'),
     senderAddress: config.get('sendgrid.sender'),
-    verificationRoute: config.get('email.verification.route')
+    verificationRoute: config.get('email.verification.route'),
+    resetRoute: config.get('email.reset.route')
 });
 
 // http and socket.io server(s)

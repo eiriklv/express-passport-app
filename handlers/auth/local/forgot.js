@@ -1,5 +1,5 @@
 exports = module.exports = function() {
     return function(req, res) {
-        res.render('reset');
+        res.render('forgot');
     };
 };

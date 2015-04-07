@@ -19,12 +19,12 @@ exports = module.exports = function(collection, sequelize) {
             type: sequelize.Sequelize.STRING,
             allowNull: false
         },
-        resetPasswordKey: {
+        resetPasswordToken: {
             type: sequelize.Sequelize.STRING,
             allowNull: true,
             unique: true
         },
-        resetPasswordKeyExpires: {
+        resetPasswordTokenExpires: {
             type: sequelize.Sequelize.DATE,
             allowNull: true
         },
@@ -38,6 +38,10 @@ exports = module.exports = function(collection, sequelize) {
 
     User.generateHash = function(password) {
         return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null); // this is syncronous (future: async)
+    };
+
+    User.generateResetToken = function(email) {
+        return bcrypt.hashSync(email, bcrypt.genSaltSync(8), null); // this is syncronous (future: async)
     };
 
     User.validPassword = function(password1, password2) {

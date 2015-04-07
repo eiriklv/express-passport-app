@@ -26,7 +26,7 @@ module.exports.createExpressApp = function(options) {
     options.env = options.env || 'development';
     
     var app = express();
-    console.log(options.dir + options.views);
+
     // set view engine and parsers
     app.set('views', options.dir + options.views);
     app.set('view engine', 'html');

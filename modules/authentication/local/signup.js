@@ -34,7 +34,11 @@ exports = module.exports = function(User, VerificationToken, mailer) {
 
             return newToken.save()
                 .then(function() {
-                    mailer(user.dataValues, 'local', 'signup', newToken.token);
+                    var mailerOptions = {
+                        token: newToken.token,
+                        route: mailer.verificationRoute
+                    };
+                    mailer('local', 'signup', user.dataValues, mailerOptions);
                 })
                 .catch(function(err) {
                     console.error('newToken save error', err);

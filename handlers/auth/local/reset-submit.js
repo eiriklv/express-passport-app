@@ -1,5 +1,13 @@
-exports = module.exports = function(passport) {
+exports = module.exports = function(profile) {
     return function(req, res, next) {
-        res.send(200, "still gotta do dis");
+        profile.reset(req, function (err, user) {
+            if (err) {
+                req.flash('errorMessage', err.message);
+            }
+            else {
+                req.flash('resetMessage', 'Password updated!');
+            }
+            res.redirect('/');
+        });
     };
 };

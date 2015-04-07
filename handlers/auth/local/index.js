@@ -1,10 +1,10 @@
 exports = module.exports = function(services, passport) {
     return {
         reset: require('./reset')(),
-        resetSubmit: require('./reset-submit')(services.reset),
+        resetSubmit: require('./reset-submit')(services.profile),
 
         forgot: require('./forgot')(),
-        forgotSubmit: require('./forgot-submit')(services.forgot),
+        forgotSubmit: require('./forgot-submit')(services.profile),
 
         signup: require('./signup')(),
         signupSubmit: require('./signup-submit')(passport),

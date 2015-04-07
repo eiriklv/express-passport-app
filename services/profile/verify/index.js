@@ -9,6 +9,7 @@ exports = module.exports = function(models) {
             .then(destroyToken)
             .then(verifyUser)
             .then(function (user) {
+                // Shouldn't req.logIn be implemented as a Promise here?
                 req.logIn(user, function(err) {
                     return callback(err);
                 });
@@ -42,6 +43,7 @@ exports = module.exports = function(models) {
                     return res;
                 }).catch(function(err) {
                     console.error("userEntry save Error", err);
+                    throw err;
                 });
             }).catch(function(err) {
                 console.error("verifyUser Error", err);

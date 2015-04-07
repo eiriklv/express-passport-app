@@ -115,6 +115,13 @@ var config = module.exports = convict({
                 default: 'http://localhost:3000/auth/local/verify',
                 env: 'EMAIL_VERIFICATION_ROUTE'
             }
+        },
+        reset: {
+            route: {
+                doc: 'Where to redirect reset tokens',
+                default: 'http://localhost:3000/auth/local/reset',
+                env: 'EMAIL_RESET_ROUTE'
+            }
         }
     },
     facebook: {
