@@ -16,7 +16,7 @@ exports = module.exports = function(profile) {
                     return res.status(500).send(err);
                 }
                 else {
-                    res.status(200).send(user);  
+                    res.status(200).send(user.dataValues);  
                 }
             }
         });

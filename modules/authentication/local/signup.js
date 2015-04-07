@@ -10,6 +10,7 @@ exports = module.exports = function(User, VerificationToken, mailer) {
             }).then(function(user) {
                 if (user) return done(null, false, req.flash('signupMessage', 'This email is already in use.'));
                 if (!req.body.fullname) return done(null, false, req.flash('signupMessage', 'Please provide your full name.'));
+                if (password.length < 6) return done(null, false, req.flash('signupMessage', 'Password must be at least 6 characters.'));
 
                 var newUser = User.build({
                     email: email,
