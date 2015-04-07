@@ -1,7 +1,3 @@
-var debug = require('debug')('express-passport-app:service:profile:update');
-var async = require('async');
-var formatName = require('helpers').common.formatName;
-
 exports = module.exports = function(models) {
     return function(req, callback) {
         if (!req.body) return callback(new Error('no request body'));

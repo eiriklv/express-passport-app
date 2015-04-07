@@ -1,6 +1,3 @@
-var async = require('async');
-var util = require('util');
-
 exports = module.exports = function(User, VerificationToken, mailer) {
     return function(req, email, password, done) {
         User.find({

@@ -1,11 +1,21 @@
 exports = module.exports = function(services, passport) {
     return {
-        login: require('./login')(),
-        loginSubmit: require('./login-submit')(passport),
-        logout: require('./logout')(),
+        reset: require('./reset')(),
+        resetSubmit: require('./reset-submit')(services.reset),
+
+        forgot: require('./forgot')(),
+        forgotSubmit: require('./forgot-submit')(services.forgot),
+
         signup: require('./signup')(),
         signupSubmit: require('./signup-submit')(passport),
+
+        login: require('./login')(),
+        loginSubmit: require('./login-submit')(passport),
+
+        logout: require('./logout')(),
+        
         unlink: require('./unlink')(),
+        
         verify: require('./verify')(services.profile)
     };
 };

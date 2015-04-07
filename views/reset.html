@@ -1,0 +1,18 @@
+<html>
+  <head></head>
+  <body>
+    <% if (messages) { %>
+      <% for (var message in messages) { %>
+        <p><%= messages[message] %></p>    
+      <% } %>
+    <% } %>
+    <form action="/auth/local/reset" method="post">
+      New Password:<br>
+      <input type="password" name="new_password"><br>
+      Confirm New Password:<br>
+      <input type="password" name="confirm_new_password"><br>
+      <button type="submit">Submit</button>
+    </form>
+    <a href="/">Home</a>
+  </body>
+</html>

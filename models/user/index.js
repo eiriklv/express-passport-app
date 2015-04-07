@@ -19,12 +19,13 @@ exports = module.exports = function(collection, sequelize) {
             type: sequelize.Sequelize.STRING,
             allowNull: false
         },
-        activationKey: {
-            type: sequelize.Sequelize.STRING,
-            allowNull: true
-        },
         resetPasswordKey: {
             type: sequelize.Sequelize.STRING,
+            allowNull: true,
+            unique: true
+        },
+        resetPasswordKeyExpires: {
+            type: sequelize.Sequelize.DATE,
             allowNull: true
         },
         verified: {

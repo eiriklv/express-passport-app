@@ -54,7 +54,7 @@ var io = socketio.attach(server);
 // app dependencies (app specific)
 var ipc = require('modules/ipc')(0);
 var models = require('./models')(sequelize);
-var services = require('./services')(models);
+var services = require('./services')(models, mailer);
 var handlers = require('./handlers')(passport, services);
 var authentication = require('modules/authentication')(models, mailer);
 
