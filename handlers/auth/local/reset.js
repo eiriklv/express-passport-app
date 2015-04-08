@@ -1,5 +1,10 @@
 exports = module.exports = function() {
     return function(req, res) {
-        res.render('reset');
+        if (req.query.token) {
+            res.render('reset', {token: req.query.token});
+        }
+        else {
+            res.send(404);
+        }
     };
 };

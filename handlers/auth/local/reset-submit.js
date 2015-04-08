@@ -7,7 +7,7 @@ exports = module.exports = function(profile) {
             else {
                 req.flash('resetMessage', 'Password updated!');
             }
-            res.redirect('/');
+            res.redirect('/auth/local/login');
         });
     };
 };

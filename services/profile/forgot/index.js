@@ -14,9 +14,13 @@ exports = module.exports = function(User, mailer) {
 
                 user.resetPasswordToken = User.generateResetToken(user.dataValues.email);
                 user.resetPasswordTokenExpires = new Date(now.getTime() + (minutes * 60000));
-                
-                sendForgotMail(user);
-                done(null, user);
+
+                return user.save().then(function() {
+                    sendForgotMail(user);
+                    return done(null, user);
+                }).catch(function(err) {
+                    return done(err, user);
+                });
             }).catch(function(err) {
                 return done(err);
             });
