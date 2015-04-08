@@ -35,7 +35,7 @@ exports = module.exports = function (options) {
             mailerOptions = mailerOptions || {};
             mailerOptions.verificationRoute = options.verificationRoute;
             mailerOptions.resetRoute = options.resetRoute;
-            console.log(mailerOptions);
+
             debug(templates[provider][action].message(user, mailerOptions));
         };
     }

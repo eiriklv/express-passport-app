@@ -41,6 +41,7 @@
     "method-override": "2.2.x",
     "mocha": "1.21.x",
     "mocha-lcov-reporter": "0.0.x",
+    "moment": "^2.10.0",
     "morgan": "1.2.x",
     "nib": "1.0.x",
     "passport": "0.2.1",

@@ -1,3 +1,5 @@
+var moment = require('moment');
+
 exports = module.exports = function(User, mailer) {
     return function(req, done) {
         if (!req.body.new_password) return done(new Error("New password required."));
@@ -9,21 +11,25 @@ exports = module.exports = function(User, mailer) {
                 }
             }).then(function(user) {
                 if (!user) throw new Error("User not found.");
-
-                try {
+                
+                var minutesTokenStillValid = moment(user.resetPasswordTokenExpires).diff(moment(), 'minutes');
+                console.log(minutesTokenStillValid, 'minutesTokenStillValid');
+                if (minutesTokenStillValid > 0) {
                     updatePassword(user, req.body);
-                }
-                catch(ex) {
-                    console.error(ex);
-                    return done(ex, user);
-                }
 
-                return user.save().then(function() {
-                    sendResetMail();
-                    return done(null, user);
-                }).catch(function(err) {
-                    return done(err, user);
-                });
+                    user.resetPasswordToken = null;
+                    user.resetPasswordTokenExpires = null;
+
+                    return user.save().then(function() {
+                        sendResetMail();
+                        return done(null, user);
+                    }).catch(function(err) {
+                        return done(err, user);
+                    });
+                }
+                else {
+                    throw new Error("Password reset token has expired. Please try again.");
+                }
             }).catch(function(err) {
                 console.error(err);
                 return done(err);

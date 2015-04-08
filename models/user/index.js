@@ -40,8 +40,8 @@ exports = module.exports = function(collection, sequelize) {
         return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null); // this is syncronous (future: async)
     };
 
-    User.generateResetToken = function(email) {
-        return bcrypt.hashSync(email, bcrypt.genSaltSync(8), null); // this is syncronous (future: async)
+    User.generateResetToken = function() {
+        return bcrypt.hashSync(makeid(), bcrypt.genSaltSync(8), null); // this is syncronous (future: async)
     };
 
     User.validPassword = function(password1, password2) {
@@ -50,3 +50,13 @@ exports = module.exports = function(collection, sequelize) {
 
     return User;
 };
+
+function makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 5; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
