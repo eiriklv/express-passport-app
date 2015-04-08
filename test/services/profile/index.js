@@ -3,7 +3,8 @@ var expect = require('chai').expect;
 
 exports = module.exports = function (profile, models) {
     // test
-    describe('Profile', function(){
+    describe('Profile', function() {
+        var token;
         var all = {
             'truncate': true
         };
@@ -258,6 +259,97 @@ exports = module.exports = function (profile, models) {
                 profile.update(req, function (err, updatedUser) {
                     expect(err).to.be.null;
                     expect(models.User.validPassword(req.body.new_password, updatedUser.password)).to.equal(true);
+                    done();
+                });
+            });
+        });
+
+        describe('#forgot()', function() {
+            it('should return an error if email address is missing from body', function(done) {
+                var req = {
+                    body: {}
+                };
+
+                profile.forgot(req, function (err, user) {
+                    expect(err).to.not.be.null;
+                    done();
+                });
+            });
+
+            it('should return a user with a reset token', function(done) {
+                var req = {
+                    body: {
+                        email: 'john@doe.com'
+                    }
+                };
+
+                profile.forgot(req, function (err, user) {
+                    expect(err).to.be.null;
+
+                    expect(user.dataValues.resetPasswordToken).to.not.be.null;
+                    expect(user.dataValues.resetPasswordTokenExpires).to.not.be.null;
+                    token = user.dataValues.resetPasswordToken;
+                    done();
+                });
+            });
+        });
+
+        describe('#reset()', function() {
+            it('should return an error if new_password is missing from body', function(done) {
+                var req = {
+                    body: {
+                        new_password_confirm: "aNewPassword"
+                    }
+                };
+
+                profile.reset(req, function (err, user) {
+                    expect(err).to.not.be.null;
+                    done();
+                });
+            });
+
+            it('should return an error if confirm_new_password is missing from body', function(done) {
+                var req = {
+                    body: {
+                        new_password: "aNewPassword"
+                    }
+                };
+
+                profile.reset(req, function (err, user) {
+                    expect(err).to.not.be.null;
+                    done();
+                });
+            });
+
+            it('should return an error if token is missing from body', function(done) {
+                var req = {
+                    body: {
+                        new_password: "aNewPassword",
+                        new_password_confirm: "aNewPassword"
+                    }
+                };
+
+                profile.reset(req, function (err, user) {
+                    expect(err).to.not.be.null;
+                    done();
+                });
+            });
+
+            it('should return a user with a null reset token', function(done) {
+                var req = {
+                    body: {
+                        new_password: "aNewPassword",
+                        new_password_confirm: "aNewPassword",
+                        token: token
+                    }
+                };
+
+                profile.reset(req, function (err, user) {
+                    expect(err).to.be.null;
+
+                    expect(user.dataValues.resetPasswordToken).to.be.null;
+                    expect(user.dataValues.resetPasswordTokenExpires).to.be.null;
+                    
                     done();
                 });
             });

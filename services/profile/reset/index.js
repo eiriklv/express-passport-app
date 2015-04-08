@@ -4,6 +4,7 @@ exports = module.exports = function(User, mailer) {
     return function(req, done) {
         if (!req.body.new_password) return done(new Error("New password required."));
         if (!req.body.new_password_confirm) return done(new Error("New password confirmation required."));
+        if (!req.body.token) return done(new Error("Token required."));
 
         User.find({
                 'where': {
@@ -13,7 +14,7 @@ exports = module.exports = function(User, mailer) {
                 if (!user) throw new Error("User not found.");
                 
                 var minutesTokenStillValid = moment(user.resetPasswordTokenExpires).diff(moment(), 'minutes');
-                console.log(minutesTokenStillValid, 'minutesTokenStillValid');
+
                 if (minutesTokenStillValid > 0) {
                     updatePassword(user, req.body);
 

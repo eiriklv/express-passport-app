@@ -1,7 +1,7 @@
 var debug = require('debug')('express-passport-app:mailer');
 var Templates = require('./templates');
 var mandrillEmail = require('mandrill-send');
-console.log(process.env.SENDGRID_API_KEY, process.env.SENDGRID_USER);
+
 var sendgrid = require('sendgrid')(process.env.SENDGRID_USER, process.env.SENDGRID_API_KEY);
 
 exports = module.exports = function (options) {
