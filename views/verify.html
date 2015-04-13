@@ -1,0 +1,18 @@
+<html>
+  <head></head>
+  <body>
+    <% if (messages) { %>
+      <% for (var message in messages) { %>
+        <p><%= messages[message] %></p>    
+      <% } %>
+    <% } %>
+    <form action="/auth/local/verify" method="get">
+      <div>
+        <label>Token</label>
+        <input type="text" name="token">
+      </div>
+      <button type="submit">Verify</button>
+    </form>
+    <a href="/">Home</a>
+  </body>
+</html>

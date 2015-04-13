@@ -1,9 +1,15 @@
 exports = module.exports = function() {
     return function(req, res, next) {
         var user = req.user;
-        req.flash('deleteMessage', 'Your account was deleted.');
-        user.remove();
-        req.logout();
-        res.redirect('/');
+        user.destroy()
+          .then(function (argument) {
+            req.logout();
+            req.flash('deleteMessage', 'Your account was deleted.');
+            res.redirect('/');
+          })
+          .catch(function (err) {
+            req.flash('deleteMessage', 'Error deleting account.');
+            res.redirect('/');
+          });
     };
 };

@@ -10,7 +10,6 @@ var express = require('express');
 var morgan = require('morgan');
 var compress = require('compression');
 var bodyParser = require('body-parser');
-var favicon = require('serve-favicon');
 var methodOverride = require('method-override');
 var errorHandler = require('errorhandler');
 var flash = require('express-flash');
@@ -23,9 +22,6 @@ module.exports.createExpressApp = function(options) {
     if (!options.session) throw (new Error('missing session middleware'));
     if (!options.store) throw (new Error('missing session store'));
     if (!options.dir) throw (new Error('missing root dir'));
-    if (!options.static) throw (new Error('missing static dir reference'));
-    if (!options.favicon) throw (new Error('missing favicon reference'));
-    if (!options.views) throw (new Error('missing viewdir reference'));
 
     options.env = options.env || 'development';
     
@@ -34,12 +30,12 @@ module.exports.createExpressApp = function(options) {
     // set view engine and parsers
     app.set('views', options.dir + options.views);
     app.set('view engine', 'html');
-    app.engine('.html', options.handlebars.__express);
+    app.engine('html', require('ejs').renderFile);
     app.set('json spaces', 2);
 
     // express common config
     app.use(compress());
-    app.use(express.static(options.dir + options.static));
+    // app.use(express.static(options.dir + options.static));
     app.use(morgan('dev'));
     app.use(options.cookieParser());
     app.use(bodyParser.urlencoded({
@@ -67,8 +63,6 @@ module.exports.createExpressApp = function(options) {
         next();
     });
 
-    app.use(favicon(options.dir + options.favicon));
-
     // express dev config
     if ('development' == options.env) {
         app.use(errorHandler());
@@ -85,9 +79,6 @@ module.exports.handleExpressError = function(app) {
 
         // respond with html page
         if (req.accepts('html')) {
-            res.render('404', {
-                url: req.url
-            });
             return;
         }
 
@@ -107,22 +98,6 @@ module.exports.handleExpressError = function(app) {
     app.use(function(err, req, res, next) {
         console.error(err.stack);
         res.status(500).send('Something broke!');
-    });
-};
-
-// register handlebars partials
-module.exports.registerPartials = function(path, handlebars) {
-    var partials = path;
-    fs.readdirSync(partials).forEach(function(folder) {
-        var extension = folder.split('.')[1];
-        if (extension != undefined) return;
-        fs.readdirSync(partials + folder).forEach(function(file) {
-            var extension = file.split('.')[1];
-            if (extension != 'html') return;
-            var source = fs.readFileSync(partials + folder + '/' + file, "utf8");
-            var partial = folder + '-' + file.split('.')[0];
-            handlebars.registerPartial(partial, source);
-        });
     });
 };
 
@@ -170,48 +145,7 @@ module.exports.sessions = function(options) {
 
 // connect to backend store (db)
 module.exports.connectToDatabase = function(mongoose, urlString) {
-    function connect() {
-        mongoose.connect(urlString);
-    }
-
-    // connection is open and ready
-    mongoose.connection.on('open', function(ref) {
-        debug('open connection to mongo server.');
-    });
-
-    // mongoose is connected to server
-    mongoose.connection.on('connected', function(ref) {
-        debug('connected to mongo server.');
-    });
-
-    // mongoose has disconnected
-    mongoose.connection.on('disconnected', function(ref) {
-        debug('disconnected from mongo server.');
-
-        debug('retrying connection in 2 seconds..');
-        setTimeout(function() {
-            connect();
-        }.bind(this), 2000);
-    });
-
-    // mongoose connection has closed
-    mongoose.connection.on('close', function(ref) {
-        debug('closed connection to mongo server');
-    });
-
-    // error has occured for mongoose connection
-    mongoose.connection.on('error', function(err) {
-        debug('error connection to mongo server!');
-        debug(err);
-    });
-
-    // mongoose is reconnecting
-    mongoose.connection.on('reconnect', function(ref) {
-        debug('reconnect to mongo server.');
-    });
-
-    // initial connect
-    connect();
+    
 };
 
 // run application

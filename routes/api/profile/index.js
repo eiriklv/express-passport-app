@@ -6,7 +6,7 @@ exports = module.exports = function(express, middleware, handlers, path) {
 
     router.route(path)
         .get(handlers.profile.get)
-        .put(handlers.profile.update);
+        .post(handlers.profile.update);
 
     return router;
 };

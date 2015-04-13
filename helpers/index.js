@@ -1,6 +1,4 @@
 exports = module.exports = {
     validators: require('./validators'),
-    common: require('./common'),
-    handlebars: require('./handlebars'),
-    react: require('./react')
+    common: require('./common')
 };

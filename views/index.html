@@ -1,0 +1,21 @@
+<html>
+  <head></head>
+  <body>
+    <% if (messages) { %>
+      <% for (var message in messages) { %>
+        <p><%= messages[message] %></p>    
+      <% } %>
+    <% } %>
+    <h3>Home</h3>
+    <% if (user) { %>
+      <% for (var prop in user) { %>
+        <p><%= prop %>: <%= user[prop] %></p>
+      <% } %>
+    <% } %>
+    <a href="/auth/local/login">Login</a>
+    <a href="/api/profile">Change Password</a>
+    <a href="/auth/local/forgot">Forgot Password</a>
+    <a href="/auth/local/signup">Sign Up</a>
+    <a href="/auth/local/logout">Log Out</a>
+  </body>
+</html>

@@ -1,27 +1,26 @@
-<!doctype html>
 <html>
-<head>
-    {{> common-title }}
-
-    <!-- stylesheets -->
-    {{> common-essential-stylesheets }}
-
-    <!-- custom body style -->
-    <style>
-        body { padding-top:80px; }
-    </style>
-
-</head>
-<body>
-
-    <!-- session flash messages -->
-    {{> common-flash-messages }}
-
-    <!-- signup content -->
-    {{> signup-content }}
-
-    <!-- essential scripts -->
-    {{> common-essential-scripts }}
-
-</body>
+  <head></head>
+  <body>
+    <% if (messages) { %>
+      <% for (var message in messages) { %>
+        <p><%= messages[message] %></p>    
+      <% } %>
+    <% } %>
+    <form action="/auth/local/signup" method="post">
+      <div>
+        <label>Email</label>
+        <input type="text" name="email">
+      </div>
+      <div>
+        <label>Full name</label>
+        <input type="text" name="fullname">
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password" name="password">
+      </div>
+      <button type="submit">Signup</button>
+    </form>
+    <a href="/">Home</a>
+  </body>
 </html>

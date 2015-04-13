@@ -2,30 +2,41 @@ var debug = require('debug')('express-passport-app:mailer');
 var Templates = require('./templates');
 var mandrillEmail = require('mandrill-send');
 
-exports = module.exports = function(options) {
+var sendgrid = require('sendgrid')(process.env.SENDGRID_USER, process.env.SENDGRID_API_KEY);
+
+exports = module.exports = function (options) {
     var templates = Templates(options.serviceName);
-    var email, sender, title, verificationRoute;
+
+    var sender;
 
     if (options.env === 'production') {
-        email = mandrillEmail(options.apiKey);
         sender = options.senderAddress;
-        verificationRoute = options.verificationRoute;
 
-        return function(user, provider, action, token, password) {
-            email({
+        return function(provider, action, user, mailerOptions) {
+            mailerOptions = mailerOptions || {};
+            mailerOptions.verificationRoute = options.verificationRoute;
+            mailerOptions.resetRoute = options.resetRoute;
+
+            var email = new sendgrid.Email({
                 from: sender,
                 to: [user.email],
                 subject: templates[provider][action].title(),
-                html: templates[provider][action].message(user, verificationRoute, token, password)
-            }, function(err) {
+                html: templates[provider][action].message(user, mailerOptions)
+            });
+
+            sendgrid.send(email, function (err, res) {
                 if (err) return debug(err);
-                if (token) debug('token: ' + token);
+
                 debug('successfully sent email for action: ' + action + ' for provider: ' + provider + ' to user via email: ' + user.email);
             });
         };
     } else {
-        return function(user, provider, action, token, password) {
-            debug(templates[provider][action].message(user, verificationRoute, token, password));
+        return function(provider, action, user, mailerOptions) {
+            mailerOptions = mailerOptions || {};
+            mailerOptions.verificationRoute = options.verificationRoute;
+            mailerOptions.resetRoute = options.resetRoute;
+
+            debug(templates[provider][action].message(user, mailerOptions));
         };
     }
 };
