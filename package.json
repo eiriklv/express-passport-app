@@ -53,6 +53,7 @@
     "pg-hstore": "^2.3.1",
     "pretty-hrtime": "0.2.x",
     "request": "2.45.x",
+    "request-promise": "^0.4.2",
     "sendgrid": "^1.6.0",
     "sequelize": "^2.0.4",
     "serve-favicon": "2.1.x",
@@ -70,13 +71,13 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git://github.com/eiriklv/express-passport-app"
+    "url": "git://github.com/flightstats/express-passport-app"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha recursive -R spec",
+    "test": "node_modules/.bin/mocha recursive -R spec --verbose",
     "develop": "sh dev.sh",
     "start": "sh start.sh"
   },
-  "author": "Eirik Vullum <eirik@evconsult.no> (http://www.evconsult.no/)",
+  "author": "Thomas Burke",
   "license": "MIT"
 }

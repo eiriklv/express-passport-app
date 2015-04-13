@@ -44,7 +44,7 @@ exports = module.exports = function (profile, models) {
                 });
 
                 // set password
-                user.password = models.User.generateHash('1234');
+                user.password = models.User.generateHash('123456');
 
                 // save user
                 user.save().then(function () {

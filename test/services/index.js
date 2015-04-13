@@ -18,5 +18,6 @@ var resource = require('../../services/resource')(models);
 // tests
 describe('Services', function(){
     require('./profile')(profile, models);
+    require('./auth')();
     require('./resource')(resource, models);
 });

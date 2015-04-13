@@ -42,7 +42,7 @@ var config = module.exports = convict({
         port: {
             doc: 'The server port to bind.',
             format: 'port',
-            default: 0,
+            default: 3000,
             env: 'PORT'
         },
         secret: {

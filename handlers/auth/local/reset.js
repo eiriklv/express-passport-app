@@ -4,7 +4,7 @@ exports = module.exports = function() {
             res.render('reset', {token: req.query.token});
         }
         else {
-            res.send(404);
+            res.status(404).end();
         }
     };
 };

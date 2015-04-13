@@ -3,11 +3,12 @@ exports = module.exports = function(profile) {
         profile.reset(req, function (err, user) {
             if (err) {
                 req.flash('errorMessage', err.message);
+                res.redirect('/auth/local/reset');
             }
             else {
                 req.flash('resetMessage', 'Password updated!');
+                res.redirect('/auth/local/login');
             }
-            res.redirect('/auth/local/login');
         });
     };
 };

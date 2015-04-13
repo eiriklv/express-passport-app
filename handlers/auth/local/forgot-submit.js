@@ -6,7 +6,12 @@ exports = module.exports = function(profile) {
             }
             else {
                 req.flash('forgotMessage', 'Please check your email for further directions.');
+
+                if (process.env.NODE_ENV === 'development') {
+                    process.user = user.dataValues;
+                }
             }
+
             res.redirect('/');
         });
     };
