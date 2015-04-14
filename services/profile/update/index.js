@@ -3,26 +3,25 @@ exports = module.exports = function(models) {
         if (!req.body) return callback(new Error('no request body'));
 
         var user = req.user;
+        var profile = user.dataValues.profile || {};
         var body = req.body;
+        var bodyProfile = body.profile;
         var dirty = false;
 
         for (var b in body) {
-            if (user.dataValues[b] !== body[b]) {
-                user.dataValues[b] = body[b];
+            if (profile[b] !== bodyProfile[b]) {
+                profile[b] = bodyProfile[b];
                 dirty = true;
             }
         }
 
-        if (!dirty) {
-            return callback(null, user);
+        if (body.email !== user.email) {
+            user.email = body.email;
+            dirty = true;
         }
 
-        try {
-            updatePassword(user, body);
-        }
-        catch(ex) {
-            console.error(ex);
-            return callback(ex, user);
+        if (!dirty) {
+            return callback(null, user);
         }
 
         req.user.save().then(function() {
@@ -31,25 +30,4 @@ exports = module.exports = function(models) {
             return callback(err, user);
         });
     };
-
-    function updatePassword(user, body) {
-        if (!body.new_password) throw new Error('passwords did not match, or was shorter than 6 characters! try again');
-        if (!body.old_password) throw new Error('old password undefined');
-        if (body.old_password.length === 0) throw new Error('old password zero length');
-
-        var oldPass = body.old_password;
-        var newPass = body.new_password;
-        var confirmPass = body.new_password_confirm;
-        var passCheck = models.User.validPassword(oldPass, user.password);
-        var newPassLength = newPass ? newPass.length : 0;
-        var passValid = newPassLength > 5 && newPass === confirmPass;
-
-        if (passCheck && passValid) {
-            user.password = models.User.generateHash(newPass);
-        } else if (!passCheck) {
-            throw new Error('password not valid');
-        } else {
-            throw new Error('passwords did not match, or was shorter than 6 characters! try again');
-        }
-    }
 };

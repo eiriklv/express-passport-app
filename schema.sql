@@ -42,7 +42,8 @@ CREATE TABLE users (
     verified boolean DEFAULT false,
     "createdAt" timestamp with time zone NOT NULL,
     "updatedAt" timestamp with time zone NOT NULL,
-    "resetPasswordTokenExpires" timestamp with time zone
+    "resetPasswordTokenExpires" timestamp with time zone,
+    profile jsonb
 );
 
 
@@ -127,4 +128,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-
