@@ -354,5 +354,41 @@ exports = module.exports = function (profile, models) {
                 });
             });
         });
+
+        describe('#update()', function() {
+            var user;
+
+            before(function (done) {
+                models.User.find({
+                    'where': {
+                        'email': 'john@doe.com'
+                    }
+                }).then(function(modelUser) {
+                    user = modelUser;
+                    done();
+                }).catch(function(err) {
+                    return done(err);
+                });
+            });
+
+            it('should successfully update the profile', function(done) {
+                var req = {
+                    user: user,
+                    body: {
+                        profile: {
+                            param1: 'value1',
+                            param2: 2
+                        }
+                    }
+                };
+
+                profile.update(req, function (err, user) {
+                    expect(err).to.not.be.null;
+                    expect(user.dataValues.profile.param1).to.eq('value1');
+                    expect(user.dataValues.profile.param2).to.eq(2);
+                    done();
+                });
+            });
+        });
     });
 };
