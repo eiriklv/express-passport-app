@@ -6,12 +6,16 @@ exports = module.exports = function(User, VerificationToken, mailer) {
                 }
             }).then(function(user) {
                 if (user) return done(null, false, req.flash('signupMessage', 'This email is already in use.'));
-                if (password.length < 6) return done(null, false, req.flash('signupMessage', 'Password must be at least 6 characters.'));
+                if (!email) return done(null, false, req.flash('signupMessage', 'Email address is required.'));
 
-                var newUser = User.build({
-                    email: email,
-                    password: User.generateHash(password)
-                });
+                newUserData = {
+                    email: email
+                };
+
+                if (password) newUserData.password = User.generateHash(password);
+                if (req.body && req.body.profile) newUserData.profile = req.body.profile;
+
+                var newUser = User.build(newUserData);
 
                 return newUser.save()
                     .then(sendVerificationMail)

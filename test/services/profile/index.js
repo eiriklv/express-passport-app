@@ -120,7 +120,7 @@ exports = module.exports = function (profile, models) {
             });
         });
 
-        describe('#update()', function () {
+        describe('#changePassword()', function () {
             var user;
 
             before(function (done) {
@@ -144,7 +144,7 @@ exports = module.exports = function (profile, models) {
             it('should return an error when no request body is supplied', function (done) {
                 var req = {};
 
-                profile.update(req, function (err, user) {
+                profile.changePassword(req, function (err, user) {
                     expect(err.message).to.equal('no request body');
                     done();
                 });
@@ -158,7 +158,7 @@ exports = module.exports = function (profile, models) {
                     }
                 };
 
-                profile.update(req, function (err, updatedUser) {
+                profile.changePassword(req, function (err, updatedUser) {
                     expect(err).to.be.null;
                     expect(updatedUser.get()).to.equal(user.get());
                     done();
@@ -175,7 +175,7 @@ exports = module.exports = function (profile, models) {
                     }
                 };
 
-                profile.update(req, function (err, updatedUser) {
+                profile.changePassword(req, function (err, updatedUser) {
                     expect(updatedUser.email).to.equal(updatedEmail);
                     done();
                 });
@@ -190,7 +190,7 @@ exports = module.exports = function (profile, models) {
                     }
                 };
 
-                profile.update(req, function (err, updatedUser) {
+                profile.changePassword(req, function (err, updatedUser) {
                     expect(err.message).to.equal('password not valid');
                     expect(updatedUser.get()).to.equal(user.get());
                     done();
@@ -206,7 +206,7 @@ exports = module.exports = function (profile, models) {
                     }
                 };
 
-                profile.update(req, function (err, updatedUser) {
+                profile.changePassword(req, function (err, updatedUser) {
                     expect(err.message).to.equal('passwords did not match, or was shorter than 6 characters! try again');
                     expect(updatedUser.get()).to.equal(user.get());
                     done();
@@ -222,7 +222,7 @@ exports = module.exports = function (profile, models) {
                     }
                 };
 
-                profile.update(req, function (err, updatedUser) {
+                profile.changePassword(req, function (err, updatedUser) {
                     expect(err.message).to.equal('passwords did not match, or was shorter than 6 characters! try again');
                     expect(updatedUser.get()).to.equal(user.get());
                     done();
@@ -239,7 +239,7 @@ exports = module.exports = function (profile, models) {
                     }
                 };
 
-                profile.update(req, function (err, updatedUser) {
+                profile.changePassword(req, function (err, updatedUser) {
                     expect(err.message).to.equal('passwords did not match, or was shorter than 6 characters! try again');
                     expect(updatedUser.get()).to.equal(user.get());
                     done();
@@ -256,7 +256,7 @@ exports = module.exports = function (profile, models) {
                     }
                 };
 
-                profile.update(req, function (err, updatedUser) {
+                profile.changePassword(req, function (err, updatedUser) {
                     expect(err).to.be.null;
                     expect(models.User.validPassword(req.body.new_password, updatedUser.password)).to.equal(true);
                     done();
@@ -350,6 +350,42 @@ exports = module.exports = function (profile, models) {
                     expect(user.dataValues.resetPasswordToken).to.be.null;
                     expect(user.dataValues.resetPasswordTokenExpires).to.be.null;
                     
+                    done();
+                });
+            });
+        });
+
+        describe('#update()', function() {
+            var user;
+
+            before(function (done) {
+                models.User.find({
+                    'where': {
+                        'email': 'john@doe.com'
+                    }
+                }).then(function(modelUser) {
+                    user = modelUser;
+                    done();
+                }).catch(function(err) {
+                    return done(err);
+                });
+            });
+
+            it('should successfully update the profile', function(done) {
+                var req = {
+                    user: user,
+                    body: {
+                        profile: {
+                            param1: 'value1',
+                            param2: 2
+                        }
+                    }
+                };
+
+                profile.update(req, function (err, user) {
+                    expect(err).to.not.be.null;
+                    expect(user.dataValues.profile.param1).to.eq('value1');
+                    expect(user.dataValues.profile.param2).to.eq(2);
                     done();
                 });
             });

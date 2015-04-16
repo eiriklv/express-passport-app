@@ -3,6 +3,7 @@ exports = module.exports = function(models, mailer) {
         forgot: require('./forgot')(models.User, mailer),
         reset: require('./reset')(models.User, mailer),
         update: require('./update')(models),
+        changePassword: require('./change-password')(models),
         verify: require('./verify')(models)
     };
 };

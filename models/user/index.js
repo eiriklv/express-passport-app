@@ -31,6 +31,9 @@ exports = module.exports = function(collection, sequelize) {
         verified: {
             type: sequelize.Sequelize.BOOLEAN,
             defaultValue: false
+        },
+        profile: {
+            type: sequelize.Sequelize.JSONB
         }
     };
 
