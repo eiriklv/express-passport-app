@@ -42,7 +42,8 @@ exports = module.exports = function(User, VerificationToken, mailer) {
                         route: mailer.verificationRoute
                     };
 
-                    if (process.env.NODE_ENV === 'test') {
+                    // Don't freak out, this is only for testing
+                    if (process.env.NODE_ENV === 'development') {
                         process.token = newToken.token;
                     }
 

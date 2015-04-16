@@ -2,13 +2,18 @@ exports = module.exports = function(profile) {
     return function(req, res, next) {
 
         profile.forgot(req, function (err, user) {
+            // Don't freak out, this is only for testing
+            if (process.env.NODE_ENV === 'development') {
+                process.user = user.dataValues;
+            }
+            
             if (req.accepts('json')) {
                 // treat as an API request
                 if (err) {
-                    res.send(400, { error: err });
+                    res.status(400).send({ error: err });
                 }
                 else {
-                    res.send(200, { token: user.resetPasswordToken });
+                    res.status(200).send({ token: user.resetPasswordToken });
                 }
             }
             else {
@@ -17,10 +22,6 @@ exports = module.exports = function(profile) {
                 }
                 else {
                     req.flash('forgotMessage', 'Please check your email for further directions.');
-
-                    if (process.env.NODE_ENV === 'development') {
-                        process.user = user.dataValues;
-                    }
                 }
 
                 res.redirect('/');

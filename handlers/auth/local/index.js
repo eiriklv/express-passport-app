@@ -14,7 +14,7 @@ exports = module.exports = function(services, passport) {
 
         logout: require('./logout')(),
         
-        unlink: require('./unlink')(),
+        unlink: require('./unlink')(services.profile),
         
         verify: require('./verify')(services.profile)
     };

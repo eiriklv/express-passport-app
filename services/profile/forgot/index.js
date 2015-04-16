@@ -9,7 +9,7 @@ exports = module.exports = function(User, mailer) {
                     'email': req.body.email
                 }
             }).then(function(user) {
-                if (!user) return done(new Error("Could not find user with email: " + req.body.email));
+                if (!user) return done(new Error("User not found."));
 
                 var now = moment();
 
