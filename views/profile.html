@@ -1,0 +1,29 @@
+<html>
+  <head></head>
+  <body>
+    <% if (messages) { %>
+      <% for (var message in messages) { %>
+        <p><%= messages[message] %></p>    
+      <% } %>
+    <% } %>
+    <form action="/api/profile" method="post">
+      <div>
+        <label>Email: <%= user.email %></label>
+      </div>
+      <div>
+        <label>Old Password</label>
+        <input type="password" name="old_password">
+      </div>
+      <div>
+        <label>New Password</label>
+        <input type="password" name="new_password">
+      </div>
+      <div>
+        <label>Confirm New Password</label>
+        <input type="password" name="new_password_confirm">
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    <a href="/">Home</a>
+  </body>
+</html>

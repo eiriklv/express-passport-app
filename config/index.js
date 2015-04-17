@@ -42,7 +42,7 @@ var config = module.exports = convict({
         port: {
             doc: 'The server port to bind.',
             format: 'port',
-            default: 0,
+            default: 3000,
             env: 'PORT'
         },
         secret: {
@@ -69,13 +69,6 @@ var config = module.exports = convict({
         }
     },
     database: {
-        mongo: {
-            url: {
-                doc: 'MongoDB url to connect to (including db reference)',
-                default: 'mongodb://localhost/express-passport-app',
-                env: 'MONGO_URL'
-            }
-        },
         redis: {
             url: {
                 doc: 'Redis url to connect to (including auth string)',
@@ -96,18 +89,23 @@ var config = module.exports = convict({
             }
         }
     },
-    mandrill: {
+    sendgrid: {
         api: {
             key: {
-                doc: 'Mandrill API key',
+                doc: 'sendgrid API key',
                 default: '0000000000',
-                env: 'MANDRILL_API_KEY'
+                env: 'SENDGRID_API_KEY'
+            },
+            user: {
+                doc: 'sendgrid user',
+                default: 'abcdefghijk',
+                env: 'SENDGRID_USER'
             }
         },
         sender: {
             doc: 'The "from" field for the verification emails',
-            default: 'Some User <someuser@company.com>',
-            env: 'MANDRILL_SENDER'
+            default: 'someuser@company.com',
+            env: 'SENDGRID_SENDER'
         }
     },
     email: {
@@ -116,6 +114,13 @@ var config = module.exports = convict({
                 doc: 'Where to redirect verification tokens',
                 default: 'http://localhost:3000/auth/local/verify',
                 env: 'EMAIL_VERIFICATION_ROUTE'
+            }
+        },
+        reset: {
+            route: {
+                doc: 'Where to redirect reset tokens',
+                default: 'http://localhost:3000/auth/local/reset',
+                env: 'EMAIL_RESET_ROUTE'
             }
         }
     },

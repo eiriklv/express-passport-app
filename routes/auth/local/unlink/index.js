@@ -4,7 +4,7 @@ exports = module.exports = function(express, middleware, handlers, path) {
     router.use(path, middleware.isLoggedIn);
 
     router.route(path)
-        .get(handlers.unlink);
+        .post(handlers.unlink);
 
     return router;
 };

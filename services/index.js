@@ -1,7 +1,6 @@
-exports = module.exports = function(models) {
+exports = module.exports = function(models, mailer) {
     return {
-        profile: require('./profile')(models),
-        resource: require('./resource')(models.Resource),
-        comments: require('./comment')(models.Comment)
+        profile: require('./profile')(models, mailer),
+        resource: require('./resource')(models.Resource)
     };
 };

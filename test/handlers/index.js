@@ -1,1 +1,3 @@
-require('./api')();
+describe('Handlers', function(){
+  require('./api')();
+});

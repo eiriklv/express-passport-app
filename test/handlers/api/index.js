@@ -38,7 +38,7 @@ exports = module.exports = function () {
     };
 
     // tests
-    describe('Handlers', function(){
+    describe('Api', function(){
         require('./profile')(services.profile);
         require('./resource')(services.resource);
     });

@@ -10,9 +10,13 @@ exports = module.exports = function(passport, authentication, models) {
     });
 
     passport.deserializeUser(function(id, done) {
-        models.User.findById(id, function(err, user) {
-            done(err, user);
-        });
+        models.User.find(id)
+            .then(function(user) {
+                done(null, user);
+            })
+            .catch(function(err) {
+                done(err);
+            });
     });
 
     passport.use('local-signup', new LocalStrategy({

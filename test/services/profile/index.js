@@ -3,33 +3,66 @@ var expect = require('chai').expect;
 
 exports = module.exports = function (profile, models) {
     // test
-    describe('Profile', function(){
+    describe('Profile', function() {
+        var token;
+        var all = {
+            'truncate': true
+        };
+
+        before(function (done) {
+            models.User.sync();
+            models.VerificationToken.sync();
+            models.User.destroy(all)
+                .then(function (res) {
+                    console.log('Destroyed all user records');
+                    return models.VerificationToken
+                        .destroy(all)
+                        .then(function (res) {
+                            console.log('Destroyed all verification tokens');
+                        })
+                        .catch(function (err) {
+                            console.error('Error destroying all verification tokens', err);
+                        });
+                })
+                .then(function () {
+                    done();
+                })
+                .catch(function (err) {
+                    console.error('Error destroying all users', err);
+                    done();
+                });
+        });
+
         describe('#verify()', function () {
             var user;
 
             before(function (done) {
                 // create fake user
-                user = new models.User({
+                user = models.User.build({
                     email: 'john@doe.com',
-                    fullname: 'John Doe',
                     verified: false
                 });
 
                 // set password
-                user.password = user.generateHash('1234');
+                user.password = models.User.generateHash('123456');
 
                 // save user
-                user.save(function (err) {
+                user.save().then(function () {
                     // create fake verification token
-                    var validToken = new models.VerificationToken({
+                    var validToken = models.VerificationToken.build({
                         token: 'aa',
-                        uid: user._id
+                        uid: user.id
                     });
 
                     // save token
-                    validToken.save(function (err) {
-                        done();
+                    return validToken.save().catch(function(err) {
+                        throw new Error("User save error" + err.message + err.stack);
+                        done(err);
                     });
+                }).then(function() {
+                    done();
+                }).catch(function(err) {
+                    throw new Error("User save error" + err.message + err.stack);
                 });
             });
 
@@ -38,7 +71,7 @@ exports = module.exports = function (profile, models) {
                 var req = {};
 
                 profile.verify(req, function (err) {
-                    expect(err).to.equal('no request query');
+                    expect(err.message).to.equal('no request query');
                     done();
                 });
             });
@@ -48,7 +81,7 @@ exports = module.exports = function (profile, models) {
                 var req = { query: {} };
 
                 profile.verify(req, function (err) {
-                    expect(err).to.equal('verification token missing! try again with a valid token (see e-mail)');
+                    expect(err.message).to.equal('verification token missing! try again with a valid token (see e-mail)');
                     done();
                 });
             });
@@ -63,7 +96,7 @@ exports = module.exports = function (profile, models) {
                 };
 
                 profile.verify(req, function (err) {
-                    expect(err).to.equal('invalid token');
+                    expect(err.message).to.equal('invalid token');
                     done();
                 });
             });
@@ -87,31 +120,32 @@ exports = module.exports = function (profile, models) {
             });
         });
 
-        describe('#update()', function () {
+        describe('#changePassword()', function () {
             var user;
 
             before(function (done) {
                 // create fake user
-                user = new models.User({
-                    email: 'john@doe.com',
-                    fullname: 'John Doe',
+                user = models.User.build({
+                    email: 'john2@doe.com',
                     verified: false
                 });
 
                 // set password
-                user.password = user.generateHash('1234');
+                user.password = models.User.generateHash('1234');
 
                 // save user
-                user.save(function (err) {
+                user.save().then(function(res) {
                     done();
+                }).catch(function(err) {
+                    throw new Error("User save error" + err.message + err.stack);
                 });
             });
 
             it('should return an error when no request body is supplied', function (done) {
                 var req = {};
 
-                profile.update(req, function (err, user) {
-                    expect(err).to.equal('no request body');
+                profile.changePassword(req, function (err, user) {
+                    expect(err.message).to.equal('no request body');
                     done();
                 });
             });
@@ -120,29 +154,29 @@ exports = module.exports = function (profile, models) {
                 var req = {
                     user: user,
                     body: {
-                        fullname: user.fullname
+                        email: user.email
                     }
                 };
 
-                profile.update(req, function (err, updatedUser) {
-                    expect(err).to.equal();
-                    expect(updatedUser).to.equal(user);
+                profile.changePassword(req, function (err, updatedUser) {
+                    expect(err).to.be.null;
+                    expect(updatedUser.get()).to.equal(user.get());
                     done();
                 });
             });
 
-            it('should update your name', function (done) {
-                var updatedName = 'John Douchebag';
+            it('should update your email', function (done) {
+                var updatedEmail = 'john3@doe.com';
 
                 var req = {
                     user: user,
                     body: {
-                        fullname: updatedName
+                        email: updatedEmail
                     }
                 };
 
-                profile.update(req, function (err, updatedUser) {
-                    expect(updatedUser.fullname).to.equal(updatedName);
+                profile.changePassword(req, function (err, updatedUser) {
+                    expect(updatedUser.email).to.equal(updatedEmail);
                     done();
                 });
             });
@@ -151,13 +185,14 @@ exports = module.exports = function (profile, models) {
                 var req = {
                     user: user,
                     body: {
-                        old_password: '4321'
+                        old_password: '4321',
+                        new_password: '2345'
                     }
                 };
 
-                profile.update(req, function (err, updatedUser) {
-                    expect(err).to.equal('password not valid');
-                    expect(updatedUser).to.equal(user);
+                profile.changePassword(req, function (err, updatedUser) {
+                    expect(err.message).to.equal('password not valid');
+                    expect(updatedUser.get()).to.equal(user.get());
                     done();
                 });
             });
@@ -166,13 +201,14 @@ exports = module.exports = function (profile, models) {
                 var req = {
                     user: user,
                     body: {
-                        old_password: '1234'
+                        old_password: '1234',
+                        new_password: null
                     }
                 };
 
-                profile.update(req, function (err, updatedUser) {
-                    expect(err).to.equal('passwords did not match, or was shorter than 6 characters! try again');
-                    expect(updatedUser).to.equal(user);
+                profile.changePassword(req, function (err, updatedUser) {
+                    expect(err.message).to.equal('passwords did not match, or was shorter than 6 characters! try again');
+                    expect(updatedUser.get()).to.equal(user.get());
                     done();
                 });
             });
@@ -186,9 +222,9 @@ exports = module.exports = function (profile, models) {
                     }
                 };
 
-                profile.update(req, function (err, updatedUser) {
-                    expect(err).to.equal('passwords did not match, or was shorter than 6 characters! try again');
-                    expect(updatedUser).to.equal(user);
+                profile.changePassword(req, function (err, updatedUser) {
+                    expect(err.message).to.equal('passwords did not match, or was shorter than 6 characters! try again');
+                    expect(updatedUser.get()).to.equal(user.get());
                     done();
                 });
             });
@@ -203,9 +239,9 @@ exports = module.exports = function (profile, models) {
                     }
                 };
 
-                profile.update(req, function (err, updatedUser) {
-                    expect(err).to.equal('passwords did not match, or was shorter than 6 characters! try again');
-                    expect(updatedUser).to.equal(user);
+                profile.changePassword(req, function (err, updatedUser) {
+                    expect(err.message).to.equal('passwords did not match, or was shorter than 6 characters! try again');
+                    expect(updatedUser.get()).to.equal(user.get());
                     done();
                 });
             });
@@ -220,9 +256,136 @@ exports = module.exports = function (profile, models) {
                     }
                 };
 
-                profile.update(req, function (err, updatedUser) {
-                    expect(err).to.equal();
-                    expect(updatedUser.validPassword(req.body.new_password)).to.equal(true);
+                profile.changePassword(req, function (err, updatedUser) {
+                    expect(err).to.be.null;
+                    expect(models.User.validPassword(req.body.new_password, updatedUser.password)).to.equal(true);
+                    done();
+                });
+            });
+        });
+
+        describe('#forgot()', function() {
+            it('should return an error if email address is missing from body', function(done) {
+                var req = {
+                    body: {}
+                };
+
+                profile.forgot(req, function (err, user) {
+                    expect(err).to.not.be.null;
+                    done();
+                });
+            });
+
+            it('should return a user with a reset token', function(done) {
+                var req = {
+                    body: {
+                        email: 'john@doe.com'
+                    }
+                };
+
+                profile.forgot(req, function (err, user) {
+                    expect(err).to.be.null;
+
+                    expect(user.dataValues.resetPasswordToken).to.not.be.null;
+                    expect(user.dataValues.resetPasswordTokenExpires).to.not.be.null;
+                    token = user.dataValues.resetPasswordToken;
+                    done();
+                });
+            });
+        });
+
+        describe('#reset()', function() {
+            it('should return an error if new_password is missing from body', function(done) {
+                var req = {
+                    body: {
+                        new_password_confirm: "aNewPassword"
+                    }
+                };
+
+                profile.reset(req, function (err, user) {
+                    expect(err).to.not.be.null;
+                    done();
+                });
+            });
+
+            it('should return an error if confirm_new_password is missing from body', function(done) {
+                var req = {
+                    body: {
+                        new_password: "aNewPassword"
+                    }
+                };
+
+                profile.reset(req, function (err, user) {
+                    expect(err).to.not.be.null;
+                    done();
+                });
+            });
+
+            it('should return an error if token is missing from body', function(done) {
+                var req = {
+                    body: {
+                        new_password: "aNewPassword",
+                        new_password_confirm: "aNewPassword"
+                    }
+                };
+
+                profile.reset(req, function (err, user) {
+                    expect(err).to.not.be.null;
+                    done();
+                });
+            });
+
+            it('should return a user with a null reset token', function(done) {
+                var req = {
+                    body: {
+                        new_password: "aNewPassword",
+                        new_password_confirm: "aNewPassword",
+                        token: token
+                    }
+                };
+
+                profile.reset(req, function (err, user) {
+                    expect(err).to.be.null;
+
+                    expect(user.dataValues.resetPasswordToken).to.be.null;
+                    expect(user.dataValues.resetPasswordTokenExpires).to.be.null;
+                    
+                    done();
+                });
+            });
+        });
+
+        describe('#update()', function() {
+            var user;
+
+            before(function (done) {
+                models.User.find({
+                    'where': {
+                        'email': 'john@doe.com'
+                    }
+                }).then(function(modelUser) {
+                    user = modelUser;
+                    done();
+                }).catch(function(err) {
+                    return done(err);
+                });
+            });
+
+            it('should successfully update the profile', function(done) {
+                var req = {
+                    user: user,
+                    body: {
+                        profile: {
+                            param1: 'value1',
+                            param2: 2
+                        }
+                    }
+                };
+
+                profile.update(req, function (err, user) {
+                    expect(err).to.not.be.null;
+                    expect(user.dataValues.profile.param1).to.eq('value1');
+                    expect(user.dataValues.profile.param2).to.eq(2);
                     done();
                 });
             });

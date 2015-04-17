@@ -1,46 +1,38 @@
-var debug = require('debug')('express-passport-app:service:profile:update');
-var async = require('async');
-var formatName = require('helpers').common.formatName;
-
-
 exports = module.exports = function(models) {
-    return function(req, callback) {
-        if (!req.body) return callback('no request body');
+  return function(req, callback) {
+    if (!req.body) return callback(new Error('no request body'));
+    if (!req.user) return callback(new Error('no request user'));
 
-        var user = req.user;
+    if (!req.user.dataValues.profile) {
+      req.user.dataValues.profile = {};
+    }
 
-        async.series({
-            updateProfile: function(callback) {
-                user.fullname = formatName(req.body.fullname) || 'no name given';
-                callback();
-            },
-            updatePassword: function(callback) {
-                if (!req.body.old_password) return callback();
-                if (req.body.old_password.length === 0) return callback();
+    var user = req.user;
+    var profile = user.dataValues.profile;
+    var body = req.body;
+    var bodyProfile = body.profile;
+    var dirty = false;
 
-                var oldPass = req.body.old_password;
-                var newPass = req.body.new_password;
-                var confirmPass = req.body.new_password_confirm;
-                var passCheck = user.validPassword(oldPass);
-                var newPassLength = newPass ? newPass.length : 0;
-                var passValid = newPassLength > 5 && newPass === confirmPass;
+    for (var b in bodyProfile) {
+      if (profile[b] !== bodyProfile[b]) {
+        profile[b] = bodyProfile[b];
+        dirty = true;
+      }
+    }
 
-                if (passCheck && passValid) {
-                    user.password = user.generateHash(newPass);
-                    callback();
-                } else if (!passCheck) {
-                    callback('password not valid');
-                } else {
-                    callback('passwords did not match, or was shorter than 6 characters! try again');
-                }
-            },
-            saveProfile: function(callback) {
-                user.save(function(err) {
-                    callback(err);
-                });
-            }
-        }, function(err, result) {
-            callback(err, user);
-        });
-    };
+    if (body.email !== user.email) {
+      user.email = body.email;
+      dirty = true;
+    }
+
+    if (!dirty) {
+      return callback(null, user);
+    }
+
+    req.user.save().then(function() {
+      return callback(null, user);
+    }).catch(function(err) {
+      return callback(err, user);
+    });
+  };
 };
