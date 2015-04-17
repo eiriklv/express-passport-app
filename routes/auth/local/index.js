@@ -1,6 +1,8 @@
 exports = module.exports = function(express, middleware, handlers, path) {
     var router = express();
 
+    router.use(path, middleware.isAuthenticatedServer);
+
     router.use(path, require('./login')(express, middleware, handlers, '/login'));
     router.use(path, require('./logout')(express, middleware, handlers, '/logout'));
     router.use(path, require('./forgot')(express, middleware, handlers, '/forgot'));

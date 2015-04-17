@@ -1,15 +1,17 @@
 exports = module.exports = function(passport) {
     return function(req, res, next) {
         if (req.accepts('json')) {
-            // passport.authenticate('local-login', function () {
-            //     console.log(arguments);
-            //     return;
-            // })(req, res, next);
-
-            passport.authenticate('local-login', {session:false})(req, res, function(req2, res2) {
-                res.status(200).send();
-            });
-
+            passport.authenticate('local-login', {session:false}, function(err, user, info) {
+                if (err) {
+                    res.status(400).send({error:req.flash('loginMessage')});
+                }
+                else if (!user) {
+                    res.status(400).send({error:req.flash('loginMessage')});
+                }
+                else {
+                    res.status(200).send();
+                }
+            })(req, res);
         }
         else {
             passport.authenticate('local-login', {

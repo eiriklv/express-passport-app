@@ -20,13 +20,18 @@ exports = module.exports = function(User, VerificationToken, mailer) {
                 return newUser.save()
                     .then(sendVerificationMail)
                     .then(function() {
-                        return done(null, newUser, req.flash('signupMessage', 'You registered through local sign-up!'));
+                        req.flash('signupMessage', 'You registered through local sign-up!');
+                        var info = req.flash('signupMessage');
+                        return done(null, newUser, info);
                     })
                     .catch(function(err) {
-                        return done(null, false, req.flash('signupMessage', 'An error occured! - ' + err));
+                        var info = req.flash('signupMessage', 'An error occured! - ' + err);
+                        return done(err, false, info);
                     });
             }).catch(function(err) {
-                return done(err);
+                req.flash('signupMessage', 'An error occured! - ' + err);
+                var info = req.flash('signupMessage');
+                return done(err, false, info);
             });
 
         function sendVerificationMail(user) {
